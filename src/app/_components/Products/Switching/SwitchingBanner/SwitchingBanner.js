@@ -5,9 +5,11 @@ import Image from 'next/image'
 import Stars from '../../../../../Components/Images/stars.png'
 const SwitchingBanner = () => {
   return (
-    <div >
-      <div
-        className="hidden lg:flex items-center justify-between w-full h-[180px] lg:h-[500px] md:h-[350px] px-3 md:px-1 relative"
+    <div className="w-full bg-[#FFFFFF] overflow-hidden">
+      <section
+        id="hero-section"
+        aria-label="Switching Brands Hero Section"
+        className="hidden lg:flex items-center justify-between w-full max-w-[1536px] mx-auto h-[180px] lg:h-[500px] md:h-[350px] px-3 md:px-1 relative overflow-hidden"
         style={{
           background: 'linear-gradient(87deg, #2D2D2D 35%, #147D61 100%)',
         }}
@@ -36,10 +38,15 @@ const SwitchingBanner = () => {
         <div className="laptop-banner-right flex-1 flex justify-end items-end">
           <Image src={LaptopImage2} width={264} height={450} alt="Laptop 2" className="object-contain drop-shadow-2xl -mb-4 md:-mb-8" />
         </div>
-      </div>
-      <div className="small-screen flex flex-col items-center justify-center lg:hidden h-[600px] w-full" style={{
-        background: 'linear-gradient(87deg, #2D2D2D 35%, #147D61 100%)',
-      }}>
+      </section>
+      <section
+        id="hero-section-mobile"
+        aria-label="Switching Brands Hero Section Mobile"
+        className="small-screen flex flex-col items-center justify-center lg:hidden h-auto min-h-[600px] py-10 w-full max-w-[1536px] mx-auto overflow-hidden"
+        style={{
+          background: 'linear-gradient(87deg, #2D2D2D 35%, #147D61 100%)',
+        }}
+      >
         <div className="top mt-20">
           <div className="laptop-banner-center ">
             {/* <div className="flex justify-center gap-2 mb-2">
@@ -63,7 +70,7 @@ const SwitchingBanner = () => {
           <Image alt='' src={LaptopImage1} width={125} height={100} className='md:w-[200px]'/>
           <Image alt='' src={LaptopImage2} width={125} height={100} className='md:w-[200px]'/>
         </div>
-      </div>
+      </section>
     </div>
   )
 }
