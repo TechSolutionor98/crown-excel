@@ -91,73 +91,84 @@ const SoftwareSmart = () => {
      
 
       {/* Categories Detail Section */}
-      <div className="py-16 bg-gradient-to-br from-gray-50 to-white">
-        <div className="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8">
-          <h2 className="text-5xl font-[780] text-center uppercase mb-16 text-gray-800 font-montserrat">
-            {/* Our <span className="text-transparent bg-clip-text bg-gradient-to-r from-[#1d8b6e] to-[#ffd900]">Software Solutions</span> */}
-          {/* Custom IT Innovations */}
-          Our Software Solutions
-          </h2>
-          
-          <div className="grid md:grid-cols-3 sm:grid-cols-2 gap-8 lg:gap-12">
-            {categories.map((category, index) => (
-              <div 
-                key={category.id} 
-                className="bg-white rounded-2xl p-8 shadow-lg hover:shadow-xl transition-all duration-300 transform hover:-translate-y-2 flex flex-col h-full"
-              >
-                {/* Category Header */}
-                <div className="mb-6">
-                  <div className="flex items-center mb-4">
-                    <div className={`w-12 h-12 bg-[#ffd900] rounded-full flex items-center justify-center text-black font-bold text-lg mr-4 flex-shrink-0`}>
-                      {category.id}
-                    </div>
-                    <h3 className="text-lg font-bold text-gray-800 font-montserrat leading-tight whitespace-nowrap">
-                      {category.title}
-                    </h3>
-                  </div>
-                  <div className={`w-16 h-1 ml-16 -mt-6 bg-gradient-to-r ${category.bgColor} rounded-full`}></div>
-                </div>
-                
-                {/* Description */}
-                <p className="text-gray-600 leading-relaxed mb-6 font-montserrat text-sm flex-grow">
-                  {category.description}
-                </p>
-                
-                {/* Features */}
-                <div className="mb-6">
-                  <div className="grid grid-cols-2 gap-2">
-                    {category.features.map((feature, idx) => (
-                      <div 
-                        key={idx}
-                        className="flex items-center space-x-2 p-2 bg-gray-50 rounded-lg"
-                      >
-                        <div className={`w-2 h-2 bg-gradient-to-r ${category.bgColor} rounded-full flex-shrink-0`}></div>
-                        <span className="text-sm font-medium text-gray-700">{feature}</span>
+      <div className="w-full bg-[#FFFFFF] overflow-hidden">
+        <section
+          id="our-software-solutions-section"
+          aria-label="Our Software Solutions"
+          className="w-full max-w-[1536px] mx-auto py-16 bg-gradient-to-br from-gray-50 to-white overflow-hidden"
+        >
+          <div className="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8">
+            <h2 className="text-5xl font-[780] text-center uppercase mb-16 text-gray-800 font-montserrat">
+              {/* Our <span className="text-transparent bg-clip-text bg-gradient-to-r from-[#1d8b6e] to-[#ffd900]">Software Solutions</span> */}
+            {/* Custom IT Innovations */}
+            Our Software Solutions
+            </h2>
+            
+            <div className="grid md:grid-cols-3 sm:grid-cols-2 gap-8 lg:gap-12">
+              {categories.map((category, index) => (
+                <div 
+                  key={category.id} 
+                  className="bg-white rounded-2xl p-8 shadow-lg hover:shadow-xl transition-all duration-300 transform hover:-translate-y-2 flex flex-col h-full"
+                >
+                  {/* Category Header */}
+                  <div className="mb-6">
+                    <div className="flex items-center mb-4">
+                      <div className={`w-12 h-12 bg-[#ffd900] rounded-full flex items-center justify-center text-black font-bold text-lg mr-4 flex-shrink-0`}>
+                        {category.id}
                       </div>
-                    ))}
+                      <h3 className="text-lg font-bold text-gray-800 font-montserrat leading-tight whitespace-nowrap">
+                        {category.title}
+                      </h3>
+                    </div>
+                    <div className={`w-16 h-1 ml-16 -mt-6 bg-gradient-to-r ${category.bgColor} rounded-full`}></div>
+                  </div>
+                  
+                  {/* Description */}
+                  <p className="text-gray-600 leading-relaxed mb-6 font-montserrat text-sm flex-grow">
+                    {category.description}
+                  </p>
+                  
+                  {/* Features */}
+                  <div className="mb-6">
+                    <div className="grid grid-cols-2 gap-2">
+                      {category.features.map((feature, idx) => (
+                        <div 
+                          key={idx}
+                          className="flex items-center space-x-2 p-2 bg-gray-50 rounded-lg"
+                        >
+                          <div className={`w-2 h-2 bg-gradient-to-r ${category.bgColor} rounded-full flex-shrink-0`}></div>
+                          <span className="text-sm font-medium text-gray-700">{feature}</span>
+                        </div>
+                      ))}
+                    </div>
+                  </div>
+                  
+                  {/* Action Button */}
+                  <div className="mt-auto">
+                    <button className={`w-full py-3 bg-gradient-to-r ${category.bgColor} text-white font-semibold rounded-lg shadow-md hover:shadow-lg transition-all duration-300 transform hover:scale-105 group relative overflow-hidden`}>
+                      <span className="relative z-10 flex items-center justify-center">
+                        Learn More & Start Project
+                        <svg className="w-5 h-5 ml-2 transform transition-transform duration-300 group-hover:translate-x-1" fill="none" stroke="currentColor" viewBox="0 0 24 24">
+                          <path strokeLinecap="round" strokeLinejoin="round" strokeWidth={2} d="M17 8l4 4m0 0l-4 4m4-4H3" />
+                        </svg>
+                      </span>
+                      <div className="absolute inset-0 bg-white/20 transform scale-x-0 group-hover:scale-x-100 transition-transform duration-300 origin-left"></div>
+                    </button>
                   </div>
                 </div>
-                
-                {/* Action Button */}
-                <div className="mt-auto">
-                  <button className={`w-full py-3 bg-gradient-to-r ${category.bgColor} text-white font-semibold rounded-lg shadow-md hover:shadow-lg transition-all duration-300 transform hover:scale-105 group relative overflow-hidden`}>
-                    <span className="relative z-10 flex items-center justify-center">
-                      Learn More & Start Project
-                      <svg className="w-5 h-5 ml-2 transform transition-transform duration-300 group-hover:translate-x-1" fill="none" stroke="currentColor" viewBox="0 0 24 24">
-                        <path strokeLinecap="round" strokeLinejoin="round" strokeWidth={2} d="M17 8l4 4m0 0l-4 4m4-4H3" />
-                      </svg>
-                    </span>
-                    <div className="absolute inset-0 bg-white/20 transform scale-x-0 group-hover:scale-x-100 transition-transform duration-300 origin-left"></div>
-                  </button>
-                </div>
-              </div>
-            ))}
+              ))}
+            </div>
           </div>
-        </div>
+        </section>
       </div>
 
       {/* Software Solutions Introduction Section */}
-      <div className="py-20 bg-gradient-to-br from-gray-50 via-white to-gray-50 relative overflow-hidden">
+      <div className="w-full bg-[#FFFFFF] overflow-hidden">
+        <section
+          id="software-excellence-section"
+          aria-label="Software Excellence"
+          className="relative w-full max-w-[1536px] mx-auto py-20 bg-gradient-to-br from-gray-50 via-white to-gray-50 overflow-hidden"
+        >
         {/* Background Decorative Elements */}
         <div className="absolute top-0 left-0 w-72 h-72 bg-gradient-to-r from-[#16CA9A]/10 to-[#084032]/10 rounded-full -translate-x-1/2 -translate-y-1/2"></div>
         <div className="absolute bottom-0 right-0 w-96 h-96 bg-gradient-to-l from-[#ffd900]/10 to-[#16CA9A]/10 rounded-full translate-x-1/3 translate-y-1/3"></div>
@@ -314,8 +325,16 @@ const SoftwareSmart = () => {
             </div>
           </div>
         </div>
-      </div>      {/* Technologies We Use Section */}
-      <div className="py-16 bg-gray-100">
+        </section>
+      </div>
+
+      {/* Technologies We Use Section */}
+      <div className="w-full bg-[#FFFFFF] overflow-hidden">
+        <section
+          id="technologies-we-master-section"
+          aria-label="Technologies We Master"
+          className="w-full max-w-[1536px] mx-auto py-16 bg-gray-100 overflow-hidden"
+        >
         <div className="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8">
           <h2 className="text-4xl font-bold text-center mb-12 text-gray-800 font-montserrat">
             Technologies We Master
@@ -686,6 +705,7 @@ const SoftwareSmart = () => {
             </p>
           </div>
         </div>
+        </section>
       </div>
     </div>
   )
