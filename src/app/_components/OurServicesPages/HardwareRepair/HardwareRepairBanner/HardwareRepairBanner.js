@@ -18,33 +18,37 @@ const HardwareRepairBanner = ({ cmsData }) => {
   const icon2Img = safeImage(fields.image_icon2, icon2);
 
   return (
-    <div
-      className="relative flex md:flex-row items-center justify-between w-full h-[350px] lg:h-[500px] px-6 md:px-10 overflow-hidden"
-      style={{
-        backgroundImage: `url(${bannerBgUrl})`,
-        backgroundRepeat: 'no-repeat',
-        backgroundSize: 'cover',
-        backgroundPosition: 'center',
-      }}
-    >
-      {/* Left Text and Icons */}
-      <div className="relative z-10 w-full md:w-1/2 text-white font-montserrat">
-        <Image
-          src={icon2Img}
-          alt="icon2"
-          width={40}
-          height={40}
-          className="absolute -top-10 left-10 md:left-0"
-        />
-        <h1 className="text-[30px] md:text-[48px] font-bold leading-[30px] md:leading-[52px]">
-          {headingText}
-        </h1>
+    <div className="w-full bg-[#FFFFFF] overflow-hidden">
+      <section
+        id="hero-section"
+        aria-label="Security Solutions Hero Section"
+        className="relative flex md:flex-row items-center justify-between w-full max-w-[1536px] mx-auto h-[350px] lg:h-[500px] px-6 md:px-10 overflow-hidden"
+        style={{
+          backgroundImage: `url(${bannerBgUrl})`,
+          backgroundRepeat: 'no-repeat',
+          backgroundSize: 'cover',
+          backgroundPosition: 'center',
+        }}
+      >
+        {/* Left Text and Icons */}
+        <div className="relative z-10 w-full md:w-1/2 text-white font-montserrat">
+          <Image
+            src={icon2Img}
+            alt="icon2"
+            width={40}
+            height={40}
+            className="absolute -top-10 left-10 md:left-0"
+          />
+          <h1 className="text-[30px] md:text-[48px] font-bold leading-[30px] md:leading-[52px]">
+            {headingText}
+          </h1>
 
-        {/* Short paragraph about Security Solutions related to Hardware Repair */}
-        <p className="mt-3 text-[14px] md:text-[16px] max-w-lg">
-          {paragraphText}
-        </p>
-      </div>
+          {/* Short paragraph about Security Solutions related to Hardware Repair */}
+          <p className="mt-3 text-[14px] md:text-[16px] max-w-lg">
+            {paragraphText}
+          </p>
+        </div>
+      </section>
     </div>
   );
 };

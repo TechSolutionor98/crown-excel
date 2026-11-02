@@ -100,7 +100,12 @@ const HardwareRepairEmpowering = ({ cmsData }) => {
   };
 
   return (
-    <section className="relative min-h-screen bg-gradient-to-br from-gray-50 via-white to-green-50 overflow-hidden">
+    <div className="w-full bg-[#FFFFFF] overflow-hidden">
+      <section
+        id="security-solutions-empowering-section"
+        aria-label="Security Solutions - Protecting Your Business"
+        className="relative w-full max-w-[1536px] mx-auto min-h-screen bg-gradient-to-br from-gray-50 via-white to-green-50 overflow-hidden"
+      >
       {/* Animated Background Elements */}
       <div className="absolute inset-0 opacity-10 pointer-events-none">
         <div className="absolute top-20 left-10 w-40 h-40 bg-[#16CA9A] rounded-full animate-pulse"></div>
@@ -348,6 +353,7 @@ const HardwareRepairEmpowering = ({ cmsData }) => {
         </div>
       </div>
     </section>
+  </div>
   );
 };
 
