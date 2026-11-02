@@ -209,7 +209,12 @@ const HardwareEmpowering = ({ cmsData }) => {
   const ctaOverlayStat2Label = safeRender(fields.cta_stat_2_label, "Expert Support");
 
   return (
-    <section className="relative min-h-screen bg-gradient-to-br from-gray-50 via-white to-blue-50 overflow-hidden">
+    <div className="w-full bg-[#FFFFFF] overflow-hidden">
+      <section
+        id="hardware-empowering-section"
+        aria-label="Hand Over All Your Business Work - Crown Excel AMC"
+        className="relative w-full max-w-[1536px] mx-auto min-h-screen bg-gradient-to-br from-gray-50 via-white to-blue-50 overflow-hidden"
+      >
       {/* Unique Background Pattern */}
       <div className="absolute inset-0 opacity-5">
         <div className="absolute top-10 left-10 w-32 h-32 border-4 border-[#16CA9A] rounded-lg transform rotate-45"></div>
@@ -538,6 +543,7 @@ const HardwareEmpowering = ({ cmsData }) => {
         </div>
       </div>
     </section>
+  </div>
   );
 };
 
