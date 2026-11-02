@@ -90,7 +90,12 @@ const ITSmart = () => {
   ];
 
   return (
-    <section className="relative min-h-screen bg-gradient-to-tr from-slate-50 via-blue-50 to-gray-50 overflow-hidden">
+    <div className="w-full bg-[#FFFFFF] overflow-hidden">
+      <section
+        id="transform-strategy-section"
+        aria-label="TRANSFORM Strategy - IT Consultancy"
+        className="relative w-full max-w-[1536px] mx-auto min-h-screen bg-gradient-to-tr from-slate-50 via-blue-50 to-gray-50 overflow-hidden"
+      >
       {/* Unique Diagonal Background Elements */}
       <div className="absolute inset-0 opacity-10">
         <div className="absolute top-20 left-10 w-64 h-2 bg-[#16CA9A] transform rotate-45"></div>
@@ -396,6 +401,7 @@ const ITSmart = () => {
         </div>
       </div>
     </section>
+  </div>
   );
 };
 
