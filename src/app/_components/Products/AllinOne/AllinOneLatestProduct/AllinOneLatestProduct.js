@@ -45,11 +45,16 @@ const AllinOneLatestProduct = () => {
   }, [])
 
   return (
-  <div className="w-full  overflow-x-hidden bg-white py-12">
-    {/* Heading */}
-    <h2 className="text-center text-4xl md:text-[60px] leading-[60px] font-[800] text-[#16806b] uppercase font-montserrat mb-14">
-      Our Latest Product
-    </h2>
+    <div className="w-full bg-[#FFFFFF] overflow-hidden">
+      <section
+        id="our-latest-product"
+        aria-label="Our Latest Product"
+        className="w-full max-w-[1536px] mx-auto bg-[#FFFFFF] py-12 relative overflow-hidden"
+      >
+        {/* Heading */}
+        <h2 className="text-center text-4xl md:text-[60px] leading-[60px] font-[800] text-[#16806b] uppercase font-montserrat mb-14">
+          Our Latest Product
+        </h2>
 
     {/* Desktop View */}
     <div className="hidden md:flex items-center justify-center max-w-7xl mx-auto relative min-h-[500px] overflow-x-hidden">
@@ -218,9 +223,10 @@ const AllinOneLatestProduct = () => {
         </button>
       </div>
     </div>
-  </div>
-)
+      </section>
+    </div>
+  );
+};
 
-}
+export default AllinOneLatestProduct;
 
-export default AllinOneLatestProduct
