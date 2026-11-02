@@ -13,15 +13,21 @@ const HighPerformance = ({ cmsData }) => {
   const commaImg = safeImage(fields.image_comma, Comma);
 
   return (
-    <div className='flex md:flex-row lg:flex-row flex-col items-center  w-full h-auto px-5 mt-20'>
-      <div className="highperformance-left basis-[65%]">
-        <Image alt='' src={featureImg} width={727} height={416}/>
-      </div>
-      <div className="highperformance-right basis-[40%] flex flex-col lg:mt-o mt-5">
-        <h2 className='text-[30px] md:leading-[32px] leading-[30px] lg:text-[44px] font-[700] font-montserrat lg:leading-[52px] text-black'>{headingText}</h2>
-        <Image className='mt-7 mb-7' alt='' src={commaImg} width={150} height={75}/>
-        <p className='text-[16px] leading-[27px] text-black font-montserrat '>{paragraphText}</p>
-      </div>
+    <div className="w-full bg-[#FFFFFF] overflow-hidden">
+      <section
+        id="creative-professional-desktops"
+        aria-label="High-Performance Desktop for Creative Professional"
+        className="w-full max-w-[1536px] mx-auto bg-[#FFFFFF] flex md:flex-row lg:flex-row flex-col items-center justify-between h-auto px-5 sm:px-8 lg:px-12 py-10 lg:py-16 relative overflow-hidden"
+      >
+        <div className="highperformance-left basis-[60%] lg:basis-[65%] flex justify-center">
+          <Image alt='' src={featureImg} width={727} height={416} className="object-contain max-w-full h-auto" />
+        </div>
+        <div className="highperformance-right basis-[40%] lg:basis-[35%] flex flex-col mt-5 lg:mt-0">
+          <h2 className='text-[30px] md:leading-[36px] leading-[34px] lg:text-[44px] font-[700] font-montserrat lg:leading-[52px] text-black'>{headingText}</h2>
+          <Image className='mt-7 mb-7' alt='' src={commaImg} width={150} height={75}/>
+          <p className='text-[16px] leading-[27px] text-black font-montserrat'>{paragraphText}</p>
+        </div>
+      </section>
     </div>
   )
 }
