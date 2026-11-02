@@ -6,9 +6,11 @@ import Image from 'next/image'
 import Stars from '../../../../../Components/Images/stars.png'
 const KeyboardMouseBanner = () => {
   return (
-    <div >
-      <div
-        className="hidden md:flex lg:flex items-center justify-between w-full h-[180px] lg:h-[500px] md:h-[350px] px-3 md:px-10 relative"
+    <div className="w-full bg-[#FFFFFF] overflow-hidden">
+      <section
+        id="hero-section"
+        aria-label="Keyboard & Mouse Brands Hero Section"
+        className="hidden md:flex lg:flex items-center justify-between w-full max-w-[1536px] mx-auto h-[180px] lg:h-[500px] md:h-[350px] px-3 md:px-10 relative overflow-hidden"
         style={{
           background: 'linear-gradient(87deg, #2D2D2D 35%, #147D61 100%)',
         }}
@@ -37,10 +39,15 @@ const KeyboardMouseBanner = () => {
         {/* <div className="laptop-banner-right flex-1 flex justify-end items-end">
           <Image src={DesktopImage2} width={291} height={352} alt="Laptop 2" className="object-contain drop-shadow-2xl -mb-4 md:-mb-8 lg:w-[250px] lg:h-[352px] md:w-[150px] md:h-[200px  " />
         </div> */}
-      </div>
-      <div className="small-screen flex flex-col gap-20 py-20 items-center justify-center md:hidden lg:hidden h-auto w-full" style={{
-        background: 'linear-gradient(87deg, #2D2D2D 35%, #147D61 100%)',
-      }}>
+      </section>
+      <section
+        id="hero-section-mobile"
+        aria-label="Keyboard & Mouse Brands Hero Section Mobile"
+        className="small-screen flex flex-col gap-20 py-20 items-center justify-center md:hidden lg:hidden h-auto w-full max-w-[1536px] mx-auto overflow-hidden"
+        style={{
+          background: 'linear-gradient(87deg, #2D2D2D 35%, #147D61 100%)',
+        }}
+      >
         <Image alt='' src={DesktopImage1} width={250} height={200}/>
         <div className="top">
           <div className="laptop-banner-center ">
@@ -65,7 +72,7 @@ const KeyboardMouseBanner = () => {
           
           {/* <Image alt='' src={DesktopImage2} width={200} height={100}/> */}
         
-      </div>
+      </section>
     </div>
   )
 }
