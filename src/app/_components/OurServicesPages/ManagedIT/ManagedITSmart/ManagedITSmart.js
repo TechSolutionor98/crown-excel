@@ -176,7 +176,12 @@ const ManagedITSmart = ({ cmsData }) => {
   ];
 
   return (
-    <section className="relative min-h-screen bg-gradient-to-br from-slate-50 via-gray-50 to-white overflow-hidden">
+    <div className="w-full bg-[#FFFFFF] overflow-hidden">
+      <section
+        id="it-infrastructure-section"
+        aria-label="IT Infrastructure Solutions"
+        className="relative w-full max-w-[1536px] mx-auto min-h-screen bg-gradient-to-br from-slate-50 via-gray-50 to-white overflow-hidden"
+      >
       {/* Unique Hexagonal Background Pattern */}
       <div className="absolute inset-0 opacity-10">
         <div className="absolute top-10 left-10 w-32 h-32" style={{ clipPath: 'polygon(30% 0%, 70% 0%, 100% 50%, 70% 100%, 30% 100%, 0% 50%)' }}>
@@ -432,6 +437,7 @@ const ManagedITSmart = ({ cmsData }) => {
         </section>
       </div>
     </section>
+  </div>
   );
 };
 
