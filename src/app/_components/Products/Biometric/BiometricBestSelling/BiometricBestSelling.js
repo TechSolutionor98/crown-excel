@@ -31,10 +31,15 @@ const carouselData = [
 
 const BiometricBestSelling = () => {
     return (
-        <div className="w-full py-8 relative lg:mt-10">
-            <h2 className="text-center text-3xl md:text-[40px] lg:text-[60px] lg:leading-[60px] lg:font-[800] font-[800] text-[#16795e] mb-8">
-                OUR BEST-SELLING ACCESSORIES
-            </h2>
+        <div className="w-full bg-[#FFFFFF] overflow-hidden">
+            <section
+                id="best-selling-accessories"
+                aria-label="Our Best-Selling Accessories"
+                className="w-full max-w-[1536px] mx-auto bg-[#FFFFFF] py-8 relative lg:mt-10 overflow-hidden"
+            >
+                <h2 className="text-center text-3xl md:text-[40px] lg:text-[60px] lg:leading-[60px] lg:font-[800] font-[800] text-[#16795e] mb-8">
+                    OUR BEST-SELLING ACCESSORIES
+                </h2>
 
             {/* Desktop Swiper */}
             <div className="hidden md:block relative overflow-hidden max-w-full  mx-auto lg:mt-30">
@@ -156,6 +161,7 @@ const BiometricBestSelling = () => {
                     </div>
                 </Swiper>
             </div>
+            </section>
         </div>
     );
 };
