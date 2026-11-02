@@ -22,44 +22,50 @@ const locations = [
 
 const ContactUsMap = () => {
   return (
-    <div className="w-full px-4 sm:px-6 lg:px-8 py-12 bg-gray-50">
-      <div className="max-w-7xl mx-auto">
-        <div className="text-center mb-10">
-          <h2 className="text-3xl font-bold text-[#084032] mb-4">Our Locations</h2>
-          <p className="text-gray-600 text-lg">Visit us at any of our convenient locations across Dubai</p>
-        </div>
-        <div className="grid grid-cols-1 md:grid-cols-3 gap-8">
-          {locations.map((loc, idx) => (
-            <div key={idx}>
-              <h3 className="text-center text-[20px] font-bold mb-3" style={{ color: "#16CA9A" }}>
-                {loc.title}
-              </h3>
-              <div className="bg-white rounded-xl h-[400px] shadow-lg overflow-hidden hover:shadow-xl transition-shadow duration-300 ">
-                <div className="p-6 flex flex-col justify-between h-full">
-                  <div className="flex items-start gap-2 mb-3">
-                    <FaMapMarkerAlt className="text-[#16CA9A] flex-shrink-0" size={24} />
-                    <span className="text-[14px] text-gray-700 font-medium">
-                      {loc.address}
-                    </span>
-                  </div>
+    <div className="w-full bg-[#FFFFFF] overflow-hidden">
+      <section
+        id="our-locations-section"
+        aria-label="Our Locations"
+        className="w-full max-w-[1536px] mx-auto px-4 sm:px-6 lg:px-8 py-12 bg-gray-50 relative overflow-hidden"
+      >
+        <div className="max-w-7xl mx-auto">
+          <div className="text-center mb-10">
+            <h2 className="text-3xl font-bold text-[#084032] mb-4">Our Locations</h2>
+            <p className="text-gray-600 text-lg">Visit us at any of our convenient locations across Dubai</p>
+          </div>
+          <div className="grid grid-cols-1 md:grid-cols-3 gap-8">
+            {locations.map((loc, idx) => (
+              <div key={idx}>
+                <h3 className="text-center text-[20px] font-bold mb-3" style={{ color: "#16CA9A" }}>
+                  {loc.title}
+                </h3>
+                <div className="bg-white rounded-xl h-[400px] shadow-lg overflow-hidden hover:shadow-xl transition-shadow duration-300 ">
+                  <div className="p-6 flex flex-col justify-between h-full">
+                    <div className="flex items-start gap-2 mb-3">
+                      <FaMapMarkerAlt className="text-[#16CA9A] flex-shrink-0" size={24} />
+                      <span className="text-[14px] text-gray-700 font-medium">
+                        {loc.address}
+                      </span>
+                    </div>
 
-                  <div className="w-full  rounded-lg overflow-hidden">
-                    <iframe
-                      src={loc.mapSrc}
-                      title={loc.title}
-                      aria-label={loc.title}
-                      className="w-full h-[300px] border-0"
-                      allowFullScreen
-                      loading="lazy"
-                      referrerPolicy="no-referrer-when-downgrade"
-                    ></iframe>
+                    <div className="w-full  rounded-lg overflow-hidden">
+                      <iframe
+                        src={loc.mapSrc}
+                        title={loc.title}
+                        aria-label={loc.title}
+                        className="w-full h-[300px] border-0"
+                        allowFullScreen
+                        loading="lazy"
+                        referrerPolicy="no-referrer-when-downgrade"
+                      ></iframe>
+                    </div>
                   </div>
                 </div>
               </div>
-            </div>
-          ))}
+            ))}
+          </div>
         </div>
-      </div>
+      </section>
     </div>
   )
 }
