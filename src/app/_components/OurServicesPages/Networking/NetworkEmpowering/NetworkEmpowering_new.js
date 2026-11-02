@@ -194,7 +194,12 @@ const NetworkEmpowering = ({ cmsData }) => {
   ];
 
   return (
-    <section className="relative py-16 bg-gradient-to-br from-gray-50 to-white overflow-hidden">
+    <div className="w-full bg-[#FFFFFF] overflow-hidden">
+      <section
+        id="complete-network-infrastructure"
+        aria-label="Complete Network Infrastructure"
+        className="relative w-full max-w-[1536px] mx-auto py-16 bg-gradient-to-br from-gray-50 to-white overflow-hidden"
+      >
       {/* Background Elements */}
       <div className="absolute inset-0">
         <div className="absolute w-96 h-96 bg-gradient-to-r from-[#16CA9A]/5 to-transparent rounded-full -top-48 -left-48"></div>
@@ -401,6 +406,7 @@ const NetworkEmpowering = ({ cmsData }) => {
         </div>
       </div>
     </section>
+    </div>
   );
 };
 
