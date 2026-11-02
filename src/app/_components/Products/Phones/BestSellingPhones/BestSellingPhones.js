@@ -47,13 +47,18 @@ const BestSellingPhones = ({ cmsData }) => {
     ];
 
     return (
-        <div className="w-full py-8 relative lg:mt-10">
-            <h2 className="text-center text-3xl md:text-[40px] lg:text-[60px] lg:leading-[60px] lg:font-[800] font-[800] text-[#16795e] mb-8 font-montserrat">
+        <div className="w-full bg-[#FFFFFF] overflow-hidden">
+            <section
+                id="best-selling-phones"
+                aria-label="Best Selling Phones"
+                className="w-full max-w-[1536px] mx-auto bg-[#FFFFFF] py-8 relative lg:mt-10 overflow-hidden"
+            >
+                <h2 className="text-center text-3xl md:text-[40px] lg:text-[60px] lg:leading-[60px] lg:font-[800] font-[800] text-[#16795e] mb-8 font-montserrat">
                 {heading}
             </h2>
 
             {/* Desktop Swiper */}
-            <div className="hidden md:block relative overflow-hidden max-w-full mx-auto lg:mt-30">
+            <div className="hidden md:block relative overflow-hidden max-w-full mx-auto lg:mt-30 isolate">
                 <Swiper
                     modules={[Navigation, Autoplay]}
                     navigation={{
@@ -72,7 +77,7 @@ const BestSellingPhones = ({ cmsData }) => {
                         768: { slidesPerView: 1, spaceBetween: 20 },
                         1024: { slidesPerView: 1, spaceBetween: 30 },
                     }}
-                    className="w-full"
+                    className="w-full relative z-10"
                 >
                     {carouselData.map((item, index) => (
                         <SwiperSlide key={index}>
@@ -105,12 +110,12 @@ const BestSellingPhones = ({ cmsData }) => {
                         <FaAngleRight />
                     </div>
                 </Swiper>
-                <div className="yellow-div absolute bg-[#ffd900] -z-10 h-[550px] w-[650px] top-0 right-0 hidden md:block" style={{ borderRadius: '360px 0 0 360px' }}></div>
+                <div className="yellow-div absolute bg-[#ffd900] z-0 h-[550px] w-[650px] top-0 right-0 hidden md:block pointer-events-none" style={{ borderRadius: '360px 0 0 360px' }}></div>
             </div>
 
             {/* Mobile Swiper */}
-            <div className="md:hidden relative overflow-hidden h-[400px]">
-                <div className="absolute bg-[#ffd900] w-[350px] h-[250px] right-0 top-30 -z-10" style={{ borderRadius: '160px 0px 0px 160px' }}></div>
+            <div className="md:hidden relative overflow-hidden h-[400px] isolate">
+                <div className="absolute bg-[#ffd900] w-[350px] h-[250px] right-0 top-30 z-0 pointer-events-none" style={{ borderRadius: '160px 0px 0px 160px' }}></div>
 
                 <Swiper
                     modules={[Navigation, Autoplay]}
@@ -130,7 +135,7 @@ const BestSellingPhones = ({ cmsData }) => {
                         768: { slidesPerView: 1 },
                         1024: { slidesPerView: 1 },
                     }}
-                    className="w-full"
+                    className="w-full relative z-10"
                 >
                     {carouselData.map((item, index) => (
                         <SwiperSlide key={index}>
@@ -158,6 +163,7 @@ const BestSellingPhones = ({ cmsData }) => {
                     </div>
                 </Swiper>
             </div>
+            </section>
         </div>
     );
 };

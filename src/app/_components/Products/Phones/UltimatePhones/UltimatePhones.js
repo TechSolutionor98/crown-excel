@@ -35,35 +35,41 @@ const UltimatePhones = ({ cmsData }) => {
     );
 
     return (
-        <div className='flex flex-col items-center justify-center w-full h-auto px-1 mt-20'>
-            <h2 className='text-[#147d61] text-[20px] md:text-[45px] lg:text-[45px] font-[700] font-montserrat text-center'>
-                {headingTop} <br /> <span className='text-black bg-[#ffd900]' style={{ padding: '5px 15px' }}>{headingHighlight}</span>
-            </h2>
-            <div className="heavycomputing-bottom flex flex-col items-center justify-center w-full h-auto mt-10 md:mt-20 lg:mt-10">
-                <div className="heavycomputing-bottom-divs flex flex-col md:flex-row lg:flex-row items-center justify-between w-full h-auto lg:h-[400px] px-2 lg:px-5 gap-30 lg:gap-50">
-                    <div className="left-part text-white rounded-[20px] p-[20px] lg:p-[32px]" style={{ backgroundImage: 'linear-gradient(300deg, #084032 0%, #118264 60%)' }}>
-                        <h3 className='text-[24px] lg:text-[28px] font-montserrat font-[600] leading-[25px] lg:leading-[33px]'>{card1Title}</h3>
-                        <p className='mt-4 text-[14px] lg:text-[16px] font-montserrat leading-[27px]'>{card1Desc}</p>
+        <div className="w-full bg-[#FFFFFF] overflow-hidden">
+            <section
+                id="ultimate-phones"
+                aria-label="The Ultimate Solution for Smartphones & Business Phones"
+                className="w-full max-w-[1536px] mx-auto bg-[#FFFFFF] flex flex-col items-center justify-center h-auto px-4 sm:px-6 lg:px-8 pt-16 pb-12 md:pt-20 md:pb-16 relative overflow-hidden"
+            >
+                <h2 className='text-[#147d61] text-[20px] md:text-[45px] lg:text-[45px] font-[700] font-montserrat text-center'>
+                    {headingTop} <br /> <span className='text-black bg-[#ffd900]' style={{ padding: '5px 15px' }}>{headingHighlight}</span>
+                </h2>
+                <div className="heavycomputing-bottom flex flex-col items-center justify-center w-full h-auto mt-10 md:mt-20 lg:mt-10">
+                    <div className="heavycomputing-bottom-divs flex flex-col md:flex-row lg:flex-row items-center justify-between w-full h-auto lg:h-[400px] px-2 lg:px-5 gap-30 lg:gap-50">
+                        <div className="left-part text-white rounded-[20px] p-[20px] lg:p-[32px]" style={{ backgroundImage: 'linear-gradient(300deg, #084032 0%, #118264 60%)' }}>
+                            <h3 className='text-[24px] lg:text-[28px] font-montserrat font-[600] leading-[25px] lg:leading-[33px]'>{card1Title}</h3>
+                            <p className='mt-4 text-[14px] lg:text-[16px] font-montserrat leading-[27px]'>{card1Desc}</p>
+                        </div>
+                        <div className="right-part -mt-20 text-black bg-[#e9e9e9] rounded-[20px] p-[20px] lg:p-[32px]">
+                            <h3 className='text-[24px] lg:text-[28px] font-montserrat font-[600] leading-[25px] lg:leading-[33px]'>{card2Title}</h3>
+                            <p className='mt-4 text-[14px] lg:text-[16px] font-montserrat leading-[27px]'>{card2Desc}</p>
+                        </div>
                     </div>
-                    <div className="right-part -mt-20 text-black bg-[#e9e9e9] rounded-[20px] p-[20px] lg:p-[32px]">
-                        <h3 className='text-[24px] lg:text-[28px] font-montserrat font-[600] leading-[25px] lg:leading-[33px]'>{card2Title}</h3>
-                        <p className='mt-4 text-[14px] lg:text-[16px] font-montserrat leading-[27px]'>{card2Desc}</p>
+                    <div className="heavycomputing-bottom-divs my-20 md:my-10">
+                        <Image alt='Phones solutions' src={centerImg} width={622} height={326} className='lg:w-[622px] rounded-[30px] lg:h-[326px] md:w-[406px] md:h-[250px]' priority />
+                    </div>
+                    <div className="heavycomputing-bottom-divs flex flex-col md:flex-row lg:flex-row items-center justify-between w-full h-auto lg:h-[400px] px-2 lg:px-5 gap-30 lg:gap-50 mt-0 md:mt-10 lg:mt-0">
+                        <div className="right-part text-black bg-[#e9e9e9] rounded-[20px] p-[20px] lg:p-[32px]">
+                            <h3 className='text-[24px] lg:text-[28px] font-montserrat font-[600] leading-[25px] lg:leading-[33px]'>{card3Title}</h3>
+                            <p className='mt-4 text-[14px] lg:text-[16px] font-montserrat leading-[27px]'>{card3Desc}</p>
+                        </div>
+                        <div className="left-part -mt-20 text-white rounded-[20px] p-[20px] lg:p-[32px]" style={{ backgroundImage: 'linear-gradient(300deg, #084032 0%, #118264 60%)' }}>
+                            <h3 className='text-[24px] lg:text-[28px] font-montserrat font-[600] leading-[25px] lg:leading-[33px]'>{card4Title}</h3>
+                            <p className='mt-4 text-[14px] lg:text-[16px] font-montserrat leading-[27px]'>{card4Desc}</p>
+                        </div>
                     </div>
                 </div>
-                <div className="heavycomputing-bottom-divs my-20 md:my-10">
-                    <Image alt='Phones solutions' src={centerImg} width={622} height={326} className='lg:w-[622px] rounded-[30px] lg:h-[326px] md:w-[406px] md:h-[250px]' priority />
-                </div>
-                <div className="heavycomputing-bottom-divs flex flex-col md:flex-row lg:flex-row items-center justify-between w-full h-auto lg:h-[400px] px-2 lg:px-5 gap-30 lg:gap-50 mt-0 md:mt-10 lg:mt-0">
-                    <div className="right-part text-black bg-[#e9e9e9] rounded-[20px] p-[20px] lg:p-[32px]">
-                        <h3 className='text-[24px] lg:text-[28px] font-montserrat font-[600] leading-[25px] lg:leading-[33px]'>{card3Title}</h3>
-                        <p className='mt-4 text-[14px] lg:text-[16px] font-montserrat leading-[27px]'>{card3Desc}</p>
-                    </div>
-                    <div className="left-part -mt-20 text-white rounded-[20px] p-[20px] lg:p-[32px]" style={{ backgroundImage: 'linear-gradient(300deg, #084032 0%, #118264 60%)' }}>
-                        <h3 className='text-[24px] lg:text-[28px] font-montserrat font-[600] leading-[25px] lg:leading-[33px]'>{card4Title}</h3>
-                        <p className='mt-4 text-[14px] lg:text-[16px] font-montserrat leading-[27px]'>{card4Desc}</p>
-                    </div>
-                </div>
-            </div>
+            </section>
         </div>
     );
 };

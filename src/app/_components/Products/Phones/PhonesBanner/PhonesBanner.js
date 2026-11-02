@@ -20,9 +20,11 @@ const PhonesBanner = ({ cmsData }) => {
   const starsImg = safeImage(fields.image_stars, Stars);
 
   return (
-    <div>
-      <div
-        className="hidden lg:flex items-center justify-between w-full h-[180px] lg:h-[600px] md:h-[350px] px-3 md:px-1 relative"
+    <div className="w-full bg-[#FFFFFF] overflow-hidden">
+      <section
+        id="hero-section"
+        aria-label="Phones Hero Section"
+        className="hidden lg:flex items-center justify-between w-full max-w-[1536px] mx-auto h-[180px] lg:h-[600px] md:h-[350px] px-3 md:px-1 relative overflow-hidden"
         style={{
           background: 'linear-gradient(87deg, #2D2D2D 35%, #147D61 100%)',
         }}
@@ -50,10 +52,12 @@ const PhonesBanner = ({ cmsData }) => {
         <div className="laptop-banner-right flex-1 flex justify-end items-end pr-2 md:pr-4 lg:pr-6">
           <Image src={rightPhoneImg} width={315} height={450} alt="Wholesale Mobile Phones" className="object-contain drop-shadow-2xl -mb-4 md:-mb-8" priority />
         </div>
-      </div>
+      </section>
 
-      <div
-        className="small-screen flex flex-col items-center justify-center lg:hidden h-[600px] w-full"
+      <section
+        id="hero-section-mobile"
+        aria-label="Phones Hero Section Mobile"
+        className="small-screen flex flex-col items-center justify-center lg:hidden h-[600px] w-full max-w-[1536px] mx-auto overflow-hidden"
         style={{
           background: 'linear-gradient(87deg, #2D2D2D 35%, #147D61 100%)',
         }}
@@ -76,7 +80,7 @@ const PhonesBanner = ({ cmsData }) => {
           <Image alt="Smartphones" src={leftPhoneImg} width={150} height={100} />
           <Image alt="Mobile Phones" src={rightPhoneImg} width={150} height={100} />
         </div>
-      </div>
+      </section>
     </div>
   );
 };
