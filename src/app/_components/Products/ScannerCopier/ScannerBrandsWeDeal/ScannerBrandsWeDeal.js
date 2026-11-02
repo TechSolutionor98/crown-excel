@@ -29,34 +29,38 @@ const ScannerBrandsWeDeal = () => {
     {Image: Msi, alt: 'Msi'}
   ]
   return (
-    <div
-      className="w-full min-h-[320px] md:min-h-[279px] relative mt-0 flex items-center justify-center overflow-hidden"
-      style={{
-        background: 'linear-gradient(90deg, #54595f 0%, #232426 70%, #18191b 100%)',
-      }}
-    >
-      {/* Overlay background image with blend for dots/stars */}
-      <div className="absolute z-0 right-0 top-0 w-full h-full pointer-events-none select-none" style={{mixBlendMode: 'screen', opacity: 0.7}}>
-        <Image alt='' src={Background} fill style={{objectFit: 'cover', objectPosition: 'right'}}/>
-      </div>
-      <div className="relative z-10 flex flex-col md:flex-row items-center justify-between w-full max-w-[1400px] px-4 md:px-20 py-8 md:py-0 gap-8 md:gap-20">
-        {/* Heading */}
-        <div className="flex-1 flex items-center md:items-start justify-center md:justify-start w-full">
-          <h2 className="text-[2.2rem] md:text-[2rem] text-[#ffd900] font-bold uppercase tracking-wide text-center md:text-left leading-tight drop-shadow-lg">
-            BRANDS WE DEAL
-          </h2>
+    <div className="w-full bg-[#FFFFFF] overflow-hidden">
+      <section
+        id="brands-we-deal-scanners"
+        aria-label="Brands We Deal"
+        className="w-full max-w-[1536px] mx-auto min-h-[320px] md:min-h-[279px] relative mt-0 flex items-center justify-center overflow-hidden"
+        style={{
+          background: 'linear-gradient(90deg, #54595f 0%, #232426 70%, #18191b 100%)',
+        }}
+      >
+        {/* Overlay background image with blend for dots/stars */}
+        <div className="absolute z-0 right-0 top-0 w-full h-full pointer-events-none select-none" style={{mixBlendMode: 'screen', opacity: 0.7}}>
+          <Image alt='' src={Background} fill style={{objectFit: 'cover', objectPosition: 'right'}}/>
         </div>
-        {/* Brand Icons Grid */}
-        <div className="flex-1 flex items-center justify-center w-full">
-          <div className="grid grid-cols-4 grid-rows-3 gap-x-8 gap-y-6 md:gap-x-12 md:gap-y-8 w-[320px] md:w-[500px] lg:w-[600px]">
-            {BrandIcons.map((brand, index) => (
-              <div key={index} className="flex items-center justify-center">
-                <Image src={brand.Image} alt={brand.alt} width={90} height={60} className="w-[70px] h-[40px] md:w-[90px] md:h-[60px] object-contain" />
-              </div>
-            ))}
+        <div className="relative z-10 flex flex-col md:flex-row items-center justify-between w-full max-w-[1400px] px-4 md:px-20 py-8 md:py-0 gap-8 md:gap-20">
+          {/* Heading */}
+          <div className="flex-1 flex items-center md:items-start justify-center md:justify-start w-full">
+            <h2 className="text-[2.2rem] md:text-[2rem] text-[#ffd900] font-bold uppercase tracking-wide text-center md:text-left leading-tight drop-shadow-lg">
+              BRANDS WE DEAL
+            </h2>
+          </div>
+          {/* Brand Icons Grid */}
+          <div className="flex-1 flex items-center justify-center w-full">
+            <div className="grid grid-cols-4 grid-rows-3 gap-x-8 gap-y-6 md:gap-x-12 md:gap-y-8 w-[320px] md:w-[500px] lg:w-[600px]">
+              {BrandIcons.map((brand, index) => (
+                <div key={index} className="flex items-center justify-center">
+                  <Image src={brand.Image} alt={brand.alt} width={90} height={60} className="w-[70px] h-[40px] md:w-[90px] md:h-[60px] object-contain" />
+                </div>
+              ))}
+            </div>
           </div>
         </div>
-      </div>
+      </section>
     </div>
   )
 }
