@@ -27,9 +27,11 @@ const CCTVBanner = ({ cmsData }) => {
   const starsImg = safeImage(fields.image_stars, Stars);
 
   return (
-    <div>
-      <div
-        className="hidden lg:flex items-center justify-between w-full h-[180px] lg:h-[600px] md:h-[350px] px-3 md:px-1 relative"
+    <div className="w-full bg-[#FFFFFF] overflow-hidden">
+      <section
+        id="hero-section"
+        aria-label="CCTV Hero Section"
+        className="hidden lg:flex items-center justify-between w-full max-w-[1536px] mx-auto h-[180px] lg:h-[600px] md:h-[350px] px-3 md:px-1 relative overflow-hidden"
         style={{
           background: 'linear-gradient(87deg, #1b2826 35%, #084032 100%)',
         }}
@@ -57,10 +59,12 @@ const CCTVBanner = ({ cmsData }) => {
         <div className="laptop-banner-right flex-1 flex justify-end items-center pr-10">
           <Image src={rightCameraImg} width={265} height={290} alt="Security Cameras Wholesale" className="object-contain drop-shadow-2xl" priority />
         </div>
-      </div>
+      </section>
 
-      <div
-        className="small-screen flex flex-col items-center justify-center lg:hidden h-[600px] w-full"
+      <section
+        id="hero-section-mobile"
+        aria-label="CCTV Hero Section Mobile"
+        className="small-screen flex flex-col items-center justify-center lg:hidden h-[600px] w-full max-w-[1536px] mx-auto overflow-hidden"
         style={{
           background: 'linear-gradient(87deg, #1b2826 35%, #084032 100%)',
         }}
@@ -83,7 +87,7 @@ const CCTVBanner = ({ cmsData }) => {
           <Image alt="CCTV Cameras" src={leftCameraImg} width={130} height={130} className="object-contain" />
           <Image alt="Bullet Camera" src={rightCameraImg} width={130} height={130} className="object-contain" />
         </div>
-      </div>
+      </section>
     </div>
   );
 };
