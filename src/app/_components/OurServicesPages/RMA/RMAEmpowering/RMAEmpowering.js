@@ -117,7 +117,12 @@ const RMAEmpowering = () => {
   ];
 
   return (
-    <section className="relative min-h-screen bg-gradient-to-b from-white via-gray-50 to-white overflow-hidden">
+    <div className="w-full bg-[#FFFFFF] overflow-hidden">
+      <section
+        id="enterprise-cloud-solutions"
+        aria-label="Enterprise Cloud Solutions"
+        className="relative w-full max-w-[1536px] mx-auto min-h-screen bg-gradient-to-b from-white via-gray-50 to-white overflow-hidden"
+      >
       {/* Animated Background Pattern */}
       <div className="absolute inset-0 opacity-30">
         <div className="absolute top-20 left-10 w-32 h-32 border-2 border-[#16CA9A] rounded-full animate-pulse"></div>
@@ -478,6 +483,7 @@ const RMAEmpowering = () => {
         </div>
       </div>
     </section>
+    </div>
   );
 };
 
