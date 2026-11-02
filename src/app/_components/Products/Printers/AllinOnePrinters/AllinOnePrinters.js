@@ -18,9 +18,14 @@ const AllinOnePrinters = () => {
         { Image: Allinone6,title: 'HP PageWide 477dw', desc: 'Introducing the HP PageWide 477dw Printer – the ultimate all-in-one printer for your home or office needs.'},
     ]
     return (
-        <div className='mt-20 lg:mt-10 '>
-            <h2 className='text-[24px] md:text-[50px] md:leading-[60px] lg:text-[50px] leading-[30px] lg:leading-[60px] font-[700] text-black text-montserrat text-center'>The Best All-in-one Desktops <br /> For Space-Saving Power</h2>
-            <div className="allinone-bottom">
+        <div className="w-full bg-[#FFFFFF] overflow-hidden">
+            <section
+                id="all-in-one-printers"
+                aria-label="The Best All-in-one Desktops For Space-Saving Power"
+                className="w-full max-w-[1536px] mx-auto bg-[#FFFFFF] pt-10 sm:pt-14 lg:pt-20 pb-16 lg:pb-24 px-4 sm:px-6 lg:px-8 relative overflow-hidden"
+            >
+                <h2 className='text-[24px] md:text-[50px] md:leading-[60px] lg:text-[50px] leading-[30px] lg:leading-[60px] font-[700] text-black font-montserrat text-montserrat text-center'>The Best All-in-one Desktops <br /> For Space-Saving Power</h2>
+                <div className="allinone-bottom">
                 <div className="allinone-bottom-top mt-10">
                     <div className="title-button flex flex-col md:flex-row lg:flex-row items-center justify-between px-5 mt-10">
                         <h3 className='text-[30px] md:text-[50px] lg:text-[50px] leading-[30px] lg:leading-[50px] font-[600] font-montserrat text-[#147d61]'>For Businesses:</h3>
@@ -60,6 +65,7 @@ const AllinOnePrinters = () => {
                     </div>
                 </div>
             </div>
+            </section>
         </div>
     )
 }

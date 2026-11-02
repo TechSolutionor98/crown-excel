@@ -31,10 +31,15 @@ const carouselData = [
 
 const BestSellingPrinters = () => {
     return (
-        <div className="w-full py-8 relative">
-            <h2 className="text-center text-3xl md:text-[50px] lg:text-[60px] lg:leading-[60px] lg:font-[800] font-bold text-[#16795e] mb-8">
-                OUR BEST-SELLING PRINTERS
-            </h2>
+        <div className="w-full bg-[#FFFFFF] overflow-hidden">
+            <section
+                id="our-best-selling-printers"
+                aria-label="Our Best-Selling Printers"
+                className="w-full max-w-[1536px] mx-auto bg-[#FFFFFF] py-8 relative overflow-hidden"
+            >
+                <h2 className="text-center text-3xl md:text-[50px] lg:text-[60px] lg:leading-[60px] lg:font-[800] font-bold text-[#16795e] mb-8">
+                    OUR BEST-SELLING PRINTERS
+                </h2>
 
             {/* Desktop Swiper */}
             <div className="hidden md:block relative overflow-hidden max-w-full  mx-auto">
@@ -156,8 +161,9 @@ const BestSellingPrinters = () => {
                     </div>
                 </Swiper>
             </div>
-        </div>
-    );
+        </section>
+    </div>
+);
 };
 
 export default BestSellingPrinters;
