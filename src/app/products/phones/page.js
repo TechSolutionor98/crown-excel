@@ -7,8 +7,7 @@ import PhonesBrand from '@/app/_components/Products/Phones/PhonesBrand/PhonesBra
 import PhonesWhyFromUs from '@/app/_components/Products/Phones/PhonesWhyFromUs/PhonesWhyFromUs';
 import { generateCmsMetadata, getCmsData } from '@/lib/cms-fetch';
 
-export const dynamic = 'force-dynamic';
-export const revalidate = 0;
+export const revalidate = 120;
 
 export async function generateMetadata() {
   return await generateCmsMetadata('/products/phones', {

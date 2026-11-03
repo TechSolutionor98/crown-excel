@@ -5,8 +5,7 @@ import NetworkingBanner from '@/app/_components/OurServicesPages/Networking/Netw
 import React from 'react';
 import { generateCmsMetadata, getCmsData } from '@/lib/cms-fetch';
 
-export const dynamic = 'force-dynamic';
-export const revalidate = 0;
+export const revalidate = 120;
 
 export async function generateMetadata() {
   return await generateCmsMetadata('/our-services/networking', {

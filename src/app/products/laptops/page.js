@@ -52,9 +52,7 @@ export async function generateMetadata() {
   });
 }
 
-// Force dynamic rendering so CMS edits reflect immediately
-export const dynamic = 'force-dynamic';
-export const revalidate = 0;
+export const revalidate = 120;
 
 export default async function LaptopsPage() {
   const { content: cmsContent, seo: cmsSeo } = await getCmsData('/products/laptops');

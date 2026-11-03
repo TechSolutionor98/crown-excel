@@ -1,8 +1,7 @@
 import Page from "./_components/page";
 import { getCmsData, generateCmsMetadata } from "@/lib/cms-fetch";
 
-export const dynamic = 'force-dynamic';
-export const revalidate = 0;
+export const revalidate = 120;
 
 export async function generateMetadata() {
   return await generateCmsMetadata('/', {

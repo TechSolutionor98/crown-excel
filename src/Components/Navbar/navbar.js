@@ -327,22 +327,23 @@ function Navbar() {
                             'Contact Us': { icon: <FaCommentDots size={20} className="text-green-900" />, desc: 'Get in touch with us' },
                           };
                           const menuItem = menuItems[subItem.label] || { icon: <FaChevronDown size={20} className="text-green-900" />, desc: 'More information' };
+                          const isActive = pathname === subItem.href || decodeURIComponent(pathname) === subItem.href;
 
                           return (
-                            <li key={j} className="rounded-lg group hover:bg-[#084032]">
+                            <li key={j} className={`rounded-lg group hover:bg-[#084032] ${isActive ? 'bg-[#084032]' : ''}`}>
                               <Link
                                 href={subItem.href}
                                 onClick={() => { setHoveredIndex(null); setOpenDropdownIndex(null); }}
-                                className={`flex items-start p-2 gap-2 ${pathname === subItem.href && subItem.href !== '/products/laptops' && subItem.href !== '/products/phones' && subItem.href !== '/products/cctv' ? 'bg-[hsl(165deg_77.78%_14.12%/0.1)]' : ''}`}
+                                className="flex items-start p-2 gap-2"
                               >
                                 <div className="flex-shrink-0">
-                                  <div className="w-10 h-10 flex items-center justify-center bg-[#f1f5f9] rounded-lg group-hover:bg-[#084032]">
+                                  <div className="w-10 h-10 flex items-center justify-center bg-[#f1f5f9] rounded-lg">
                                     {menuItem.icon}
                                   </div>
                                 </div>
                                 <div className="flex flex-col">
-                                  <span className="font-medium text-gray-900 group-hover:text-white">{subItem.label}</span>
-                                  <span className="text-xs text-gray-500 mt-1 group-hover:text-white">{menuItem.desc}</span>
+                                  <span className={`font-medium ${isActive ? 'text-white' : 'text-gray-900 group-hover:text-white'}`}>{subItem.label}</span>
+                                  <span className={`text-xs mt-1 ${isActive ? 'text-white' : 'text-gray-500 group-hover:text-white'}`}>{menuItem.desc}</span>
                                 </div>
                               </Link>
                             </li>
@@ -543,24 +544,25 @@ function Navbar() {
                         desc: "More information"
                       };
 
-                      // Dropdown item with hover color hsl(165deg 77.78% 14.12%) at 10% opacity
+                      const isActive = pathname === subItem.href || decodeURIComponent(pathname) === subItem.href;
+
                       return (
-                        <li key={j} className="rounded-lg hover:bg-[#084032] group">
+                        <li key={j} className={`rounded-lg hover:bg-[#084032] group ${isActive ? 'bg-[#084032]' : ''}`}>
                           <Link
                             href={subItem.href}
                             onClick={() => { setHoveredIndex(null); setOpenDropdownIndex(null); }}
-                            className={`flex items-start p-2 gap-2 ${pathname === subItem.href && subItem.href !== '/products/laptops' && subItem.href !== '/products/phones' && subItem.href !== '/products/cctv' ? 'bg-[hsl(165deg_77.78%_14.12%/0.1)]' : ''}`}
+                            className="flex items-start p-2 gap-2"
                           >
                             <div className="flex-shrink-0">
                               {/* Icon container with the specified color */}
                               <div className="w-10 h-10 flex items-center justify-center bg-[#f1f5f9] text-[hsl(165deg_77.78%_14.12%)] rounded-lg">
                                 {menuItem.icon}
-                                  </div>
-                                </div>
-                                <div className="flex flex-col">
+                              </div>
+                            </div>
+                            <div className="flex flex-col">
                               {/* Title with hover effect using the specified color */}
-                                  <span className="font-medium text-gray-900 group-hover:text-white">{subItem.label}</span>
-                              <span className="text-xs text-gray-500 mt-1 group-hover:text-white">{menuItem.desc}</span>
+                              <span className={`font-medium ${isActive ? 'text-white' : 'text-gray-900 group-hover:text-white'}`}>{subItem.label}</span>
+                              <span className={`text-xs mt-1 ${isActive ? 'text-white' : 'text-gray-500 group-hover:text-white'}`}>{menuItem.desc}</span>
                             </div>
                           </Link>
                         </li>
@@ -702,20 +704,21 @@ function Navbar() {
                                 'Contact Us': { icon: <FaCommentDots size={18} className="text-green-900" />, desc: 'Get in touch with us' },
                               };
                               const menuItem = menuItems[subItem.label] || { icon: <FaChevronDown size={18} className="text-green-900" />, desc: 'More information' };
+                              const isActive = pathname === subItem.href || decodeURIComponent(pathname) === subItem.href;
 
                               return (
-                                <li key={j} className="rounded-lg group">
+                                <li key={j} className={`rounded-lg group hover:bg-[#084032] ${isActive ? 'bg-[#084032]' : ''}`}>
                                   <Link
                                     href={subItem.href}
                                     onClick={() => closeMobileMenu()}
-                                    className={`flex items-center gap-3 p-2 rounded ${pathname === subItem.href && subItem.href !== '/products/laptops' && subItem.href !== '/products/phones' && subItem.href !== '/products/cctv' ? 'bg-[hsl(165deg_77.78%_14.12%/0.1)]' : 'hover:bg-gray-50'}`}
+                                    className="flex items-center gap-3 p-2 rounded-lg"
                                   >
                                     <div className="w-9 h-9 flex items-center justify-center bg-[#f1f5f9] rounded-md">
                                       {menuItem.icon}
                                     </div>
                                     <div className="flex flex-col">
-                                      <span className="font-medium text-gray-900">{subItem.label}</span>
-                                      <span className="text-xs text-gray-500">{menuItem.desc}</span>
+                                      <span className={`font-medium ${isActive ? 'text-white' : 'text-gray-900 group-hover:text-white'}`}>{subItem.label}</span>
+                                      <span className={`text-xs ${isActive ? 'text-white' : 'text-gray-500 group-hover:text-white'}`}>{menuItem.desc}</span>
                                     </div>
                                   </Link>
                                 </li>

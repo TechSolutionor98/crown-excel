@@ -22,14 +22,13 @@
  */
 
 import { getDb } from '@/lib/mongodb';
+import { cache } from 'react';
+import { unstable_cache } from 'next/cache';
 
 /**
- * Fetch CMS SEO data for a given path
- * @param {string} path - Route path (e.g., '/products/laptops')
- * @param {string} websiteId - Website ID (default: 'default')
- * @returns {Object|null} SEO data or null
+ * Fetch CMS SEO data directly from DB
  */
-export async function getCmsSeo(path, websiteId = 'default') {
+async function fetchCmsSeoFromDb(path, websiteId = 'default') {
   try {
     if (!path) return null;
     const db = await getDb();
@@ -61,7 +60,7 @@ export async function getCmsSeo(path, websiteId = 'default') {
         });
       }
     }
-    return seo || null;
+    return seo ? JSON.parse(JSON.stringify(seo)) : null;
   } catch (err) {
     console.error(`getCmsSeo error for ${path}:`, err);
     return null;
@@ -69,12 +68,9 @@ export async function getCmsSeo(path, websiteId = 'default') {
 }
 
 /**
- * Fetch CMS page content for a given path
- * @param {string} path - Route path
- * @param {string} websiteId - Website ID
- * @returns {Object|null} Content data with sections or null
+ * Fetch CMS page content directly from DB
  */
-export async function getCmsContent(path, websiteId = 'default') {
+async function fetchCmsContentFromDb(path, websiteId = 'default') {
   try {
     if (!path && path !== '') return null;
     const db = await getDb();
@@ -158,12 +154,13 @@ export async function getCmsContent(path, websiteId = 'default') {
       }
     }
 
-    return {
+    const result = {
       sections,
       status: content.status,
       version: content.version,
       updatedAt: content.updatedAt,
     };
+    return JSON.parse(JSON.stringify(result));
   } catch (err) {
     console.error(`getCmsContent error for ${path}:`, err);
     return null;
@@ -171,19 +168,44 @@ export async function getCmsContent(path, websiteId = 'default') {
 }
 
 /**
- * Fetch both CMS content and SEO data in one call
- * @param {string} path - Route path
- * @param {string} websiteId - Website ID
- * @returns {Object} { content, seo }
+ * Fetch CMS SEO data for a given path (cached & deduplicated)
  */
-export async function getCmsData(path, websiteId = 'default') {
+export const getCmsSeo = cache(async (path, websiteId = 'default') => {
+  if (!path) return null;
+  const cleanPath = path.trim();
+  const cachedFn = unstable_cache(
+    () => fetchCmsSeoFromDb(cleanPath, websiteId),
+    [`cms-seo-${cleanPath}-${websiteId}`],
+    { revalidate: 300, tags: ['cms', 'cms-seo'] }
+  );
+  return await cachedFn();
+});
+
+/**
+ * Fetch CMS page content for a given path (cached & deduplicated)
+ */
+export const getCmsContent = cache(async (path, websiteId = 'default') => {
+  if (!path && path !== '') return null;
+  const cleanPath = path ? path.trim() : '/';
+  const cachedFn = unstable_cache(
+    () => fetchCmsContentFromDb(cleanPath, websiteId),
+    [`cms-content-${cleanPath}-${websiteId}`],
+    { revalidate: 300, tags: ['cms', 'cms-content'] }
+  );
+  return await cachedFn();
+});
+
+/**
+ * Fetch both CMS content and SEO data in one call (deduplicated)
+ */
+export const getCmsData = cache(async (path, websiteId = 'default') => {
   const [content, seo] = await Promise.all([
     getCmsContent(path, websiteId),
     getCmsSeo(path, websiteId),
   ]);
 
   return { content, seo };
-}
+});
 
 /**
  * Generate Next.js metadata from CMS SEO data

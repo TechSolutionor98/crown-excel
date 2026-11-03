@@ -6,11 +6,25 @@ const __dirname = path.dirname(fileURLToPath(import.meta.url));
 /** @type {import('next').NextConfig} */
 const nextConfig = {
   images: {
+    formats: ['image/webp'],
+    minimumCacheTTL: 2678400,
     remotePatterns: [
       {
         protocol: 'https',
         hostname: 'res.cloudinary.com',
       },
+    ],
+  },
+  compress: true,
+  experimental: {
+    optimizePackageImports: [
+      'lucide-react',
+      'react-icons',
+      '@phosphor-icons/react',
+      'phosphor-react',
+      'hugeicons-react',
+      'framer-motion',
+      'lottie-react',
     ],
   },
   async redirects() {

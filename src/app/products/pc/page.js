@@ -10,8 +10,7 @@ import WhyBuyFromUs from '@/app/_components/Products/Desktop/WhyBuyFromUs/WhyBuy
 import DesktopBrands from '@/app/_components/Products/Desktop/DesktopBrandsWeDeal/DesktopBrands'
 import { generateCmsMetadata, getCmsData } from '@/lib/cms-fetch';
 
-export const dynamic = 'force-dynamic';
-export const revalidate = 0;
+export const revalidate = 120;
 
 export async function generateMetadata() {
   return await generateCmsMetadata('/products/pc', {

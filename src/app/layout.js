@@ -1,10 +1,11 @@
-import { Geist, Geist_Mono } from "next/font/google";
+import { Geist, Geist_Mono, Montserrat, Mulish, Anton } from "next/font/google";
 import "./globals.css";
 import LayoutShell from "@/Components/Layout/LayoutShell";
 import { getDb } from "@/lib/mongodb";
 import CustomScripts from "@/Components/Layout/CustomScripts";
 import { Suspense } from "react";
 import AnalyticsTracker from "@/Components/Layout/AnalyticsTracker";
+import { unstable_cache } from "next/cache";
 
 const geistSans = Geist({
   variable: "--font-geist-sans",
@@ -14,6 +15,25 @@ const geistSans = Geist({
 const geistMono = Geist_Mono({
   variable: "--font-geist-mono",
   subsets: ["latin"],
+});
+
+const montserrat = Montserrat({
+  variable: "--font-montserrat",
+  subsets: ["latin"],
+  display: "swap",
+});
+
+const mulish = Mulish({
+  variable: "--font-mulish",
+  subsets: ["latin"],
+  display: "swap",
+});
+
+const anton = Anton({
+  variable: "--font-anton-font",
+  weight: "400",
+  subsets: ["latin"],
+  display: "swap",
 });
 
 export const metadata = {
@@ -26,19 +46,29 @@ export const metadata = {
     "Crown Excel provides IT hardware, infrastructure, networking, and managed technology solutions for businesses in Dubai and the UAE.",
 };
 
-export const revalidate = 0;
+const getCachedWebsiteData = unstable_cache(
+  async () => {
+    let settings = null;
+    let inactiveRoutes = [];
+    try {
+      const db = await getDb();
+      settings = await db.collection("settings").findOne({ _id: "website_settings" });
+      const inactiveDocs = await db.collection("cms_routes").find({ status: "inactive" }, { projection: { path: 1 } }).toArray();
+      inactiveRoutes = inactiveDocs.map(d => d.path).filter(Boolean);
+    } catch (err) {
+      console.error("Failed to load settings in RootLayout:", err);
+    }
+    return {
+      settings: settings ? JSON.parse(JSON.stringify(settings)) : null,
+      inactiveRoutes,
+    };
+  },
+  ['website-settings-and-routes'],
+  { revalidate: 300, tags: ['settings', 'routes'] }
+);
 
 export default async function RootLayout({ children }) {
-  let settings = null;
-  let inactiveRoutes = [];
-  try {
-    const db = await getDb();
-    settings = await db.collection("settings").findOne({ _id: "website_settings" });
-    const inactiveDocs = await db.collection("cms_routes").find({ status: "inactive" }, { projection: { path: 1 } }).toArray();
-    inactiveRoutes = inactiveDocs.map(d => d.path).filter(Boolean);
-  } catch (err) {
-    console.error("Failed to load settings in RootLayout:", err);
-  }
+  const { settings, inactiveRoutes } = await getCachedWebsiteData();
 
   return (
     <html lang="en" suppressHydrationWarning>
@@ -46,7 +76,7 @@ export default async function RootLayout({ children }) {
       <body
         suppressHydrationWarning
         style={{ backgroundColor: "white" }}
-        className={`${geistSans.variable} ${geistMono.variable} antialiased`}
+        className={`${geistSans.variable} ${geistMono.variable} ${montserrat.variable} ${mulish.variable} ${anton.variable} antialiased`}
       >
         {/* Google Tag Manager (noscript) */}
         {settings?.googleTagManagerId && (

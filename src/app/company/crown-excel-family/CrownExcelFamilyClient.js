@@ -1,5 +1,6 @@
 'use client';
 import Link from 'next/link';
+import Image from 'next/image';
 import React, { useState, useEffect } from 'react';
 import FamilyPhoto from '@/Components/Images/familyphoto.png';
 import { safeRender } from '@/lib/safe-html';
@@ -74,14 +75,16 @@ export default function CrownExcelFamilyClient() {
     <div className="min-h-screen">
       <div className="w-full bg-[#FFFFFF] overflow-hidden">
         <section className="relative w-full max-w-[1536px] mx-auto h-[280px] sm:h-[180px] md:h-[260px] lg:h-[540px] overflow-hidden">
-          <div
-            className="absolute inset-0"
-            style={{
-              backgroundImage: `url(${FamilyPhoto.src})`,
-              backgroundSize: 'cover',
-              backgroundPosition: 'center right'
-            }}
-          />
+          <div className="absolute inset-0">
+            <Image
+              src={FamilyPhoto}
+              alt="Crown Excel Family"
+              fill
+              priority
+              className="object-cover object-[center_right]"
+              sizes="(max-width: 1536px) 100vw, 1536px"
+            />
+          </div>
           <div className="absolute" />
           <div className="pointer-events-none absolute -left-24 w-[340px] h-[340px]" />
           <div className="relative h-full flex items-center justify-start">

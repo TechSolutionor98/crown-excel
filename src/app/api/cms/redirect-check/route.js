@@ -12,7 +12,13 @@ export async function OPTIONS() {
 }
 
 function jsonResponse(data, status = 200) {
-  return NextResponse.json(data, { status, headers: CORS_HEADERS });
+  return NextResponse.json(data, {
+    status,
+    headers: {
+      ...CORS_HEADERS,
+      'Cache-Control': 'public, s-maxage=120, stale-while-revalidate=300',
+    },
+  });
 }
 
 // GET /api/cms/redirect-check?path=... → Check if there is a matching redirect path
