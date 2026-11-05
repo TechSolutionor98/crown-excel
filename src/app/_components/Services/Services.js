@@ -34,7 +34,7 @@ const Services = ({ cmsData }) => {
             </div>
           </div>
           <Link
-            href="/our-services"
+            href="/products/laptops"
             className="flex items-center justify-center gap-2 w-auto min-w-[130px] sm:w-[150px] bg-white text-[#084032] font-semibold rounded-full px-5 sm:px-6 py-2.5 sm:py-3 shadow-lg hover:bg-[#e6eeff] transition text-sm sm:text-base shrink-0"
           >
             View All

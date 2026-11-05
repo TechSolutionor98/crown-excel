@@ -1582,6 +1582,7 @@ export async function POST(request) {
       finalPath === '/products/laptops' || path === '/products/laptops' || routeId === '6a2016aca0608271b7524ead' ||
       finalPath === '/products/pc' || path === '/products/pc' || routeId === '6a2016aca0608271b7524eae' ||
       finalPath === '/our-services/it-infrastructure' || path === '/our-services/it-infrastructure' || routeId === '6a2016aaa0608271b7524ea2' ||
+      finalPath === '/our-services/it-hardware-supplier-and-distributor' || path === '/our-services/it-hardware-supplier-and-distributor' || routeId === '6aead11910c353706f75a8c3' ||
       finalPath === '/our-services/long/short-term-amc' || path === '/our-services/long/short-term-amc' || routeId === '6a2016aba0608271b7524ea3' ||
       finalPath === '/our-services/networking' || path === '/our-services/networking' || routeId === '6a2016aba0608271b7524ea4' ||
       finalPath === '/our-services/security-solutions' || path === '/our-services/security-solutions' || routeId === '6a2016aba0608271b7524ea5' ||
