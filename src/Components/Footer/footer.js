@@ -41,14 +41,13 @@ const Footer = () => {
     { label: 'Networking Solutions', mobileLabel: 'Networking', href: '/our-services/networking' },
     { label: 'Storage & Virtualization', href: '/our-services/storage&virtualization' },
     { label: 'Laptop Wholesale Supplier', href: '/laptop-wholesale-supplier-in-dubai-or-uae' },
-    { label: 'Sitemaps', href: '/sitemap.xml' },
   ];
 
   const companyLinks = [
     { label: 'About Us', href: '/company/about-us' },
     { label: 'Careers', href: '/company/career' },
     { label: 'Our History', href: '/company/company-history' },
-    { label: 'Leadership', href: '/our-management' },
+    { label: 'Our Management', href: '/our-management' },
     { label: 'Blogs', href: '/blogs' },
   ];
 
