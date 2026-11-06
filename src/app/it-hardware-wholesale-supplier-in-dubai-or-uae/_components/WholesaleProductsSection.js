@@ -12,22 +12,18 @@ import Img83F30082AX from '@/Components/Images/83F30082AX.webp';
 import Img83M4000YGP from '@/Components/Images/83M4000YGP.webp';
 import Img83RR0040PS from '@/Components/Images/83RR0040PS.webp';
 import Img83S0007FUS from '@/Components/Images/83S0007FUS.png';
-import Img90NB10J1_M04TK0 from '@/Components/Images/90NB10J1-M04TK0.webp';
 import Img90NB10J1_M04TL0 from '@/Components/Images/90NB10J1-M04TL0.webp';
-import Img90NB10T1_M01YX0 from '@/Components/Images/90NB10T1-M01YX0.webp';
-import Img90NB10T2_M01YY0 from '@/Components/Images/90NB10T2-M01YY0.webp';
 import Img90NB14Q2_M003W0 from '@/Components/Images/90NB14Q2-M003W0.webp';
-import Img90NB16G2_M00230 from '@/Components/Images/90NB16G2-M00230.png';
 import Img90NX0801_M04XV0 from '@/Components/Images/90NX0801-M04XV0.webp';
 import ImgD78MQEA_BH5 from '@/Components/Images/D78MQEA_BH5.webp';
 import ImgNH_QVUEM_002 from '@/Components/Images/NH.QVUEM.002.png';
 import ImgNH_QX5EM_003 from '@/Components/Images/NH.QX5EM.003.png';
 import ImgNX_BSQEM_001 from '@/Components/Images/NX.BSQEM.001.png';
 import ImgNX_DGJEM_002 from '@/Components/Images/NX.DGJEM.002.png';
-import ImgNX_DTGEM_001 from '@/Components/Images/NX.DTGEM.001.png';
 
 // Category Additional Product Images
 import ImgAllinoneLatestProduct1 from '@/Components/Images/AllinoneLatestProduct1.png';
+import ImgOneinall1 from '@/Components/Images/oneinall1.png';
 import ImgOneinall4 from '@/Components/Images/oneinall4.png';
 import ImgOneinall6 from '@/Components/Images/oneinall6.png';
 import ImgBestSellingPrinter2 from '@/Components/Images/bestsellingprinter2.png';
@@ -40,7 +36,6 @@ import ImgServerWorkstation3 from '@/Components/Images/servers-workstation-3.web
 import ImgServerWorkstation4 from '@/Components/Images/servers-workstation-4.webp';
 import ImgAccessAllinone1 from '@/Components/Images/accessallinone1.png';
 import ImgAccessAllinone2 from '@/Components/Images/accessallinone2.png';
-import ImgAccessAllinone3 from '@/Components/Images/accessallinone3.png';
 
 // Seven Product Categories in Exact Required Sequence (1 to 7)
 const SEVEN_CATEGORIES = [
@@ -53,9 +48,9 @@ const SEVEN_CATEGORIES = [
   'Accessories (Crownyx)',
 ];
 
-// Product Data Arranged in Exact Sequence 1 to 6
+// Product Data Arranged with Exactly 4 Product Cards per Category
 const ALL_PRODUCTS = [
-  // 1. Consumer Laptops
+  // 1. Consumer Laptops (Exactly 4 Products)
   {
     brand: 'ACER',
     category: 'Consumer Laptops',
@@ -66,48 +61,12 @@ const ALL_PRODUCTS = [
     imageClassName: 'scale-[1.28]'
   },
   {
-    brand: 'ACER',
-    category: 'Consumer Laptops',
-    barcode: 'NX.DTGEM.001',
-    name: 'ACER ASPIRE ALITE15-54P',
-    particular: 'ACER ASPIRE ALITE15-54P, INTEL® CORE™ ULTRA 5-115U,8GB RAM,512GB SSD, 15.6" FHD, INTEL® SHARED,DOS,ENGLISH KEYBOARD,SILVER',
-    image: ImgNX_DTGEM_001,
-    imageClassName: 'scale-[1.28]'
-  },
-  {
     brand: 'ASUS',
     category: 'Consumer Laptops',
     barcode: '90NB10J1-M04TL0',
-    name: 'ASUS VIVOBOOK X1504VA-BQ4675 (English)',
+    name: 'ASUS VIVOBOOK X1504VA-BQ4675',
     particular: 'ASUS VIVOBOOK X1504VA-BQ4675 I3-1315U , 8GB RAM, 512GB SSD, 15.6-INCH, FHD , INTEL® UHD GRAPHICS,DOS,ENGLISH KEYBOARD,QUIET BLUE.',
     image: Img90NB10J1_M04TL0,
-    imageClassName: 'scale-[0.92]'
-  },
-  {
-    brand: 'ASUS',
-    category: 'Consumer Laptops',
-    barcode: '90NB10T1-M01YX0',
-    name: 'ASUS VIVOBOOK A1502VA-BQ1385',
-    particular: 'ASUS VIVOBOOK A1502VA-BQ1385, INTEL CORE I7-13620H, 16GB RAM, 512GB SSD, 15.6 FHD (1920 X 1080), INTEL UHD GRAPHICS, DOS, ENGLISH KEYBOARD, QUIET BLUE',
-    image: Img90NB10T1_M01YX0,
-    imageClassName: 'scale-[0.92]'
-  },
-  {
-    brand: 'ASUS',
-    category: 'Consumer Laptops',
-    barcode: '90NB10J1-M04TK0',
-    name: 'ASUS VIVOBOOK X1504VA-BQ4675 (Arabic)',
-    particular: 'ASUS VIVOBOOK X1504VA-BQ4675 I3-1315U , 8GB RAM, 512GB SSD, 15.6-INCH, FHD , INTEL® UHD GRAPHICS,DOS,ARABIC KEYBOARD,QUIET BLUE',
-    image: Img90NB10J1_M04TK0,
-    imageClassName: 'scale-[0.92]'
-  },
-  {
-    brand: 'ASUS',
-    category: 'Consumer Laptops',
-    barcode: '90NB10T2-M01YY0',
-    name: 'ASUS VIVOBOOK A1502VA-BQ1386',
-    particular: 'ASUS VIVOBOOK A1502VA-BQ1386, INTEL CORE I7-13620H, 16GB RAM, 512GB SSD, 15.6 FHD (1920 X 1080), INTEL UHD GRAPHICS, DOS, ENGLISH KEYBOARD, COOL SILVER',
-    image: Img90NB10T2_M01YY0,
     imageClassName: 'scale-[0.92]'
   },
   {
@@ -120,23 +79,6 @@ const ALL_PRODUCTS = [
     imageClassName: 'scale-[0.92]'
   },
   {
-    brand: 'ASUS',
-    category: 'Consumer Laptops',
-    barcode: '90NB16G2-M00230',
-    name: 'ASUS ZENBOOK A14 X3407RA-QD004W',
-    particular: 'ASUS ZENBOOK A14 X3407RA-QD004W, SNAPDRAGON X ELITE X1E-78-100,16GB RAM,1TB SSD, 14 WUXGA OLED, INTEGRATED GRAPHICS,WINDOWS 11 HOME,BACKLIT ENGLISH KEYBOARD, ICELAND GRAY',
-    image: Img90NB16G2_M00230
-  },
-  {
-    brand: 'HP',
-    category: 'Consumer Laptops',
-    barcode: 'D78MQEA#BH5',
-    name: 'HP OmniBook 3 Laptop 16-bu0065nia',
-    particular: 'HP OmniBook 3 Laptop 16-bu0065nia,Intel® Core™ 5 120U,16 GB DDR5-5200,512 GB PCIe® Gen4 NVMe,16" Diagonal 2K (1920 x 1200) IPS,Integrated,Intel® Graphics,DOS 3.0,English Backlit KB,Silver',
-    image: ImgD78MQEA_BH5,
-    imageClassName: 'scale-[1.24]'
-  },
-  {
     brand: 'LENOVO',
     category: 'Consumer Laptops',
     barcode: '83RR0040PS',
@@ -146,7 +88,7 @@ const ALL_PRODUCTS = [
     imageClassName: 'scale-[1.36]'
   },
 
-  // 2. Gaming Laptops
+  // 2. Gaming Laptops (Exactly 4 Products)
   {
     brand: 'ACER',
     category: 'Gaming Laptops',
@@ -182,7 +124,7 @@ const ALL_PRODUCTS = [
     image: Img83S0007FUS
   },
 
-  // 3. Business Laptops
+  // 3. Business Laptops (Exactly 4 Products)
   {
     brand: 'ACER',
     category: 'Business Laptops',
@@ -202,6 +144,15 @@ const ALL_PRODUCTS = [
     imageClassName: 'scale-[1.44]'
   },
   {
+    brand: 'HP',
+    category: 'Business Laptops',
+    barcode: 'D78MQEA#BH5',
+    name: 'HP OmniBook 3 Laptop 16-bu0065nia',
+    particular: 'HP OmniBook 3 Laptop 16-bu0065nia,Intel® Core™ 5 120U,16 GB DDR5-5200,512 GB PCIe® Gen4 NVMe,16" Diagonal 2K (1920 x 1200) IPS,Integrated,Intel® Graphics,DOS 3.0,English Backlit KB,Silver',
+    image: ImgD78MQEA_BH5,
+    imageClassName: 'scale-[1.24]'
+  },
+  {
     brand: 'LENOVO',
     category: 'Business Laptops',
     barcode: '83M4000YGP',
@@ -211,7 +162,7 @@ const ALL_PRODUCTS = [
     imageClassName: 'scale-[1.26]'
   },
 
-  // 4. All-In-One
+  // 4. All-In-One (Exactly 4 Products)
   {
     brand: 'ACER',
     category: 'All-In-One',
@@ -236,8 +187,16 @@ const ALL_PRODUCTS = [
     particular: 'Lenovo IdeaCentre AIO 3 27" FHD IPS Desktop, Intel Core i7-13620H, 16GB DDR4, 512GB SSD, Intel UHD Graphics, Wireless KB & Mouse, DOS',
     image: ImgOneinall6
   },
+  {
+    brand: 'ASUS',
+    category: 'All-In-One',
+    barcode: 'D700SC-I512',
+    name: 'ASUS ExpertCenter D700 AIO Desktop',
+    particular: 'ASUS ExpertCenter D700 23.8" FHD All-in-One Business PC, Intel Core i5-12400, 16GB RAM, 512GB SSD, Intel UHD Graphics 730, Wireless Keyboard & Mouse, DOS',
+    image: ImgOneinall1
+  },
 
-  // 4. Print & Scan
+  // 5. Print & Scan (Exactly 4 Products)
   {
     brand: 'HP',
     category: 'Print & Scan',
@@ -271,7 +230,7 @@ const ALL_PRODUCTS = [
     image: ImgScannerPopular1
   },
 
-  // 6. Servers & Workstation
+  // 6. Servers & Workstation (Exactly 4 Products)
   {
     brand: 'DELL',
     category: 'Servers & Workstation',
@@ -305,7 +264,7 @@ const ALL_PRODUCTS = [
     image: ImgServerWorkstation4
   },
 
-  // 7. Accessories (Crownyx)
+  // 7. Accessories (Crownyx) (Exactly 4 Products)
   {
     brand: 'AOC',
     category: 'Accessories (Crownyx)',
@@ -337,14 +296,6 @@ const ALL_PRODUCTS = [
     name: 'Crownyx 7-in-1 Dual USB-C Hub',
     particular: 'Crownyx 7-in-1 Multiport USB-C Docking Adapter, 4K HDMI, 100W Power Delivery, 3x USB 3.0, SD/MicroSD Card Reader, Aluminum Grey',
     image: ImgAccessAllinone2
-  },
-  {
-    brand: 'CROWNYX',
-    category: 'Accessories (Crownyx)',
-    barcode: 'CX-MS-CGM800',
-    name: 'Crownyx CGM-800 RGB Gaming Mouse',
-    particular: 'Crownyx CGM-800 High-Precision RGB Optical Gaming Mouse, 7200 DPI Adjustable Sensor, Ergonomic Grip, Braided Cable',
-    image: ImgAccessAllinone3
   }
 ];
 
@@ -356,11 +307,15 @@ function getTwoLineTitle(name) {
   if (name.startsWith('ACER TRAVELMATE')) return { line1: 'ACER TRAVELMATE', line2: 'P214-56' };
   if (name.startsWith('ASUS EXPERTBOOK')) return { line1: 'ASUS EXPERTBOOK', line2: 'B1503CV' };
   if (name.startsWith('LENOVO IDEAPAD')) return { line1: 'LENOVO IDEAPAD', line2: 'SLIM 3I' };
-  if (name.startsWith('ACER ASPIRE ALITE15-54P')) return { line1: 'ACER ASPIRE', line2: 'ALITE15-54P' };
+  if (name.startsWith('ACER ASPIRE LITE')) return { line1: 'ACER ASPIRE LITE', line2: 'AL15-36P-36UJ' };
+  if (name.startsWith('ASUS VIVOBOOK X1504VA')) return { line1: 'ASUS VIVOBOOK', line2: 'X1504VA-BQ4675' };
+  if (name.startsWith('ASUS VIVOBOOK S5507QA')) return { line1: 'ASUS VIVOBOOK', line2: 'S5507QA-MA007W OLED' };
+  if (name.startsWith('HP OmniBook 3')) return { line1: 'HP OmniBook 3', line2: 'Laptop 16-bu0065nia' };
   if (name.startsWith('Lenovo Legion Pro 5i')) return { line1: 'Lenovo Legion Pro 5i', line2: '(16", 10)' };
   if (name.startsWith('Acer Aspire C24-1700')) return { line1: 'Acer Aspire C24-1700', line2: 'AIO Desktop' };
   if (name.startsWith('HP All-in-One 24-cr0122nh')) return { line1: 'HP All-in-One', line2: '24-cr0122nh' };
   if (name.startsWith('Lenovo IdeaCentre AIO 3')) return { line1: 'Lenovo IdeaCentre', line2: 'AIO 3 27IAP7' };
+  if (name.startsWith('ASUS ExpertCenter D700')) return { line1: 'ASUS ExpertCenter', line2: 'D700 AIO Desktop' };
   if (name.startsWith('HP Color LaserJet Enterprise')) return { line1: 'HP Color LaserJet', line2: 'Enterprise M652n' };
   if (name.startsWith('HP LaserJet MFP M141a')) return { line1: 'HP LaserJet MFP', line2: 'M141a Monochrome' };
   if (name.startsWith('Canon PIXMA G3410')) return { line1: 'Canon PIXMA G3410', line2: 'MegaTank 3-in-1' };
@@ -371,7 +326,6 @@ function getTwoLineTitle(name) {
   if (name.startsWith('HP ZBook Firefly 16')) return { line1: 'HP ZBook Firefly', line2: '16 G10 Workstation' };
   if (name.startsWith('Crownyx MagSafe Shockproof')) return { line1: 'Crownyx MagSafe', line2: 'Shockproof Case' };
   if (name.startsWith('Crownyx 7-in-1 Dual')) return { line1: 'Crownyx 7-in-1', line2: 'Dual USB-C Hub' };
-  if (name.startsWith('Crownyx CGM-800 RGB')) return { line1: 'Crownyx CGM-800', line2: 'RGB Gaming Mouse' };
 
   let splitIndex = Math.ceil(words.length / 2);
   let line1 = words.slice(0, splitIndex).join(' ');
@@ -430,7 +384,8 @@ export default function WholesaleProductsSection({
         {/* Product Categories Rendered in Exact Sequence (1 to 7) */}
         <div className="space-y-12 sm:space-y-16">
           {categoriesToRender.map((catName) => {
-            const catProducts = ALL_PRODUCTS.filter((p) => p.category === catName);
+            // Strictly cap each category to exactly 4 product cards
+            const catProducts = ALL_PRODUCTS.filter((p) => p.category === catName).slice(0, 4);
             const categoryIndex = SEVEN_CATEGORIES.indexOf(catName) + 1;
             const categoryAnchorId = catName.toLowerCase().replace(/[^a-z0-9]+/g, '-');
 
@@ -448,97 +403,99 @@ export default function WholesaleProductsSection({
                   </div>
 
                   <span className="text-[11px] sm:text-xs font-semibold text-[#147A5F] bg-[#147A5F]/10 px-3 py-1 rounded-full font-jakarta">
-                    {catProducts.length} {catProducts.length === 1 ? 'Product' : 'Products'}
+                    {catProducts.length} Products
                   </span>
                 </div>
 
-                {/* Product Cards Grid: 2 columns on mobile, 4 on desktop */}
-                <div className="grid grid-cols-2 sm:grid-cols-2 lg:grid-cols-4 gap-2.5 sm:gap-5 lg:gap-6 items-stretch">
-                  {catProducts.map((product, index) => {
-                    const { line1, line2 } = getTwoLineTitle(product.name);
-                    return (
-                      <div
-                        key={product.barcode}
-                        className="group relative bg-white p-2.5 sm:p-3.5 rounded-xl sm:rounded-2xl border border-[#147A5F] shadow-md hover:shadow-2xl transition-all duration-300 hover:-translate-y-1.5 flex flex-col justify-between overflow-hidden min-h-[295px] sm:min-h-[375px] lg:min-h-[395px]"
-                      >
-                        {/* Product Image Showcase on Pure White Background */}
-                        <div className="relative w-full h-28 xs:h-32 sm:h-48 lg:h-52 bg-white flex items-center justify-center overflow-hidden rounded-lg sm:rounded-xl">
-                          <Image
-                            src={product.image}
-                            alt={product.name}
-                            fill
-                            priority={categoryIndex === 1 && index < 4}
-                            sizes="(max-width: 640px) 50vw, (max-width: 1024px) 50vw, 25vw"
-                            className={`object-contain ${
-                              product.imageClassName ? `p-0 ${product.imageClassName}` : 'p-1 sm:p-2'
-                            }`}
-                          />
-                        </div>
-
-                        {/* Separate container below the image for product text, barcode, and buttons */}
-                        <div className="w-full flex flex-col flex-grow justify-end pt-2 pb-0.5 sm:pb-1 px-0.5 sm:px-1.5">
-                          {/* Content: Exactly 2-Line Product Name & Plain Barcode Text */}
-                          <div className="w-full flex flex-col items-center text-center">
-                            <h3
-                              className="w-full font-montserrat font-bold text-[11.5px] xs:text-[13px] sm:text-[15px] text-[#171717] leading-[1.3] sm:leading-[1.35] h-[32px] xs:h-[35px] sm:h-[42px] mb-1 sm:mb-1.5 text-center overflow-hidden flex flex-col justify-center"
-                              title={product.particular}
-                            >
-                              <span className="block truncate">{line1}</span>
-                              <span className="block truncate">{line2}</span>
-                            </h3>
-
-                            <p className="w-full font-mono text-[9.5px] xs:text-[10.5px] sm:text-[12px] text-gray-500 tracking-tight sm:tracking-wider mb-2 sm:mb-2.5 text-center truncate">
-                              {product.barcode}
-                            </p>
+                {/* Exactly 4 Product Cards Arranged Inline in a Single Row (No Wrapping) */}
+                <div className="w-full overflow-x-auto pb-2 scrollbar-none">
+                  <div className="grid grid-cols-4 gap-2 sm:gap-4 lg:gap-6 items-stretch min-w-[700px] lg:min-w-0">
+                    {catProducts.map((product, index) => {
+                      const { line1, line2 } = getTwoLineTitle(product.name);
+                      return (
+                        <div
+                          key={product.barcode}
+                          className="group relative bg-white p-2.5 sm:p-3.5 rounded-xl sm:rounded-2xl border border-[#147A5F] shadow-md hover:shadow-2xl transition-all duration-300 hover:-translate-y-1.5 flex flex-col justify-between overflow-hidden min-h-[295px] sm:min-h-[375px] lg:min-h-[395px]"
+                        >
+                          {/* Product Image Showcase on Pure White Background */}
+                          <div className="relative w-full h-28 xs:h-32 sm:h-48 lg:h-52 bg-white flex items-center justify-center overflow-hidden rounded-lg sm:rounded-xl">
+                            <Image
+                              src={product.image}
+                              alt={product.name}
+                              fill
+                              priority={categoryIndex === 1 && index < 4}
+                              sizes="(max-width: 640px) 25vw, (max-width: 1024px) 25vw, 25vw"
+                              className={`object-contain ${
+                                product.imageClassName ? `p-0 ${product.imageClassName}` : 'p-1 sm:p-2'
+                              }`}
+                            />
                           </div>
 
-                          {/* Action Buttons: Inquire Now, WhatsApp & Telegram Inline Side-by-Side */}
-                          <div className="w-full flex items-center gap-1 xs:gap-1.5 sm:gap-2">
-                            <button
-                              type="button"
-                              onClick={() => openProductInquiryModal(product)}
-                              className="flex-1 py-1.5 sm:py-2.5 px-1 sm:px-2 bg-[#147A5F] hover:bg-[#0f5f4a] text-white text-[9px] xs:text-[10px] sm:text-xs font-bold font-montserrat tracking-tight sm:tracking-wide uppercase flex items-center justify-center gap-0.5 sm:gap-1.5 transition-all duration-200 cursor-pointer shadow-xs hover:shadow-md active:scale-[0.99] rounded-md sm:rounded-lg whitespace-nowrap min-w-0"
-                            >
-                              <span>
-                                <span className="hidden xs:inline">Inquire Now</span>
-                                <span className="xs:hidden">Inquire</span>
-                              </span>
-                              <ArrowRight className="w-2.5 h-2.5 sm:w-3 sm:h-3 shrink-0" />
-                            </button>
-
-                            <div className="flex items-center gap-1 sm:gap-1.5 shrink-0">
-                              <a
-                                href={typeof getWhatsAppUrl === 'function' ? getWhatsAppUrl(defaultWhatsAppMessage) : '#'}
-                                onClick={(e) => {
-                                  if (typeof handleWhatsAppRedirect === 'function') {
-                                    handleWhatsAppRedirect(e, defaultWhatsAppMessage);
-                                  }
-                                }}
-                                target="_blank"
-                                rel="noopener noreferrer"
-                                title="Contact on WhatsApp"
-                                aria-label="Contact on WhatsApp"
-                                className="py-1.5 sm:py-2.5 px-2 xs:px-2.5 sm:px-3 bg-[#25D366] hover:bg-[#20ba59] text-white flex items-center justify-center transition-all duration-200 cursor-pointer shadow-xs hover:shadow-md active:scale-[0.99] rounded-md sm:rounded-lg shrink-0"
+                          {/* Separate container below the image for product text, barcode, and buttons */}
+                          <div className="w-full flex flex-col flex-grow justify-end pt-2 pb-0.5 sm:pb-1 px-0.5 sm:px-1.5">
+                            {/* Content: Exactly 2-Line Product Name & Plain Barcode Text */}
+                            <div className="w-full flex flex-col items-center text-center">
+                              <h3
+                                className="w-full font-montserrat font-bold text-[11.5px] xs:text-[13px] sm:text-[15px] text-[#171717] leading-[1.3] sm:leading-[1.35] h-[32px] xs:h-[35px] sm:h-[42px] mb-1 sm:mb-1.5 text-center overflow-hidden flex flex-col justify-center"
+                                title={product.particular}
                               >
-                                <FaWhatsapp className="w-3 h-3 xs:w-3.5 xs:h-3.5 sm:w-4 sm:h-4 shrink-0" />
-                              </a>
+                                <span className="block truncate">{line1}</span>
+                                <span className="block truncate">{line2}</span>
+                              </h3>
 
-                              <a
-                                href={telegramChannelUrl || 'https://t.me/crownexcelae'}
-                                target="_blank"
-                                rel="noopener noreferrer"
-                                title="Join Crown Excel Telegram Channel"
-                                aria-label="Crown Excel Telegram Channel"
-                                className="py-1.5 sm:py-2.5 px-2 xs:px-2.5 sm:px-3 bg-[#0088cc] hover:bg-[#0077b5] text-white flex items-center justify-center transition-all duration-200 cursor-pointer shadow-xs hover:shadow-md active:scale-[0.99] rounded-md sm:rounded-lg shrink-0"
+                              <p className="w-full font-mono text-[9.5px] xs:text-[10.5px] sm:text-[12px] text-gray-500 tracking-tight sm:tracking-wider mb-2 sm:mb-2.5 text-center truncate">
+                                {product.barcode}
+                              </p>
+                            </div>
+
+                            {/* Action Buttons: Inquire Now, WhatsApp & Telegram Inline Side-by-Side */}
+                            <div className="w-full flex items-center gap-1 xs:gap-1.5 sm:gap-2">
+                              <button
+                                type="button"
+                                onClick={() => openProductInquiryModal(product)}
+                                className="flex-1 py-1.5 sm:py-2.5 px-1 sm:px-2 bg-[#147A5F] hover:bg-[#0f5f4a] text-white text-[9px] xs:text-[10px] sm:text-xs font-bold font-montserrat tracking-tight sm:tracking-wide uppercase flex items-center justify-center gap-0.5 sm:gap-1.5 transition-all duration-200 cursor-pointer shadow-xs hover:shadow-md active:scale-[0.99] rounded-md sm:rounded-lg whitespace-nowrap min-w-0"
                               >
-                                <FaTelegramPlane className="w-3 h-3 xs:w-3.5 xs:h-3.5 sm:w-4 sm:h-4 shrink-0" />
-                              </a>
+                                <span>
+                                  <span className="hidden xs:inline">Inquire Now</span>
+                                  <span className="xs:hidden">Inquire</span>
+                                </span>
+                                <ArrowRight className="w-2.5 h-2.5 sm:w-3 sm:h-3 shrink-0" />
+                              </button>
+
+                              <div className="flex items-center gap-1 sm:gap-1.5 shrink-0">
+                                <a
+                                  href={typeof getWhatsAppUrl === 'function' ? getWhatsAppUrl(defaultWhatsAppMessage) : '#'}
+                                  onClick={(e) => {
+                                    if (typeof handleWhatsAppRedirect === 'function') {
+                                      handleWhatsAppRedirect(e, defaultWhatsAppMessage);
+                                    }
+                                  }}
+                                  target="_blank"
+                                  rel="noopener noreferrer"
+                                  title="Contact on WhatsApp"
+                                  aria-label="Contact on WhatsApp"
+                                  className="py-1.5 sm:py-2.5 px-2 xs:px-2.5 sm:px-3 bg-[#25D366] hover:bg-[#20ba59] text-white flex items-center justify-center transition-all duration-200 cursor-pointer shadow-xs hover:shadow-md active:scale-[0.99] rounded-md sm:rounded-lg shrink-0"
+                                >
+                                  <FaWhatsapp className="w-3 h-3 xs:w-3.5 xs:h-3.5 sm:w-4 sm:h-4 shrink-0" />
+                                </a>
+
+                                <a
+                                  href={telegramChannelUrl || 'https://t.me/crownexcelae'}
+                                  target="_blank"
+                                  rel="noopener noreferrer"
+                                  title="Join Crown Excel Telegram Channel"
+                                  aria-label="Crown Excel Telegram Channel"
+                                  className="py-1.5 sm:py-2.5 px-2 xs:px-2.5 sm:px-3 bg-[#0088cc] hover:bg-[#0077b5] text-white flex items-center justify-center transition-all duration-200 cursor-pointer shadow-xs hover:shadow-md active:scale-[0.99] rounded-md sm:rounded-lg shrink-0"
+                                >
+                                  <FaTelegramPlane className="w-3 h-3 xs:w-3.5 xs:h-3.5 sm:w-4 sm:h-4 shrink-0" />
+                                </a>
+                              </div>
                             </div>
                           </div>
                         </div>
-                      </div>
-                    );
-                  })}
+                      );
+                    })}
+                  </div>
                 </div>
               </div>
             );
