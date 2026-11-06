@@ -1,0 +1,550 @@
+'use client';
+
+import React, { useState, useMemo } from 'react';
+import Image from 'next/image';
+import { ArrowRight } from 'lucide-react';
+import { FaWhatsapp, FaTelegramPlane } from 'react-icons/fa';
+
+// Inventory Product WebP / PNG Images
+import Img24B3HA2_89 from '@/Components/Images/24B3HA2-89.webp';
+import Img25B36H_89 from '@/Components/Images/25B36H-89.webp';
+import Img83F30082AX from '@/Components/Images/83F30082AX.webp';
+import Img83M4000YGP from '@/Components/Images/83M4000YGP.webp';
+import Img83RR0040PS from '@/Components/Images/83RR0040PS.webp';
+import Img83S0007FUS from '@/Components/Images/83S0007FUS.png';
+import Img90NB10J1_M04TK0 from '@/Components/Images/90NB10J1-M04TK0.webp';
+import Img90NB10J1_M04TL0 from '@/Components/Images/90NB10J1-M04TL0.webp';
+import Img90NB10T1_M01YX0 from '@/Components/Images/90NB10T1-M01YX0.webp';
+import Img90NB10T2_M01YY0 from '@/Components/Images/90NB10T2-M01YY0.webp';
+import Img90NB14Q2_M003W0 from '@/Components/Images/90NB14Q2-M003W0.webp';
+import Img90NB16G2_M00230 from '@/Components/Images/90NB16G2-M00230.png';
+import Img90NX0801_M04XV0 from '@/Components/Images/90NX0801-M04XV0.webp';
+import ImgD78MQEA_BH5 from '@/Components/Images/D78MQEA_BH5.webp';
+import ImgNH_QVUEM_002 from '@/Components/Images/NH.QVUEM.002.png';
+import ImgNH_QX5EM_003 from '@/Components/Images/NH.QX5EM.003.png';
+import ImgNX_BSQEM_001 from '@/Components/Images/NX.BSQEM.001.png';
+import ImgNX_DGJEM_002 from '@/Components/Images/NX.DGJEM.002.png';
+import ImgNX_DTGEM_001 from '@/Components/Images/NX.DTGEM.001.png';
+
+// Category Additional Product Images
+import ImgAllinoneLatestProduct1 from '@/Components/Images/AllinoneLatestProduct1.png';
+import ImgOneinall4 from '@/Components/Images/oneinall4.png';
+import ImgOneinall6 from '@/Components/Images/oneinall6.png';
+import ImgBestSellingPrinter2 from '@/Components/Images/bestsellingprinter2.png';
+import ImgAllinonePrinters1 from '@/Components/Images/allinoneprinters1.png';
+import ImgAllinonePrinters2 from '@/Components/Images/allinoneprinters2.png';
+import ImgScannerPopular1 from '@/Components/Images/scannerpopular1.png';
+import ImgServerWorkstation1 from '@/Components/Images/servers-workstation-1.webp';
+import ImgServerWorkstation2 from '@/Components/Images/servers-workstation-2.webp';
+import ImgServerWorkstation3 from '@/Components/Images/servers-workstation-3.webp';
+import ImgServerWorkstation4 from '@/Components/Images/servers-workstation-4.webp';
+import ImgAccessAllinone1 from '@/Components/Images/accessallinone1.png';
+import ImgAccessAllinone2 from '@/Components/Images/accessallinone2.png';
+import ImgAccessAllinone3 from '@/Components/Images/accessallinone3.png';
+
+// Seven Product Categories in Exact Required Sequence (1 to 7)
+const SEVEN_CATEGORIES = [
+  'Consumer Laptops',
+  'Gaming Laptops',
+  'Business Laptops',
+  'All-In-One',
+  'Print & Scan',
+  'Servers & Workstation',
+  'Accessories (Crownyx)',
+];
+
+// Product Data Arranged in Exact Sequence 1 to 6
+const ALL_PRODUCTS = [
+  // 1. Consumer Laptops
+  {
+    brand: 'ACER',
+    category: 'Consumer Laptops',
+    barcode: 'NX.DGJEM.002',
+    name: 'ACER ASPIRE LITE AL15-36P-36UJ',
+    particular: 'ACER ASPIRE LITE AL15-36P-36UJ INTEL CORE 3 N350, 8GB RAM, 256GB SSD, INTEL SHARED, 15.6 FHD, DOS, ENGLISH KEYBOARD, SILVER',
+    image: ImgNX_DGJEM_002,
+    imageClassName: 'scale-[1.28]'
+  },
+  {
+    brand: 'ACER',
+    category: 'Consumer Laptops',
+    barcode: 'NX.DTGEM.001',
+    name: 'ACER ASPIRE ALITE15-54P',
+    particular: 'ACER ASPIRE ALITE15-54P, INTEL® CORE™ ULTRA 5-115U,8GB RAM,512GB SSD, 15.6" FHD, INTEL® SHARED,DOS,ENGLISH KEYBOARD,SILVER',
+    image: ImgNX_DTGEM_001,
+    imageClassName: 'scale-[1.28]'
+  },
+  {
+    brand: 'ASUS',
+    category: 'Consumer Laptops',
+    barcode: '90NB10J1-M04TL0',
+    name: 'ASUS VIVOBOOK X1504VA-BQ4675 (English)',
+    particular: 'ASUS VIVOBOOK X1504VA-BQ4675 I3-1315U , 8GB RAM, 512GB SSD, 15.6-INCH, FHD , INTEL® UHD GRAPHICS,DOS,ENGLISH KEYBOARD,QUIET BLUE.',
+    image: Img90NB10J1_M04TL0,
+    imageClassName: 'scale-[0.92]'
+  },
+  {
+    brand: 'ASUS',
+    category: 'Consumer Laptops',
+    barcode: '90NB10T1-M01YX0',
+    name: 'ASUS VIVOBOOK A1502VA-BQ1385',
+    particular: 'ASUS VIVOBOOK A1502VA-BQ1385, INTEL CORE I7-13620H, 16GB RAM, 512GB SSD, 15.6 FHD (1920 X 1080), INTEL UHD GRAPHICS, DOS, ENGLISH KEYBOARD, QUIET BLUE',
+    image: Img90NB10T1_M01YX0,
+    imageClassName: 'scale-[0.92]'
+  },
+  {
+    brand: 'ASUS',
+    category: 'Consumer Laptops',
+    barcode: '90NB10J1-M04TK0',
+    name: 'ASUS VIVOBOOK X1504VA-BQ4675 (Arabic)',
+    particular: 'ASUS VIVOBOOK X1504VA-BQ4675 I3-1315U , 8GB RAM, 512GB SSD, 15.6-INCH, FHD , INTEL® UHD GRAPHICS,DOS,ARABIC KEYBOARD,QUIET BLUE',
+    image: Img90NB10J1_M04TK0,
+    imageClassName: 'scale-[0.92]'
+  },
+  {
+    brand: 'ASUS',
+    category: 'Consumer Laptops',
+    barcode: '90NB10T2-M01YY0',
+    name: 'ASUS VIVOBOOK A1502VA-BQ1386',
+    particular: 'ASUS VIVOBOOK A1502VA-BQ1386, INTEL CORE I7-13620H, 16GB RAM, 512GB SSD, 15.6 FHD (1920 X 1080), INTEL UHD GRAPHICS, DOS, ENGLISH KEYBOARD, COOL SILVER',
+    image: Img90NB10T2_M01YY0,
+    imageClassName: 'scale-[0.92]'
+  },
+  {
+    brand: 'ASUS',
+    category: 'Consumer Laptops',
+    barcode: '90NB14Q2-M003W0',
+    name: 'ASUS VIVOBOOK S5507QA-MA007W OLED',
+    particular: 'ASUS VIVOBOOK S5507QA-MA007W SNAPDRAGON X PLUS X1P42100, 16GB RAM, 1TB SSD, 15.6 OLED (2880 X 1620), QUALCOMM ADRENO X1-45, WIN 11 HOME, RGB 1 ZONE BACKLIT ENGLISH KEYBOARD, COOL SILVER',
+    image: Img90NB14Q2_M003W0,
+    imageClassName: 'scale-[0.92]'
+  },
+  {
+    brand: 'ASUS',
+    category: 'Consumer Laptops',
+    barcode: '90NB16G2-M00230',
+    name: 'ASUS ZENBOOK A14 X3407RA-QD004W',
+    particular: 'ASUS ZENBOOK A14 X3407RA-QD004W, SNAPDRAGON X ELITE X1E-78-100,16GB RAM,1TB SSD, 14 WUXGA OLED, INTEGRATED GRAPHICS,WINDOWS 11 HOME,BACKLIT ENGLISH KEYBOARD, ICELAND GRAY',
+    image: Img90NB16G2_M00230
+  },
+  {
+    brand: 'HP',
+    category: 'Consumer Laptops',
+    barcode: 'D78MQEA#BH5',
+    name: 'HP OmniBook 3 Laptop 16-bu0065nia',
+    particular: 'HP OmniBook 3 Laptop 16-bu0065nia,Intel® Core™ 5 120U,16 GB DDR5-5200,512 GB PCIe® Gen4 NVMe,16" Diagonal 2K (1920 x 1200) IPS,Integrated,Intel® Graphics,DOS 3.0,English Backlit KB,Silver',
+    image: ImgD78MQEA_BH5,
+    imageClassName: 'scale-[1.24]'
+  },
+  {
+    brand: 'LENOVO',
+    category: 'Consumer Laptops',
+    barcode: '83RR0040PS',
+    name: 'LENOVO IDEAPAD SLIM 3I',
+    particular: 'LENOVO IDEAPAD SLIM 3I,INTEL CORE™ 3 304,8GB RAM,512GB SSD, INTEGRATED INTEL® GRAPHICS, 15.3" WUXGA IPS,DOS,BACKLIT, ENGLISH KEYBOARD, LUNA GREY',
+    image: Img83RR0040PS,
+    imageClassName: 'scale-[1.36]'
+  },
+
+  // 2. Gaming Laptops
+  {
+    brand: 'ACER',
+    category: 'Gaming Laptops',
+    barcode: 'NH.QX5EM.003',
+    name: 'Acer Predator Helios Neo PHN16-73-94ZR',
+    particular: "Acer Predator Helios Neo PHN16-73-94ZR, Intel® Core™ Ultra 9 275HX, 16GB 6400MHZ, 1TB SSD, 16''WQXGA IPS 240Hz, NVIDIA® GeForce® RTX™ 5070 8GB, DOS, RGB 4 ZONE BACKLITE ENGLISH KB, BLACK",
+    image: ImgNH_QX5EM_003,
+    imageClassName: 'scale-[1.38]'
+  },
+  {
+    brand: 'ACER',
+    category: 'Gaming Laptops',
+    barcode: 'NH.QVUEM.002',
+    name: 'Predator Helios Neo 16 AI PHN16-73-97BP',
+    particular: "Predator Helios Neo 16 AI PHN16-73-97BP Intel® Core™ Ultra 9 275HX, 16GB 6400MHZ, 1TB SSD, 16''WQXGA IPS 180Hz, 8GB NVIDIA RTX 5060, DOS, RGB 4 ZONE BACKLITE ENGLISH KB, BLACK",
+    image: ImgNH_QVUEM_002,
+    imageClassName: 'scale-[1.38]'
+  },
+  {
+    brand: 'LENOVO',
+    category: 'Gaming Laptops',
+    barcode: '83F30082AX',
+    name: 'Lenovo Legion Pro 5i (16", 10)',
+    particular: 'Lenovo Legion Pro 5i (16", 10) Intel Core™ Ultra 7 255HX, 2x 16GB SODIMM DDR5-5600, 1TB SSD M.2 2280, 16" WQXGA OLED 500nits 165Hz, NVIDIA GeForce RTX™ 5070 8GB GDDR7, DOS, 24-Zone RGB Backlit Arabic Keyboard, Eclipse Black',
+    image: Img83F30082AX
+  },
+  {
+    brand: 'LENOVO',
+    category: 'Gaming Laptops',
+    barcode: '83S0007FUS',
+    name: 'Lenovo LOQ Gaming Laptop 15.6"',
+    particular: 'Lenovo LOQ Gaming Laptop, AMD Ryzen 7 170 2025, 16GB Memory, 512GB Storage, 15.6" 2K, NVIDIA GeForce RTX 4050, Luna Grey',
+    image: Img83S0007FUS
+  },
+
+  // 3. Business Laptops
+  {
+    brand: 'ACER',
+    category: 'Business Laptops',
+    barcode: 'NX.BSQEM.001',
+    name: 'ACER TRAVELMATE P214-56',
+    particular: 'ACER TRAVELMATE P214-56,INTEL® CORE™ ULTRA 5 225U,8GB RAM,512GB SSD,14” WUXGA IPS, INTEL® SHARED MEMORY,DOS,ENGLISH KEYBOARD,BACKLIT,SILVER',
+    image: ImgNX_BSQEM_001,
+    imageClassName: 'scale-[1.36]'
+  },
+  {
+    brand: 'ASUS',
+    category: 'Business Laptops',
+    barcode: '90NX0801-M04XV0',
+    name: 'ASUS EXPERTBOOK B1503CV',
+    particular: 'ASUS EXPERTBOOK B1503CV, INTEL CORE I3-1315U, 8GB DDR5, 256GB SSD M.2 2280 PCIE 4.0, 15.6" FHD 60HZ, WIN 11 HOME, ENG KEYBOARD, GENTLE GREY',
+    image: Img90NX0801_M04XV0,
+    imageClassName: 'scale-[1.44]'
+  },
+  {
+    brand: 'LENOVO',
+    category: 'Business Laptops',
+    barcode: '83M4000YGP',
+    name: 'Lenovo V15 Gen 6',
+    particular: 'Lenovo V15 Gen 6 ,Intel® N100,8GB SODIMM DDR5-4800,256GB SSD M.2,15.6" FHD (1920x1080),Integrated Intel® UHD Graphics,Dos,Non-backlit English,Business Black',
+    image: Img83M4000YGP,
+    imageClassName: 'scale-[1.26]'
+  },
+
+  // 4. All-In-One
+  {
+    brand: 'ACER',
+    category: 'All-In-One',
+    barcode: 'DQ.BGYEM.001',
+    name: 'Acer Aspire C24-1700 AIO Desktop',
+    particular: 'Acer Aspire C24-1700 23.8" FHD All-in-One PC, Intel Core i5-1235U, 8GB DDR4, 512GB NVMe SSD, Wireless Keyboard & Mouse, DOS',
+    image: ImgAllinoneLatestProduct1
+  },
+  {
+    brand: 'HP',
+    category: 'All-In-One',
+    barcode: '8H5A4EA#BH5',
+    name: 'HP All-in-One 24-cr0122nh',
+    particular: 'HP 23.8" FHD All-in-One Desktop, Intel Core i5-1335U, 16GB DDR4, 512GB PCIe SSD, Intel Iris Xe Graphics, White Keyboard & Mouse, FreeDOS',
+    image: ImgOneinall4
+  },
+  {
+    brand: 'LENOVO',
+    category: 'All-In-One',
+    barcode: 'F0GH00XPAX',
+    name: 'Lenovo IdeaCentre AIO 3 27IAP7',
+    particular: 'Lenovo IdeaCentre AIO 3 27" FHD IPS Desktop, Intel Core i7-13620H, 16GB DDR4, 512GB SSD, Intel UHD Graphics, Wireless KB & Mouse, DOS',
+    image: ImgOneinall6
+  },
+
+  // 4. Print & Scan
+  {
+    brand: 'HP',
+    category: 'Print & Scan',
+    barcode: 'J7Z98A',
+    name: 'HP Color LaserJet Enterprise M652n',
+    particular: 'HP Color LaserJet Enterprise M652n Laser Printer, Up to 50 ppm, 1200 x 1200 dpi, Gigabit Ethernet, 550-Sheet Input Tray',
+    image: ImgBestSellingPrinter2
+  },
+  {
+    brand: 'HP',
+    category: 'Print & Scan',
+    barcode: '7MD72A',
+    name: 'HP LaserJet MFP M141a Monochrome',
+    particular: 'HP LaserJet MFP M141a 3-in-1 Multifunction Monochrome Laser Printer, Print, Copy & Scan, 20 ppm, Compact Small Office Design',
+    image: ImgAllinonePrinters1
+  },
+  {
+    brand: 'CANON',
+    category: 'Print & Scan',
+    barcode: '2315C009AA',
+    name: 'Canon PIXMA G3410 MegaTank 3-in-1',
+    particular: 'Canon PIXMA G3410 Wireless Refillable MegaTank Color All-in-One Printer, Print, Copy & Scan, High-Yield Ink Bottles, Wi-Fi',
+    image: ImgAllinonePrinters2
+  },
+  {
+    brand: 'CANON',
+    category: 'Print & Scan',
+    barcode: '2995C010AA',
+    name: 'Canon CanoScan LiDE 300 Flatbed',
+    particular: 'Canon CanoScan LiDE 300 Compact Flatbed Document & Photo Scanner, 2400 x 2400 dpi, 4 EZ Buttons, USB Powered, Advanced Z-lid',
+    image: ImgScannerPopular1
+  },
+
+  // 6. Servers & Workstation
+  {
+    brand: 'DELL',
+    category: 'Servers & Workstation',
+    barcode: 'PER760-24NVMe',
+    name: 'Dell PowerEdge R760 2U Rack Server',
+    particular: 'Dell PowerEdge R760 2U Rack Server, Dual Intel Xeon Silver 4410Y, 64GB DDR5 ECC, 2x 960GB NVMe SSD, PERC H755, Dual 1100W Redundant PSU',
+    image: ImgServerWorkstation1
+  },
+  {
+    brand: 'HPE',
+    category: 'Servers & Workstation',
+    barcode: 'P52534-B21',
+    name: 'HPE ProLiant DL380 Gen11 Server',
+    particular: 'HPE ProLiant DL380 Gen11 2U Server, Intel Xeon Silver 4410Y 12-Core, 32GB RDIMM, MR408i-o Storage Controller, 8 SFF Bays, 800W PSU',
+    image: ImgServerWorkstation2
+  },
+  {
+    brand: 'LENOVO',
+    category: 'Servers & Workstation',
+    barcode: '7Z73A03FEA',
+    name: 'Lenovo ThinkSystem SR650 V2 Server',
+    particular: 'Lenovo ThinkSystem SR650 V2 2U Rack Server, 3rd Gen Intel Xeon Scalable, 32GB TruDDR4, RAID 930-8i, Dual 750W Titanium PSU',
+    image: ImgServerWorkstation3
+  },
+  {
+    brand: 'HP',
+    category: 'Servers & Workstation',
+    barcode: '5G378EA#ABU',
+    name: 'HP ZBook Firefly 16 G10 Workstation',
+    particular: 'HP ZBook Firefly 16 G10 Mobile Workstation, Intel Core i7-1365U, 32GB DDR5, 1TB PCIe NVMe, NVIDIA RTX A500 4GB, 16" WUXGA IPS, Win 11 Pro',
+    image: ImgServerWorkstation4
+  },
+
+  // 7. Accessories (Crownyx)
+  {
+    brand: 'AOC',
+    category: 'Accessories (Crownyx)',
+    barcode: '24B3HA2-89',
+    name: 'AOC MONITOR-23.8" flat wide monitor',
+    particular: 'AOC MONITOR-23.8" flat wide monitor, 100Hz Refresh Rate, Full HD IPS Display, Built-in Speakers, HDMI & VGA Inputs',
+    image: Img24B3HA2_89
+  },
+  {
+    brand: 'AOC',
+    category: 'Accessories (Crownyx)',
+    barcode: '25B36H-89',
+    name: 'AOC 25" IPS FHD 100Hz Monitor',
+    particular: 'AOC| 25"|IPS|FHD|100Hz|HDMI&VGA|GameMode|VESAMount',
+    image: Img25B36H_89
+  },
+  {
+    brand: 'CROWNYX',
+    category: 'Accessories (Crownyx)',
+    barcode: 'CX-MGSC-16P',
+    name: 'Crownyx MagSafe Shockproof Case',
+    particular: 'Crownyx Premium Crystal Clear Protective Case with Strong MagSafe Ring, Shock-Absorbing Corners, Scratch-Resistant Acrylic Back',
+    image: ImgAccessAllinone1
+  },
+  {
+    brand: 'CROWNYX',
+    category: 'Accessories (Crownyx)',
+    barcode: 'CX-HUB7-PRO',
+    name: 'Crownyx 7-in-1 Dual USB-C Hub',
+    particular: 'Crownyx 7-in-1 Multiport USB-C Docking Adapter, 4K HDMI, 100W Power Delivery, 3x USB 3.0, SD/MicroSD Card Reader, Aluminum Grey',
+    image: ImgAccessAllinone2
+  },
+  {
+    brand: 'CROWNYX',
+    category: 'Accessories (Crownyx)',
+    barcode: 'CX-MS-CGM800',
+    name: 'Crownyx CGM-800 RGB Gaming Mouse',
+    particular: 'Crownyx CGM-800 High-Precision RGB Optical Gaming Mouse, 7200 DPI Adjustable Sensor, Ergonomic Grip, Braided Cable',
+    image: ImgAccessAllinone3
+  }
+];
+
+function getTwoLineTitle(name) {
+  const words = name.trim().split(/\s+/);
+  if (words.length <= 1) return { line1: name, line2: '\u00A0' };
+
+  if (name.startsWith('Lenovo V15')) return { line1: 'Lenovo V15', line2: 'Gen 6' };
+  if (name.startsWith('ACER TRAVELMATE')) return { line1: 'ACER TRAVELMATE', line2: 'P214-56' };
+  if (name.startsWith('ASUS EXPERTBOOK')) return { line1: 'ASUS EXPERTBOOK', line2: 'B1503CV' };
+  if (name.startsWith('LENOVO IDEAPAD')) return { line1: 'LENOVO IDEAPAD', line2: 'SLIM 3I' };
+  if (name.startsWith('ACER ASPIRE ALITE15-54P')) return { line1: 'ACER ASPIRE', line2: 'ALITE15-54P' };
+  if (name.startsWith('Lenovo Legion Pro 5i')) return { line1: 'Lenovo Legion Pro 5i', line2: '(16", 10)' };
+  if (name.startsWith('Acer Aspire C24-1700')) return { line1: 'Acer Aspire C24-1700', line2: 'AIO Desktop' };
+  if (name.startsWith('HP All-in-One 24-cr0122nh')) return { line1: 'HP All-in-One', line2: '24-cr0122nh' };
+  if (name.startsWith('Lenovo IdeaCentre AIO 3')) return { line1: 'Lenovo IdeaCentre', line2: 'AIO 3 27IAP7' };
+  if (name.startsWith('HP Color LaserJet Enterprise')) return { line1: 'HP Color LaserJet', line2: 'Enterprise M652n' };
+  if (name.startsWith('HP LaserJet MFP M141a')) return { line1: 'HP LaserJet MFP', line2: 'M141a Monochrome' };
+  if (name.startsWith('Canon PIXMA G3410')) return { line1: 'Canon PIXMA G3410', line2: 'MegaTank 3-in-1' };
+  if (name.startsWith('Canon CanoScan LiDE 300')) return { line1: 'Canon CanoScan', line2: 'LiDE 300 Flatbed' };
+  if (name.startsWith('Dell PowerEdge R760')) return { line1: 'Dell PowerEdge R760', line2: '2U Rack Server' };
+  if (name.startsWith('HPE ProLiant DL380')) return { line1: 'HPE ProLiant DL380', line2: 'Gen11 Server' };
+  if (name.startsWith('Lenovo ThinkSystem SR650')) return { line1: 'Lenovo ThinkSystem', line2: 'SR650 V2 Server' };
+  if (name.startsWith('HP ZBook Firefly 16')) return { line1: 'HP ZBook Firefly', line2: '16 G10 Workstation' };
+  if (name.startsWith('Crownyx MagSafe Shockproof')) return { line1: 'Crownyx MagSafe', line2: 'Shockproof Case' };
+  if (name.startsWith('Crownyx 7-in-1 Dual')) return { line1: 'Crownyx 7-in-1', line2: 'Dual USB-C Hub' };
+  if (name.startsWith('Crownyx CGM-800 RGB')) return { line1: 'Crownyx CGM-800', line2: 'RGB Gaming Mouse' };
+
+  let splitIndex = Math.ceil(words.length / 2);
+  let line1 = words.slice(0, splitIndex).join(' ');
+  let line2 = words.slice(splitIndex).join(' ');
+
+  if (line1.length > 22 && splitIndex > 1) {
+    splitIndex = splitIndex - 1;
+    line1 = words.slice(0, splitIndex).join(' ');
+    line2 = words.slice(splitIndex).join(' ');
+  }
+
+  return { line1, line2 };
+}
+
+export default function WholesaleProductsSection({
+  openProductInquiryModal,
+  getWhatsAppUrl,
+  handleWhatsAppRedirect,
+  telegramChannelUrl,
+  defaultWhatsAppMessage,
+}) {
+  const [activeCategory, setActiveCategory] = useState('All');
+
+  // Determines which categories to render
+  const categoriesToRender = useMemo(() => {
+    if (activeCategory === 'All') {
+      return SEVEN_CATEGORIES;
+    }
+    return [activeCategory];
+  }, [activeCategory]);
+
+  return (
+    <section className="py-10 sm:py-14 bg-[#F8FAFC] border-t border-b border-gray-200" id="product-line">
+      <div className="max-w-7xl mx-auto px-3 sm:px-6">
+        {/* Seven Category Selector Buttons in Exact Required Sequence (1 to 7) */}
+        <div className="flex flex-wrap items-center justify-center gap-2 sm:gap-2.5 mb-10 sm:mb-14 font-jakarta">
+          {SEVEN_CATEGORIES.map((cat, idx) => {
+            const isActive = activeCategory === cat;
+            return (
+              <button
+                key={cat}
+                type="button"
+                onClick={() => setActiveCategory(activeCategory === cat ? 'All' : cat)}
+                className={`px-3.5 py-2 sm:px-4 sm:py-2.5 rounded-xl text-xs sm:text-[13px] font-semibold tracking-wide transition-all duration-200 cursor-pointer shadow-xs active:scale-[0.98] ${
+                  isActive
+                    ? 'bg-[#147A5F] text-white shadow-md'
+                    : 'bg-white text-gray-700 hover:bg-gray-100 hover:text-[#147A5F] border border-gray-200/90'
+                }`}
+              >
+                <span>{idx + 1}. {cat}</span>
+              </button>
+            );
+          })}
+        </div>
+
+        {/* Product Categories Rendered in Exact Sequence (1 to 7) */}
+        <div className="space-y-12 sm:space-y-16">
+          {categoriesToRender.map((catName) => {
+            const catProducts = ALL_PRODUCTS.filter((p) => p.category === catName);
+            const categoryIndex = SEVEN_CATEGORIES.indexOf(catName) + 1;
+            const categoryAnchorId = catName.toLowerCase().replace(/[^a-z0-9]+/g, '-');
+
+            return (
+              <div key={catName} id={categoryAnchorId} className="w-full scroll-mt-24">
+                {/* Category Header Bar with Sequence Number and Product Count */}
+                <div className="flex items-center justify-between border-b border-gray-200 pb-3 mb-6 sm:mb-8">
+                  <div className="flex items-center gap-2.5 sm:gap-3">
+                    <span className="w-6 h-6 sm:w-7 sm:h-7 rounded-lg bg-[#147A5F] text-white text-xs sm:text-sm font-bold flex items-center justify-center font-jakarta shrink-0">
+                      {categoryIndex}
+                    </span>
+                    <h3 className="font-montserrat font-bold text-lg sm:text-2xl text-[#171717] tracking-tight">
+                      {catName}
+                    </h3>
+                  </div>
+
+                  <span className="text-[11px] sm:text-xs font-semibold text-[#147A5F] bg-[#147A5F]/10 px-3 py-1 rounded-full font-jakarta">
+                    {catProducts.length} {catProducts.length === 1 ? 'Product' : 'Products'}
+                  </span>
+                </div>
+
+                {/* Product Cards Grid: 2 columns on mobile, 4 on desktop */}
+                <div className="grid grid-cols-2 sm:grid-cols-2 lg:grid-cols-4 gap-2.5 sm:gap-5 lg:gap-6 items-stretch">
+                  {catProducts.map((product, index) => {
+                    const { line1, line2 } = getTwoLineTitle(product.name);
+                    return (
+                      <div
+                        key={product.barcode}
+                        className="group relative bg-white p-2.5 sm:p-3.5 rounded-xl sm:rounded-2xl border border-[#147A5F] shadow-md hover:shadow-2xl transition-all duration-300 hover:-translate-y-1.5 flex flex-col justify-between overflow-hidden min-h-[295px] sm:min-h-[375px] lg:min-h-[395px]"
+                      >
+                        {/* Product Image Showcase on Pure White Background */}
+                        <div className="relative w-full h-28 xs:h-32 sm:h-48 lg:h-52 bg-white flex items-center justify-center overflow-hidden rounded-lg sm:rounded-xl">
+                          <Image
+                            src={product.image}
+                            alt={product.name}
+                            fill
+                            priority={categoryIndex === 1 && index < 4}
+                            sizes="(max-width: 640px) 50vw, (max-width: 1024px) 50vw, 25vw"
+                            className={`object-contain ${
+                              product.imageClassName ? `p-0 ${product.imageClassName}` : 'p-1 sm:p-2'
+                            }`}
+                          />
+                        </div>
+
+                        {/* Separate container below the image for product text, barcode, and buttons */}
+                        <div className="w-full flex flex-col flex-grow justify-end pt-2 pb-0.5 sm:pb-1 px-0.5 sm:px-1.5">
+                          {/* Content: Exactly 2-Line Product Name & Plain Barcode Text */}
+                          <div className="w-full flex flex-col items-center text-center">
+                            <h3
+                              className="w-full font-montserrat font-bold text-[11.5px] xs:text-[13px] sm:text-[15px] text-[#171717] leading-[1.3] sm:leading-[1.35] h-[32px] xs:h-[35px] sm:h-[42px] mb-1 sm:mb-1.5 text-center overflow-hidden flex flex-col justify-center"
+                              title={product.particular}
+                            >
+                              <span className="block truncate">{line1}</span>
+                              <span className="block truncate">{line2}</span>
+                            </h3>
+
+                            <p className="w-full font-mono text-[9.5px] xs:text-[10.5px] sm:text-[12px] text-gray-500 tracking-tight sm:tracking-wider mb-2 sm:mb-2.5 text-center truncate">
+                              {product.barcode}
+                            </p>
+                          </div>
+
+                          {/* Action Buttons: Inquire Now, WhatsApp & Telegram Inline Side-by-Side */}
+                          <div className="w-full flex items-center gap-1 xs:gap-1.5 sm:gap-2">
+                            <button
+                              type="button"
+                              onClick={() => openProductInquiryModal(product)}
+                              className="flex-1 py-1.5 sm:py-2.5 px-1 sm:px-2 bg-[#147A5F] hover:bg-[#0f5f4a] text-white text-[9px] xs:text-[10px] sm:text-xs font-bold font-montserrat tracking-tight sm:tracking-wide uppercase flex items-center justify-center gap-0.5 sm:gap-1.5 transition-all duration-200 cursor-pointer shadow-xs hover:shadow-md active:scale-[0.99] rounded-md sm:rounded-lg whitespace-nowrap min-w-0"
+                            >
+                              <span>
+                                <span className="hidden xs:inline">Inquire Now</span>
+                                <span className="xs:hidden">Inquire</span>
+                              </span>
+                              <ArrowRight className="w-2.5 h-2.5 sm:w-3 sm:h-3 shrink-0" />
+                            </button>
+
+                            <div className="flex items-center gap-1 sm:gap-1.5 shrink-0">
+                              <a
+                                href={typeof getWhatsAppUrl === 'function' ? getWhatsAppUrl(defaultWhatsAppMessage) : '#'}
+                                onClick={(e) => {
+                                  if (typeof handleWhatsAppRedirect === 'function') {
+                                    handleWhatsAppRedirect(e, defaultWhatsAppMessage);
+                                  }
+                                }}
+                                target="_blank"
+                                rel="noopener noreferrer"
+                                title="Contact on WhatsApp"
+                                aria-label="Contact on WhatsApp"
+                                className="py-1.5 sm:py-2.5 px-2 xs:px-2.5 sm:px-3 bg-[#25D366] hover:bg-[#20ba59] text-white flex items-center justify-center transition-all duration-200 cursor-pointer shadow-xs hover:shadow-md active:scale-[0.99] rounded-md sm:rounded-lg shrink-0"
+                              >
+                                <FaWhatsapp className="w-3 h-3 xs:w-3.5 xs:h-3.5 sm:w-4 sm:h-4 shrink-0" />
+                              </a>
+
+                              <a
+                                href={telegramChannelUrl || 'https://t.me/crownexcelae'}
+                                target="_blank"
+                                rel="noopener noreferrer"
+                                title="Join Crown Excel Telegram Channel"
+                                aria-label="Crown Excel Telegram Channel"
+                                className="py-1.5 sm:py-2.5 px-2 xs:px-2.5 sm:px-3 bg-[#0088cc] hover:bg-[#0077b5] text-white flex items-center justify-center transition-all duration-200 cursor-pointer shadow-xs hover:shadow-md active:scale-[0.99] rounded-md sm:rounded-lg shrink-0"
+                              >
+                                <FaTelegramPlane className="w-3 h-3 xs:w-3.5 xs:h-3.5 sm:w-4 sm:h-4 shrink-0" />
+                              </a>
+                            </div>
+                          </div>
+                        </div>
+                      </div>
+                    );
+                  })}
+                </div>
+              </div>
+            );
+          })}
+        </div>
+      </div>
+    </section>
+  );
+}

@@ -1,13 +1,16 @@
 import React from 'react';
-import { generateCmsMetadata, getCmsSeo } from '@/lib/cms-fetch';
+import { generateCmsMetadata, getCmsData, getCmsSeo } from '@/lib/cms-fetch';
 import WholesaleClientPage from './WholesaleClientPage';
 
 export async function generateMetadata() {
-  return await generateCmsMetadata('/laptop-wholesale-supplier-in-dubai-or-uae', {
-    title: 'Best Laptop Wholesale Supplier in Dubai UAE',
+  return await generateCmsMetadata('/it-hardware-wholesale-supplier-in-dubai-or-uae', {
+    title: 'Best IT Hardware Wholesale Supplier in Dubai UAE',
     description:
-      'Leading laptop wholesale supplier in Dubai & UAE. Bulk business laptops, gaming laptops, workstations, everyday portables & certified refurbished units for resellers and corporate clients.',
+      'Leading IT hardware and laptop wholesale supplier in Dubai & UAE. Bulk business laptops, gaming laptops, workstations, everyday portables & certified refurbished units for resellers and corporate clients.',
     keywords: [
+      'IT Hardware Wholesale Supplier in Dubai',
+      'Wholesale IT Hardware in Dubai',
+      'IT Hardware Wholesaler in UAE',
       'Laptop Wholesale Supplier in Dubai',
       'Wholesale Laptops in Dubai',
       'Laptop Wholesaler in UAE',
@@ -20,13 +23,13 @@ export async function generateMetadata() {
       'Corporate laptop procurement Dubai',
     ],
     alternates: {
-      canonical: 'https://www.crownexcel.ae/laptop-wholesale-supplier-in-dubai-or-uae',
+      canonical: 'https://www.crownexcel.ae/it-hardware-wholesale-supplier-in-dubai-or-uae',
     },
     openGraph: {
-      title: 'Laptop Wholesale Supplier in Dubai | Bulk Laptops in UAE - Crown Excel',
+      title: 'IT Hardware Wholesale Supplier in Dubai | Bulk IT Hardware in UAE - Crown Excel',
       description:
-        'Leading laptop wholesale supplier in Dubai & UAE. Bulk business laptops, gaming laptops, workstations, everyday portables & certified refurbished units for resellers and corporate clients.',
-      url: 'https://www.crownexcel.ae/laptop-wholesale-supplier-in-dubai-or-uae',
+        'Leading IT hardware and laptop wholesale supplier in Dubai & UAE. Bulk business laptops, gaming laptops, workstations, everyday portables & certified refurbished units for resellers and corporate clients.',
+      url: 'https://www.crownexcel.ae/it-hardware-wholesale-supplier-in-dubai-or-uae',
       siteName: 'Crown Excel',
       locale: 'en_AE',
       type: 'website',
@@ -35,7 +38,7 @@ export async function generateMetadata() {
           url: 'https://www.crownexcel.ae/logo.png',
           width: 800,
           height: 600,
-          alt: 'Crown Excel Wholesale Laptops in Dubai and UAE',
+          alt: 'Crown Excel Wholesale IT Hardware in Dubai and UAE',
         },
       ],
     },
@@ -44,9 +47,9 @@ export async function generateMetadata() {
     
     twitter: {
       card: 'summary_large_image',
-      title: 'Laptop Wholesale Supplier in Dubai | Bulk Laptops in UAE',
+      title: 'IT Hardware Wholesale Supplier in Dubai | Bulk IT Hardware in UAE',
       description:
-        'Wholesale laptops in Dubai & UAE. Business, gaming, workstation & refurbished bulk laptop supply for resellers and enterprises.',
+        'Wholesale IT hardware and laptops in Dubai & UAE. Business, gaming, workstation & refurbished bulk supply for resellers and enterprises.',
       images: ['https://www.crownexcel.ae/logo.png'],
     },
   });
@@ -55,14 +58,22 @@ export async function generateMetadata() {
 // Enable Incremental Static Regeneration (ISR)
 export const revalidate = 300;
 
-export default async function LaptopWholesalePage() {
-  const cmsSeo = await getCmsSeo('/laptop-wholesale-supplier-in-dubai-or-uae');
+export default async function ITHardwareWholesalePage() {
+  let { content: cmsContent } = await getCmsData('/it-hardware-wholesale-supplier-in-dubai-or-uae');
+  if (!cmsContent || Object.keys(cmsContent).length === 0) {
+    const legacy = await getCmsData('/laptop-wholesale-supplier-in-dubai-or-uae');
+    cmsContent = legacy?.content;
+  }
+  let cmsSeo = await getCmsSeo('/it-hardware-wholesale-supplier-in-dubai-or-uae');
+  if (!cmsSeo) {
+    cmsSeo = await getCmsSeo('/laptop-wholesale-supplier-in-dubai-or-uae');
+  }
   let customSchemaObj = null;
   if (cmsSeo?.schema?.customSchema && typeof cmsSeo.schema.customSchema === 'string') {
     try {
       customSchemaObj = JSON.parse(cmsSeo.schema.customSchema);
     } catch (e) {
-      console.error('Failed to parse CMS customSchema in LaptopWholesalePage:', e);
+      console.error('Failed to parse CMS customSchema in ITHardwareWholesalePage:', e);
     }
   }
   const jsonLdData = {
@@ -86,16 +97,16 @@ export default async function LaptopWholesalePage() {
           {
             '@type': 'ListItem',
             position: 3,
-            name: 'Laptop Wholesale Supplier in Dubai or UAE',
-            item: 'https://www.crownexcel.ae/laptop-wholesale-supplier-in-dubai-or-uae',
+            name: 'IT Hardware Wholesale Supplier in Dubai or UAE',
+            item: 'https://www.crownexcel.ae/it-hardware-wholesale-supplier-in-dubai-or-uae',
           },
         ],
       },
       {
         '@type': ['WholesaleStore', 'LocalBusiness'],
-        '@id': 'https://www.crownexcel.ae/laptop-wholesale-supplier-in-dubai-or-uae#store',
-        name: 'Crown Excel - Laptop Wholesale Supplier in Dubai',
-        url: 'https://www.crownexcel.ae/laptop-wholesale-supplier-in-dubai-or-uae',
+        '@id': 'https://www.crownexcel.ae/it-hardware-wholesale-supplier-in-dubai-or-uae#store',
+        name: 'Crown Excel - IT Hardware Wholesale Supplier in Dubai',
+        url: 'https://www.crownexcel.ae/it-hardware-wholesale-supplier-in-dubai-or-uae',
         logo: 'https://www.crownexcel.ae/logo.png',
         telephone: '+971-4-354-0566',
         email: 'contact@crownexcel.com',
@@ -219,7 +230,7 @@ export default async function LaptopWholesalePage() {
         type="application/ld+json"
         dangerouslySetInnerHTML={{ __html: JSON.stringify(jsonLdData) }}
       />
-      <WholesaleClientPage />
+      <WholesaleClientPage cmsContent={cmsContent} />
     </>
   );
 }

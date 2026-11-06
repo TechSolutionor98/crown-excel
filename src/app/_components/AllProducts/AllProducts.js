@@ -118,7 +118,7 @@ const AllProducts = ({ cmsCatalog, cmsData }) => {
                                         <ArrowRight className="w-3 h-3 shrink-0" />
                                     </button>
                                     <a
-                                        href={`https://api.whatsapp.com/send/?phone=971505033860&text=${encodeURIComponent(
+                                        href={`https://api.whatsapp.com/send/?phone=971543090680&text=${encodeURIComponent(
                                             `Hello Crown Excel, I am inquiring about ${product.title}.`
                                         )}&type=phone_number&app_absent=0`}
                                         target="_blank"

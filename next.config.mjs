@@ -30,6 +30,11 @@ const nextConfig = {
   async redirects() {
     return [
       {
+        source: '/laptop-wholesale-supplier-in-dubai-or-uae',
+        destination: '/it-hardware-wholesale-supplier-in-dubai-or-uae',
+        permanent: true,
+      },
+      {
         source: '/about-us',
         destination: '/company/about-us',
         permanent: true,

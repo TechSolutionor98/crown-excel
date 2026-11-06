@@ -39,7 +39,7 @@ export default function LaptopInquirySection({
 
   const [openFaqIndex, setOpenFaqIndex] = useState(0);
 
-  const WHATSAPP_PHONE = '971505033860';
+  const WHATSAPP_PHONE = '971543090680';
   const inquiryWhatsAppMessage =
     'Hello Crown Excel, I would like to request wholesale laptop availability and the latest price sheet.';
 
@@ -158,7 +158,7 @@ export default function LaptopInquirySection({
                   onClick={handleInquiryWhatsAppClick}
                   target="_blank"
                   rel="noopener noreferrer"
-                  aria-label="Chat on WhatsApp with Crown Excel at +971 50 503 3860"
+                  aria-label="Chat on WhatsApp with Crown Excel at +971 54 309 0680"
                   className="w-full sm:w-auto inline-flex items-center justify-center gap-2 px-6 sm:px-7 py-3 rounded-xl bg-white/10 hover:bg-white/20 border border-white/25 text-white font-semibold text-xs sm:text-sm backdrop-blur-md transition-all duration-200 cursor-pointer transform hover:-translate-y-0.5 active:scale-[0.98]"
                 >
                   <FaWhatsapp className="w-4.5 h-4.5 text-emerald-400" />

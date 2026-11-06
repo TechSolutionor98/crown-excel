@@ -1,14 +1,53 @@
 import React from 'react';
-import { Send, PhoneCall } from 'lucide-react';
-import { FaWhatsapp } from 'react-icons/fa';
+import { Send } from 'lucide-react';
+import { FaWhatsapp, FaTelegramPlane } from 'react-icons/fa';
+import { safeRender } from '@/lib/safe-html';
 
 export default function WholesaleHeroSection({
   openGeneralInquiryModal,
   getWhatsAppUrl,
   handleWhatsAppRedirect,
+  telegramChannelUrl,
+  defaultWhatsAppMessage,
   typedHeroText,
   prefersReducedMotion,
+  cmsData,
 }) {
+  const fields = cmsData?.fields || cmsData || {};
+
+  const defaultParagraph =
+    'Crown Excel is a trusted Dubai-based sourcing partner for brand-new laptops, serving international wholesalers, distributors, retailers and corporate buyers. We offer a wide portfolio of leading laptop brands, competitive wholesale pricing, reliable stock availability and seamless export coordination to customers across the GCC, Africa, CIS and Asia.';
+  const rawParagraph =
+    typeof fields.paragraph === 'object' && fields.paragraph?.value !== undefined
+      ? fields.paragraph.value
+      : fields.paragraph;
+  const paragraphVal =
+    !rawParagraph ||
+    rawParagraph.includes('authentic factory-sealed inventory, competitive bulk rates')
+      ? defaultParagraph
+      : fields.paragraph;
+
+  const headingVal = safeRender(fields.heading, 'Laptop Wholesale Supplier in Dubai, UAE');
+
+  const renderHeadingWithHighlight = (text) => {
+    if (!text) return 'Laptop Wholesale Supplier in Dubai, UAE';
+    const parts = text.split(/(wholesale)/i);
+    if (parts.length > 1) {
+      return (
+        <>
+          <span className="block md:inline">{parts[0]}</span>
+          <span className="inline-block mt-0.5 md:mt-0">
+            <span className="inline-block bg-[#FFE500] text-[#171717] px-2 py-0.5 sm:px-3 sm:py-1.5 md:py-2 md:px-3 rounded-[3px] sm:rounded-none shadow-xs sm:shadow-none align-baseline">
+              {parts[1]}
+            </span>{' '}
+            <span>{parts.slice(2).join('')}</span>
+          </span>
+        </>
+      );
+    }
+    return <span>{text}</span>;
+  };
+
   return (
     <section className="relative overflow-hidden bg-gradient-to-b from-[#F7FAF9] via-white to-white pt-7 pb-12 sm:pt-20 sm:pb-24 border-b border-gray-100">
       {/* Subtle Ambient Radial Glow for Depth */}
@@ -18,29 +57,28 @@ export default function WholesaleHeroSection({
       />
 
       <div className="max-w-7xl mx-auto px-4 sm:px-6 relative z-10 text-center">
-        {/* User-Specified Display Heading (Anton, consistent font size across all lines on mobile and desktop) */}
+        {/* User-Specified Display Heading */}
         <h1
-          className="font-anton font-normal uppercase text-center text-[26px] sm:text-5xl md:text-6xl lg:text-[80px] xl:text-[84px] tracking-[-0.035em] leading-[1.08] sm:leading-[1] md:leading-[0.95]"
+          className="font-anton font-normal uppercase text-center tracking-[-0.035em] leading-[1.08] sm:leading-[1] md:leading-[0.95]"
           style={{
             fontFamily: "'Anton', Impact, sans-serif",
             fontWeight: 400,
             textTransform: 'uppercase',
           }}
         >
-          {/* Line 1: Desktop single line, Mobile clean 2-tier wrap */}
-          <span className="block not-italic text-[#171717] text-[28px] sm:text-5xl md:text-6xl lg:text-[80px] xl:text-[84px] lg:whitespace-nowrap">
-            <span className="block md:inline">Looking For </span>
-            <span className="inline-block mt-0.5 md:mt-0">
-              <span className="inline-block bg-[#FFE500] text-[#171717] px-2 py-0.5 sm:px-3 sm:py-1.5 md:py-2 md:px-3 rounded-[3px] sm:rounded-none shadow-xs sm:shadow-none align-baseline">
-                Wholesale
-              </span>{' '}
-              <span>Deals On</span>
-            </span>
+          {/* Top Line: TRUST | AUTHENTICITY | CONVENIENCE */}
+          <span className="block not-italic text-[#171717] text-[21px] sm:text-4xl md:text-5xl lg:text-[66px] xl:text-[70px] lg:whitespace-nowrap">
+            {safeRender(fields.badge_top, 'TRUST | AUTHENTICITY | CONVENIENCE')}
+          </span>
+
+          {/* Line 1: Laptop Wholesale Supplier in Dubai, UAE (Desktop single line, Mobile clean 2-tier wrap) */}
+          <span className="block not-italic text-[#171717] text-[21px] sm:text-4xl md:text-5xl lg:text-[66px] xl:text-[70px] lg:whitespace-nowrap mt-0.5 sm:mt-1">
+            {renderHeadingWithHighlight(headingVal)}
           </span>
 
           {/* Dynamic Animated Category Typewriter */}
           <span
-            className="block italic text-[#147A5F] text-[26px] sm:text-5xl md:text-6xl lg:text-[80px] xl:text-[84px] mt-1 sm:mt-1.5 md:mt-2"
+            className="block italic text-[#147A5F] text-[21px] sm:text-4xl md:text-5xl lg:text-[66px] xl:text-[70px] mt-1 sm:mt-1.5 md:mt-2"
             style={{ fontStyle: 'italic' }}
           >
             <span className="inline-flex items-center justify-center min-h-[1.2em] sm:min-h-[1.15em] align-middle px-1">
@@ -51,14 +89,14 @@ export default function WholesaleHeroSection({
                 {!prefersReducedMotion && (
                   <span
                     aria-hidden="true"
-                    className="inline-block w-[2.5px] sm:w-[4px] md:w-[5px] h-[0.7em] bg-[#147A5F] ml-1 sm:ml-1.5 rounded-full animate-pulse align-middle"
+                    className="inline-block w-[2.5px] sm:w-[3.5px] md:w-[4px] h-[0.7em] bg-[#147A5F] ml-1 sm:ml-1.5 rounded-full animate-pulse align-middle"
                   />
                 )}
               </span>
             </span>
           </span>
 
-          {/* Best Supplier in Dubai & UAE Badge */}
+          {/* BEST SUPPLIER IN DUBAI & THE UAE Badge */}
           <span className="block mt-2 sm:mt-3 md:mt-4">
             <span
               className="inline-block not-italic bg-[#147A5F] text-white text-[26px] sm:text-5xl md:text-6xl lg:text-[80px] xl:text-[84px] px-2.5 sm:px-8 md:px-10 py-1 sm:py-3 md:py-3.5 lg:py-4 rounded-full shadow-sm whitespace-nowrap transform -rotate-[0.7deg] origin-center tracking-[-0.035em] max-w-full"
@@ -67,7 +105,7 @@ export default function WholesaleHeroSection({
                 transform: 'rotate(-0.7deg)',
               }}
             >
-              Best Supplier in Dubai &amp; UAE
+              {safeRender(fields.badge_bottom, 'BEST SUPPLIER IN DUBAI & THE UAE')}
             </span>
           </span>
         </h1>
@@ -77,7 +115,7 @@ export default function WholesaleHeroSection({
           className="text-[13px] sm:text-base md:text-[17px] text-gray-600 leading-[1.6] sm:leading-relaxed font-jakarta font-normal mt-3 sm:mt-7 mb-5 sm:mb-9 max-w-xl sm:max-w-2xl md:max-w-3xl mx-auto px-0 sm:px-0 text-center text-pretty"
           style={{ textWrap: 'pretty' }}
         >
-          Crown Excel is a trusted wholesale supplier of commercial, gaming, and business laptops in Dubai and across the UAE. We deliver authentic factory-sealed inventory, competitive bulk rates, and fast local fulfillment to IT resellers and corporate clients.
+          {safeRender(paragraphVal, defaultParagraph)}
         </p>
 
         {/* Centered Action Buttons (Responsive: clean stacked/grid on mobile, flex row on desktop) */}
@@ -89,32 +127,36 @@ export default function WholesaleHeroSection({
             className="w-full sm:w-auto inline-flex items-center justify-center gap-2.5 px-6 sm:px-7 py-3 sm:py-3.5 rounded-xl bg-[#147A5F] hover:bg-[#0f604b] text-white font-semibold text-sm sm:text-[15px] shadow-sm hover:shadow-md transition-all duration-200 cursor-pointer transform hover:-translate-y-0.5 active:scale-[0.98]"
           >
             <Send className="w-4 h-4 flex-shrink-0" />
-            <span>Request Wholesale Quote</span>
+            <span>{safeRender(fields.button_primary_text, 'Request Wholesale Quote')}</span>
           </button>
 
           {/* Quick Contact: 2-column grid on mobile, flex row on sm+ */}
           <div className="grid grid-cols-2 gap-2.5 w-full sm:w-auto sm:flex sm:items-center sm:gap-4">
             <a
-              href={typeof getWhatsAppUrl === 'function' ? getWhatsAppUrl('Hello Crown Excel, I am inquiring about wholesale laptops.') : '#'}
+              href={typeof getWhatsAppUrl === 'function' ? getWhatsAppUrl(defaultWhatsAppMessage) : '#'}
               onClick={(e) => {
                 if (typeof handleWhatsAppRedirect === 'function') {
-                  handleWhatsAppRedirect(e, 'Hello Crown Excel, I am inquiring about wholesale laptops.');
+                  handleWhatsAppRedirect(e, defaultWhatsAppMessage);
                 }
               }}
               target="_blank"
               rel="noopener noreferrer"
+              aria-label="Contact Crown Excel on WhatsApp"
               className="inline-flex items-center justify-center gap-2 px-3 sm:px-7 py-2.5 sm:py-3.5 rounded-xl bg-[#25D366] hover:bg-[#20ba59] text-white font-semibold text-xs sm:text-[15px] shadow-sm hover:shadow-md transition-all duration-200 cursor-pointer transform hover:-translate-y-0.5 active:scale-[0.98]"
             >
               <FaWhatsapp className="w-4 h-4 flex-shrink-0" />
-              <span>WhatsApp</span>
+              <span>{safeRender(fields.button_whatsapp_text, 'WhatsApp')}</span>
             </a>
 
             <a
-              href="tel:+97143540566"
-              className="inline-flex items-center justify-center gap-1.5 sm:gap-2 px-2.5 sm:px-7 py-2.5 sm:py-3.5 rounded-xl bg-white hover:bg-gray-50 text-gray-800 font-semibold text-xs sm:text-[15px] border border-gray-200/90 shadow-2xs hover:shadow-xs transition-all duration-200 transform hover:-translate-y-0.5 active:scale-[0.98] whitespace-nowrap"
+              href={safeRender(fields.telegram_url, telegramChannelUrl || 'https://t.me/crownexcelae')}
+              target="_blank"
+              rel="noopener noreferrer"
+              aria-label="Join Crown Excel Telegram Channel"
+              className="inline-flex items-center justify-center gap-2 px-3 sm:px-7 py-2.5 sm:py-3.5 rounded-xl bg-[#0088cc] hover:bg-[#0077b5] text-white font-semibold text-xs sm:text-[15px] shadow-sm hover:shadow-md transition-all duration-200 cursor-pointer transform hover:-translate-y-0.5 active:scale-[0.98]"
             >
-              <PhoneCall className="w-3.5 h-3.5 sm:w-4 sm:h-4 text-[#147A5F] flex-shrink-0" />
-              <span>+971 4-354 0566</span>
+              <FaTelegramPlane className="w-4 h-4 flex-shrink-0" />
+              <span>{safeRender(fields.button_telegram_text, 'Telegram')}</span>
             </a>
           </div>
         </div>

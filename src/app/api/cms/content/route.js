@@ -296,7 +296,19 @@ export async function GET(request) {
           };
         };
 
-        if (sec.sectionId === 'laptopherosection') {
+        if (sec.sectionId === 'wholesaleherosection') {
+          sec.sectionName = 'Hero Section (Wholesale Laptops Landing Page)';
+          sec.fields = {
+            badge_top: getFld('badge_top', 'TRUST | AUTHENTICITY | CONVENIENCE', 'Top Values / Header Tagline'),
+            heading: getFld('heading', 'Laptop Wholesale Supplier in Dubai, UAE', 'Main Heading'),
+            badge_bottom: getFld('badge_bottom', 'BEST SUPPLIER IN DUBAI & THE UAE', 'Badge / Subheading'),
+            paragraph: getFld('paragraph', 'Crown Excel is a trusted Dubai-based sourcing partner for brand-new laptops, serving international wholesalers, distributors, retailers and corporate buyers. We offer a wide portfolio of leading laptop brands, competitive wholesale pricing, reliable stock availability and seamless export coordination to customers across the GCC, Africa, CIS and Asia.', 'Hero Description', 'richtext'),
+            button_primary_text: getFld('button_primary_text', 'Request Wholesale Quote', 'Primary Button Label'),
+            button_whatsapp_text: getFld('button_whatsapp_text', 'WhatsApp', 'WhatsApp Button Label'),
+            button_telegram_text: getFld('button_telegram_text', 'Telegram', 'Telegram Button Label'),
+            telegram_url: getFld('telegram_url', 'https://t.me/crownexcelae', 'Telegram Channel URL'),
+          };
+        } else if (sec.sectionId === 'laptopherosection') {
           sec.sectionName = 'Hero Section (Wholesale Laptops)';
           sec.fields = {
             heading: getFld('heading', 'Direct Wholesale & Bulk Laptops & Workstations', 'Hero Main Heading'),
@@ -1586,6 +1598,8 @@ export async function POST(request) {
       finalPath === '/our-services/long/short-term-amc' || path === '/our-services/long/short-term-amc' || routeId === '6a2016aba0608271b7524ea3' ||
       finalPath === '/our-services/networking' || path === '/our-services/networking' || routeId === '6a2016aba0608271b7524ea4' ||
       finalPath === '/our-services/security-solutions' || path === '/our-services/security-solutions' || routeId === '6a2016aba0608271b7524ea5' ||
+      finalPath === '/it-hardware-wholesale-supplier-in-dubai-or-uae' || path === '/it-hardware-wholesale-supplier-in-dubai-or-uae' ||
+      finalPath === '/laptop-wholesale-supplier-in-dubai-or-uae' || path === '/laptop-wholesale-supplier-in-dubai-or-uae' || routeId === '6ad36ed7a31875b6e0e116ba' ||
       finalPath === '/company/director-message' || path === '/company/director-message';
 
     // Update JSX files on disk with the new values (never for dynamic pages like homepage and laptops, which are rendered from DB)

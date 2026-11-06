@@ -2,9 +2,6 @@
 import React, { useState, useEffect } from 'react';
 import Link from 'next/link';
 import Image from 'next/image';
-import Partner from '../Images/footerpartner.png'
-import Coorporate from '../Images/footercoorporates.png'
-import Wholesale from '../Images/footerwholesale.png'
 import logo from "../Images/logos.png"
 
 import {
@@ -14,7 +11,6 @@ import {
   PaperPlaneRight,
 } from 'phosphor-react';
 import { XLogoIcon } from '@phosphor-icons/react';
-import ContactFormPopup from '../ContactFormPopup/ContactFormPopup';
 import { useRouteStatus } from '@/context/RouteStatusContext';
 
 const Footer = () => {
@@ -22,8 +18,6 @@ const Footer = () => {
   const [emailInput, setEmailInput] = useState('');
   const [loadingEmail, setLoadingEmail] = useState(false);
   const [emailMessage, setEmailMessage] = useState('');
-  const [showContactPopup, setShowContactPopup] = useState(false);
-  const [popupSubject, setPopupSubject] = useState('');
   const [settings, setSettings] = useState({
     phone: '+971 4-354 0566',
     email: 'contact@crownexcel.com',
@@ -40,7 +34,7 @@ const Footer = () => {
     { label: 'IT Consultancy', href: '/our-services/it-consultancy' },
     { label: 'Networking Solutions', mobileLabel: 'Networking', href: '/our-services/networking' },
     { label: 'Storage & Virtualization', href: '/our-services/storage&virtualization' },
-    { label: 'Laptop Wholesale Supplier', href: '/laptop-wholesale-supplier-in-dubai-or-uae' },
+    { label: 'IT Hardware Wholesale Supplier', href: '/it-hardware-wholesale-supplier-in-dubai-or-uae' },
   ];
 
   const companyLinks = [
@@ -64,24 +58,6 @@ const Footer = () => {
         console.warn('Could not load settings:', err);
       });
   }, []);
-
-  const topButtons = [
-    {
-      title: 'Become Our Partner',
-      imgSrc: Partner,
-      href: '/contact-us',
-    },
-    {
-      title: 'For Corporates Content',
-      imgSrc: Coorporate,
-      href: '/contact-us',
-    },
-    {
-      title: 'Wholesale Inquiries',
-      imgSrc: Wholesale,
-      href: '/contact-us',
-    },
-  ];
 
   async function submitSubscription(e) {
     e?.preventDefault?.();
@@ -122,87 +98,6 @@ const Footer = () => {
 
   return (
     <footer className="text-white">
-      {/* Partnership & Business Section ("Become Our Partner") */}
-      <div className="w-full bg-[#FFFFFF] overflow-hidden">
-        <section id="become-partner" className="become-partner-section relative w-full max-w-[1536px] mx-auto bg-[#084032] border-b border-[#4ade80]/20 overflow-hidden">
-          <div className="max-w-7xl mx-auto px-4 sm:px-6 py-6 sm:py-8 lg:py-16">
-            {/* Desktop View */}
-            <div className="hidden lg:flex justify-between items-stretch">
-            {topButtons.map((item, index) => (
-              <div key={index} className="flex-1 text-center relative group">
-                {/* Divider */}
-                {index < topButtons.length - 1 && (
-                  <div className="absolute right-0 top-1/2 transform -translate-y-1/2 w-px h-32 bg-[#4ade80]/30"></div>
-                )}
-
-                <div className="px-8 py-6">
-                  <div className="w-24 h-24 mx-auto mb-6 p-3 bg-white/5 rounded-2xl flex items-center justify-center group-hover:bg-white/10 transition-all duration-300">
-                    <Image
-                      src={item.imgSrc}
-                      alt={item.title}
-                      width={60}
-                      height={60}
-                      className="object-contain"
-                    />
-                  </div>
-
-                  <h3 className="text-xl font-semibold mb-6 text-white leading-tight">
-                    {item.title}
-                  </h3>
-
-                  <button
-                    type="button"
-                    onClick={() => { setPopupSubject(item.title); setShowContactPopup(true); }}
-                    className="bg-gradient-to-r from-[#4ade80] to-[#22c55e] hover:from-[#22c55e] hover:to-[#16a34a] text-white font-medium px-8 py-3 rounded-lg transition-all duration-300 transform hover:scale-105 shadow-lg cursor-pointer"
-                  >
-                    Get Started
-                  </button>
-                </div>
-              </div>
-            ))}
-          </div>
-
-          {/* Mobile & Tablet View */}
-          <div className="lg:hidden">
-            <div className="flex justify-between items-stretch min-h-[190px] sm:min-h-[240px] lg:min-h-[280px] px-2">
-              {topButtons.map((item, index) => (
-                <div key={index} className="flex-1 text-center relative group max-w-[33%]">
-                  {/* Divider */}
-                  {index < topButtons.length - 1 && (
-                    <div className="absolute right-0 top-1/2 transform -translate-y-1/2 w-px h-28 sm:h-36 bg-[#4ade80]/30"></div>
-                  )}
-
-                  <div className="px-1 py-2 sm:py-4 lg:py-8 flex flex-col justify-center items-center h-full">
-                    <div className="w-14 h-14 sm:w-16 sm:h-16 mx-auto mb-3 sm:mb-4 p-2 bg-white/5 rounded-xl flex items-center justify-center group-hover:bg-white/10 transition-all duration-300">
-                      <Image
-                        src={item.imgSrc}
-                        alt={item.title}
-                        width={40}
-                        height={40}
-                        className="object-contain"
-                      />
-                    </div>
-
-                    <h3 className="text-xs font-semibold mb-3 sm:mb-4 text-white leading-tight text-center">
-                      {item.title}
-                    </h3>
-
-                    <button
-                      type="button"
-                      onClick={() => { setPopupSubject(item.title); setShowContactPopup(true); }}
-                      className="bg-gradient-to-r from-[#4ade80] to-[#22c55e] hover:from-[#22c55e] hover:to-[#16a34a] text-white font-medium px-2 py-1.5 rounded-md transition-all duration-300 transform hover:scale-105 shadow-lg text-xs whitespace-nowrap cursor-pointer"
-                    >
-                      Get Started
-                    </button>
-                  </div>
-                </div>
-              ))}
-            </div>
-          </div>
-        </div>
-      </section>
-    </div>
-
       {/* Main Footer Content */}
       <div className="w-full bg-[#FFFFFF] overflow-hidden">
         <section id="footer-content" className="footer-content-section relative w-full max-w-[1536px] mx-auto bg-[#084032] overflow-hidden">
@@ -348,7 +243,7 @@ const Footer = () => {
                     <p className="text-gray-300 leading-relaxed flex flex-col gap-2">
                       <span className=" block text-[14px]"> <span className='font-semibold text-white '>Head Office:</span> {settings.address}</span>
                       <span className=" block text-[14px]"> <span className='font-semibold text-white '>Experience Centre:</span> Shop No. 2 - Building 716 Khalid Bin Al Waleed Rd - opposite Main Entrance of Admiral Plaza Hotel - Bur Dubai</span>
-                      <span className=" block text-[14px]"> <span className='font-semibold text-white '>Branch 2:</span> Admiral Plaza Hotel Building - 37C Street - Shop 5 - Khalid Bin Al Waleed Rd - Bur Dubai </span>
+                      <span className=" block text-[14px]"> <span className='font-semibold text-white '>Retail Shop:</span> Admiral Plaza Hotel Building - 37C Street - Shop 5 - Khalid Bin Al Waleed Rd - Bur Dubai </span>
                     </p>
                   </div>
 
@@ -422,7 +317,7 @@ const Footer = () => {
                 <p className="text-gray-300 text-[14px] leading-relaxed max-w-xs mx-auto">
                    Shop No. 2 - Building 716 Khalid Bin Al Waleed Rd - opposite Main Entrance of Admiral Plaza Hotel - Bur Dubai
                 </p>
-                <h4><span className='font-bold text-[14px]'>Branch 2:</span></h4>
+                <h4><span className='font-bold text-[14px]'>Retail Shop:</span></h4>
                 <p className="text-gray-300 text-[14px] leading-relaxed max-w-xs mx-auto">
                    Admiral Plaza Hotel Building - 37C Street - Shop 5 - Khalid Bin Al Waleed Rd - Bur Dubai - Dubai
                 </p>
@@ -532,19 +427,8 @@ const Footer = () => {
       </section>
     </div>
 
-      {/* Contact Form Popup */}
-      <ContactFormPopup
-        isOpen={showContactPopup}
-        onClose={() => setShowContactPopup(false)}
-      />
     </footer>
   );
 };
 
 export default Footer;
-// export default Footer;
-
-
-
-
-

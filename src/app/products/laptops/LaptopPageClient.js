@@ -27,7 +27,7 @@ export default function LaptopPageClient({ cmsContent }) {
   const operationsSection = sections.laptopoperationssection;
   const inquirySection = sections.laptopinquirysection;
 
-  const WHATSAPP_PHONE = '971505033860';
+  const WHATSAPP_PHONE = '971543090680';
 
   useEffect(() => {
     if (typeof window !== 'undefined') {

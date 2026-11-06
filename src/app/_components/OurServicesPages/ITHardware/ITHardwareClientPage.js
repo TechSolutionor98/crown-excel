@@ -31,7 +31,7 @@ export default function ITHardwareClientPage({ cmsContent }) {
   const handleWhatsApp = useCallback((customMsg) => {
     const defaultMsg = 'Hello Crown Excel, I am looking for an IT Hardware quote and stock availability in Dubai/UAE.';
     const msg = typeof customMsg === 'string' ? customMsg : defaultMsg;
-    const url = `https://api.whatsapp.com/send/?phone=971505033860&text=${encodeURIComponent(msg)}&type=phone_number&app_absent=0`;
+    const url = `https://api.whatsapp.com/send/?phone=971543090680&text=${encodeURIComponent(msg)}&type=phone_number&app_absent=0`;
     if (typeof window !== 'undefined') {
       window.open(url, '_blank', 'noopener,noreferrer');
     }

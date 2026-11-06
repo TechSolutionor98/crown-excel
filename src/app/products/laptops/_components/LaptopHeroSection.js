@@ -10,7 +10,7 @@ export default function LaptopHeroSection({
   handleWhatsAppRedirect,
   scrollToSection,
 }) {
-  const WHATSAPP_PHONE = '971505033860';
+  const WHATSAPP_PHONE = '971543090680';
   const heroWhatsAppMessage = 'Hello Crown Excel, I am looking for wholesale laptops availability and pricing.';
 
   const getHeroWhatsAppUrl = () => {
@@ -144,7 +144,7 @@ export default function LaptopHeroSection({
               onClick={handleHeroWhatsAppClick}
               target="_blank"
               rel="noopener noreferrer"
-              aria-label="Contact Crown Excel on WhatsApp at +971 50 503 3860"
+              aria-label="Contact Crown Excel on WhatsApp at +971 54 309 0680"
               className="group w-full sm:w-auto inline-flex items-center justify-center gap-2 px-5 sm:px-6 xl:px-8 py-3.5 xl:py-4 rounded-xl bg-white/10 hover:bg-emerald-500/20 border border-emerald-400/30 hover:border-emerald-400/60 text-white font-semibold text-xs sm:text-sm xl:text-base whitespace-nowrap backdrop-blur-md shadow-sm hover:shadow-lg hover:shadow-emerald-950/40 transition-all duration-200 cursor-pointer transform hover:-translate-y-0.5 active:scale-[0.98]"
             >
               <FaWhatsapp className="w-4.5 h-4.5 xl:w-5 xl:h-5 text-[#25D366] group-hover:scale-110 transition-transform duration-200 flex-shrink-0" />

@@ -391,7 +391,7 @@ export default function LaptopProductsGridSection({
     });
   }, [LAPTOP_PRODUCTS, activeCategory, searchQuery]);
 
-  const WHATSAPP_PHONE = '971505033860';
+  const WHATSAPP_PHONE = '971543090680';
 
   const getProductWhatsAppMessage = (prod) => {
     return `Hello Crown Excel, I am inquiring about wholesale pricing for ${prod.name} (Barcode: ${prod.barcode}).`;

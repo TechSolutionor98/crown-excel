@@ -397,8 +397,8 @@ async function run() {
           },
           whatsapp_phone: {
             type: 'text',
-            value: '+971 50 503 3860',
-            originalValue: '+971 50 503 3860',
+            value: '+971 54 309 0680',
+            originalValue: '+971 54 309 0680',
             label: 'WhatsApp Phone',
           },
           email: {

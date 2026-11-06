@@ -17,7 +17,7 @@ export default function ITHardwareCTA({ cmsData, onOpenInquiry, onWhatsApp }) {
   const eyebrow = safeRender(fields.eyebrow, 'GET IN TOUCH WITH OUR WHOLESALE DESK');
 
   const phone = safeRender(fields.phone, '+971 4-354 0566');
-  const whatsappPhone = safeRender(fields.whatsapp_phone, '+971 50 503 3860');
+  const whatsappPhone = safeRender(fields.whatsapp_phone, '+971 54 309 0680');
   const email = safeRender(fields.email, 'contact@crownexcel.com');
   const address = safeRender(fields.address, 'Al Jahra Building, 2nd floor, 18th St - Al Raffa - Dubai, UAE');
 
