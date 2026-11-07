@@ -91,7 +91,7 @@ export default function WholesaleBrandsSection() {
                   }`}
                 />
               </div>
-              <span className="text-gray-900 font-montserrat font-bold text-xs sm:text-[13px] tracking-wide text-center leading-none group-hover:text-[#147A5F] transition-colors">
+              <span className="text-gray-900 font-montserrat font-bold text-sm sm:text-[14px] tracking-wide text-center leading-none group-hover:text-[#147A5F] transition-colors">
                 {brand.name}
               </span>
             </div>
@@ -121,7 +121,7 @@ export default function WholesaleBrandsSection() {
                   }`}
                 />
               </div>
-              <span className="text-gray-900 font-montserrat font-bold text-xs sm:text-[13px] tracking-wide text-center leading-none group-hover:text-[#147A5F] transition-colors">
+              <span className="text-gray-900 font-montserrat font-bold text-sm sm:text-[14px] tracking-wide text-center leading-none group-hover:text-[#147A5F] transition-colors">
                 {brand.name}
               </span>
             </div>

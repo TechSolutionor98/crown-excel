@@ -141,7 +141,7 @@ export default function WholesaleHeroSection({
               <span className="font-jakarta font-extrabold text-3xl sm:text-4xl lg:text-[40px] text-[#147A5F] tracking-tight leading-none">
                 16+
               </span>
-              <span className="text-xs sm:text-[13px] text-gray-500 font-medium mt-2 leading-snug">
+              <span className="text-sm sm:text-[16px] text-gray-500 font-medium mt-2 leading-snug">
                 Years in the<br className="hidden sm:inline" /> Dubai market
               </span>
             </div>
@@ -151,7 +151,7 @@ export default function WholesaleHeroSection({
               <span className="font-jakarta font-extrabold text-3xl sm:text-4xl lg:text-[40px] text-[#147A5F] tracking-tight leading-none">
                 16
               </span>
-              <span className="text-xs sm:text-[13px] text-gray-500 font-medium mt-2 leading-snug">
+              <span className="text-sm sm:text-[16px] text-gray-500 font-medium mt-2 leading-snug">
                 Active export<br className="hidden sm:inline" /> markets
               </span>
             </div>
@@ -161,7 +161,7 @@ export default function WholesaleHeroSection({
               <span className="font-jakarta font-extrabold text-3xl sm:text-4xl lg:text-[40px] text-[#147A5F] tracking-tight leading-none">
                 7
               </span>
-              <span className="text-xs sm:text-[13px] text-gray-500 font-medium mt-2 leading-snug">
+              <span className="text-sm sm:text-[16px] text-gray-500 font-medium mt-2 leading-snug">
                 Core IT<br className="hidden sm:inline" /> categories
               </span>
             </div>
@@ -171,7 +171,7 @@ export default function WholesaleHeroSection({
               <span className="font-jakarta font-extrabold text-3xl sm:text-4xl lg:text-[40px] text-[#147A5F] tracking-tight leading-none">
                 100%
               </span>
-              <span className="text-xs sm:text-[13px] text-gray-500 font-medium mt-2 leading-snug">
+              <span className="text-sm sm:text-[16px] text-gray-500 font-medium mt-2 leading-snug">
                 Brand-new &amp;<br className="hidden sm:inline" /> factory-sealed
               </span>
             </div>

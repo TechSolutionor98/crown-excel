@@ -48,27 +48,7 @@ export default function WholesaleCategoriesSection() {
     >
       <div className="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8">
         {/* Section Heading */}
-        <div className="text-center max-w-3xl mx-auto mb-8 sm:mb-12">
-          <span className="text-xs sm:text-sm font-extrabold uppercase tracking-wider text-[#147A5F] mb-2 block font-montserrat">
-            Wholesale Categories
-          </span>
-          <h2
-            className="font-anton font-normal uppercase text-center text-2xl sm:text-3xl lg:text-[38px] tracking-[-0.035em] leading-[1.08] text-[#171717]"
-            style={{
-              fontFamily: "'Anton', Impact, sans-serif",
-              fontWeight: 400,
-              letterSpacing: '-0.035em',
-              lineHeight: 1.08,
-              textTransform: 'uppercase',
-            }}
-          >
-            Direct Sourcing Across 7 Core IT Categories
-          </h2>
-          <p className="text-gray-600 font-jakarta text-xs sm:text-sm md:text-[14.5px] leading-relaxed mt-3 max-w-2xl mx-auto font-normal">
-            Volume hardware distribution with authentic warranty and immediate dispatch from our Dubai central hubs.
-          </p>
-        </div>
-
+        
         {/* 7 Categories Icon Cards Layout */}
         <div className="grid grid-cols-2 sm:grid-cols-3 md:grid-cols-4 lg:grid-cols-7 gap-3 sm:gap-4 lg:gap-3.5 items-stretch">
           {wholesaleCategories.map((cat) => {
