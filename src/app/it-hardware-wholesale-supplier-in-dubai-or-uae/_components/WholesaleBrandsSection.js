@@ -1,24 +1,24 @@
 import React from 'react';
 import Image from 'next/image';
 
+import AcerLogo from '@/Components/Images/acer (2).png';
+import AppleLogo from '@/Components/Images/apple (3).png';
+import AsusLogo from '@/Components/Images/asus (1).png';
 import DellLogo from '@/Components/Images/dell (1).png';
 import HPLogo from '@/Components/Images/hp.png';
 import LenovoLogo from '@/Components/Images/lenovo (1).png';
-import AppleLogo from '@/Components/Images/apple (3).png';
-import AsusLogo from '@/Components/Images/asus (1).png';
-import AcerLogo from '@/Components/Images/acer (2).png';
-import MsiLogo from '@/Components/Images/msi (1).png';
 import MicrosoftLogo from '@/Components/Images/microsof.png';
+import MsiLogo from '@/Components/Images/msi (1).png';
 
 const brandLogos = [
+  { name: 'Acer', logo: AcerLogo },
+  { name: 'Apple', logo: AppleLogo },
+  { name: 'ASUS', logo: AsusLogo },
   { name: 'Dell', logo: DellLogo },
   { name: 'HP', logo: HPLogo },
   { name: 'Lenovo', logo: LenovoLogo },
-  { name: 'Apple', logo: AppleLogo },
-  { name: 'ASUS', logo: AsusLogo },
-  { name: 'Acer', logo: AcerLogo },
-  { name: 'MSI', logo: MsiLogo },
   { name: 'Microsoft', logo: MicrosoftLogo },
+  { name: 'MSI', logo: MsiLogo },
 ];
 
 export default function WholesaleBrandsSection() {
