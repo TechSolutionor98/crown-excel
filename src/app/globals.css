@@ -102,6 +102,32 @@ body {
   animation: cardFadeIn 0.8s cubic-bezier(0.23, 1, 0.32, 1) both;
 }
 
+@keyframes brandScrollLeft {
+  0% {
+    transform: translate3d(0, 0, 0);
+  }
+  100% {
+    transform: translate3d(-50%, 0, 0);
+  }
+}
+
+.animate-brand-scroll {
+  display: flex;
+  width: max-content;
+  animation: brandScrollLeft 28s linear infinite;
+  will-change: transform;
+}
+
+.animate-brand-scroll:hover {
+  animation-play-state: paused;
+}
+
+@media (prefers-reduced-motion: reduce) {
+  .animate-brand-scroll {
+    animation: none;
+  }
+}
+
 
 
 

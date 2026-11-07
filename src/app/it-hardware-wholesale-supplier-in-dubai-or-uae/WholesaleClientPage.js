@@ -4,7 +4,6 @@ import React, { useState, useEffect, useMemo } from 'react';
 import ContactFormPopup from '@/Components/ContactFormPopup/ContactFormPopup';
 
 import WholesaleHeroSection from './_components/WholesaleHeroSection';
-import WholesaleBrandsSection from './_components/WholesaleBrandsSection';
 import WholesaleCategoriesSection from './_components/WholesaleCategoriesSection';
 import WholesaleProductsSection from './_components/WholesaleProductsSection';
 import WholesaleWhyCrownExcelSection from './_components/WholesaleWhyCrownExcelSection';
@@ -152,10 +151,7 @@ export default function WholesaleClientPage({ cmsContent }) {
         prefersReducedMotion={prefersReducedMotion}
       />
 
-      {/* 2. Laptop Brands Section (Authorized Distribution & Sourcing) */}
-      <WholesaleBrandsSection />
-
-      {/* 3. Wholesale Product Categories (7 Categories with Icons) */}
+      {/* 2. Wholesale Product Categories (7 Categories with Icons) */}
       <WholesaleCategoriesSection />
 
       {/* 4. Product Line Section */}

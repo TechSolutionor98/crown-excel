@@ -2,6 +2,7 @@ import React from 'react';
 import { Send } from 'lucide-react';
 import { FaWhatsapp, FaTelegramPlane } from 'react-icons/fa';
 import { safeRender } from '@/lib/safe-html';
+import WholesaleBrandsSection from './WholesaleBrandsSection';
 
 export default function WholesaleHeroSection({
   openGeneralInquiryModal,
@@ -29,6 +30,27 @@ export default function WholesaleHeroSection({
 
   const headingVal = safeRender(fields.heading, 'Laptop Wholesale Supplier in Dubai, UAE');
 
+  const renderBadgeTopWithYellowDividers = (rawVal) => {
+    const text = safeRender(rawVal, 'TRUST | AUTHENTICITY | CONVENIENCE');
+    if (typeof text !== 'string') return text;
+    if (!text.includes('|')) return text;
+
+    const parts = text.split('|');
+    return parts.map((part, index) => (
+      <React.Fragment key={index}>
+        {part.trim()}
+        {index < parts.length - 1 && (
+          <>
+            {' '}
+            <span className="text-[#FFE500]" aria-hidden="true">
+              |
+            </span>{' '}
+          </>
+        )}
+      </React.Fragment>
+    ));
+  };
+
   const renderHeadingWithHighlight = (text) => {
     if (!text) return 'Laptop Wholesale Supplier in Dubai, UAE';
     const parts = text.split(/(wholesale)/i);
@@ -49,7 +71,7 @@ export default function WholesaleHeroSection({
   };
 
   return (
-    <section className="relative overflow-hidden bg-gradient-to-b from-[#F7FAF9] via-white to-white pt-7 pb-12 sm:pt-20 sm:pb-24 border-b border-gray-100">
+    <section className="relative overflow-hidden bg-gradient-to-b from-[#F7FAF9] via-white to-white pt-7 pb-8 sm:pt-16 sm:pb-12 border-b border-gray-100">
       {/* Subtle Ambient Radial Glow for Depth */}
       <div
         aria-hidden="true"
@@ -67,8 +89,8 @@ export default function WholesaleHeroSection({
           }}
         >
           {/* Top Line: TRUST | AUTHENTICITY | CONVENIENCE */}
-          <span className="block not-italic text-[#171717] text-[21px] sm:text-4xl md:text-5xl lg:text-[66px] xl:text-[70px] lg:whitespace-nowrap">
-            {safeRender(fields.badge_top, 'TRUST | AUTHENTICITY | CONVENIENCE')}
+          <span className="block not-italic text-[#171717] text-[13px] sm:text-[22px] md:text-[30px] lg:text-[40px] xl:text-[44px] lg:whitespace-nowrap mb-1.5 sm:mb-2 md:mb-2.5 lg:mb-3">
+            {renderBadgeTopWithYellowDividers(fields.badge_top)}
           </span>
 
           {/* Line 1: Laptop Wholesale Supplier in Dubai, UAE (Desktop single line, Mobile clean 2-tier wrap) */}
@@ -159,6 +181,11 @@ export default function WholesaleHeroSection({
               <span>{safeRender(fields.button_telegram_text, 'Telegram')}</span>
             </a>
           </div>
+        </div>
+
+        {/* Continuous Horizontal Scrolling Brand Logos Slider Positioned Directly Below Hero Buttons */}
+        <div className="w-full mt-6 sm:mt-10">
+          <WholesaleBrandsSection />
         </div>
       </div>
     </section>
