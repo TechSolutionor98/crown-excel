@@ -1,6 +1,6 @@
 'use client';
 
-import React, { useState, useMemo } from 'react';
+import React from 'react';
 import Image from 'next/image';
 import { ArrowRight } from 'lucide-react';
 import { FaWhatsapp, FaTelegramPlane } from 'react-icons/fa';
@@ -349,43 +349,12 @@ export default function WholesaleProductsSection({
   telegramChannelUrl,
   defaultWhatsAppMessage,
 }) {
-  const [activeCategory, setActiveCategory] = useState('All');
-
-  // Determines which categories to render
-  const categoriesToRender = useMemo(() => {
-    if (activeCategory === 'All') {
-      return SEVEN_CATEGORIES;
-    }
-    return [activeCategory];
-  }, [activeCategory]);
-
   return (
     <section className="py-10 sm:py-14 bg-[#F8FAFC] border-t border-b border-gray-200" id="product-line">
       <div className="max-w-7xl mx-auto px-3 sm:px-6">
-        {/* Seven Category Selector Buttons in Exact Required Sequence (1 to 7) */}
-        <div className="flex flex-wrap items-center justify-center gap-2 sm:gap-2.5 mb-10 sm:mb-14 font-jakarta">
-          {SEVEN_CATEGORIES.map((cat, idx) => {
-            const isActive = activeCategory === cat;
-            return (
-              <button
-                key={cat}
-                type="button"
-                onClick={() => setActiveCategory(activeCategory === cat ? 'All' : cat)}
-                className={`px-3.5 py-2 sm:px-4 sm:py-2.5 rounded-xl text-xs sm:text-[13px] font-semibold tracking-wide transition-all duration-200 cursor-pointer shadow-xs active:scale-[0.98] ${
-                  isActive
-                    ? 'bg-[#147A5F] text-white shadow-md'
-                    : 'bg-white text-gray-700 hover:bg-gray-100 hover:text-[#147A5F] border border-gray-200/90'
-                }`}
-              >
-                <span>{idx + 1}. {cat}</span>
-              </button>
-            );
-          })}
-        </div>
-
         {/* Product Categories Rendered in Exact Sequence (1 to 7) */}
         <div className="space-y-12 sm:space-y-16">
-          {categoriesToRender.map((catName) => {
+          {SEVEN_CATEGORIES.map((catName) => {
             // Strictly cap each category to exactly 4 product cards
             const catProducts = ALL_PRODUCTS.filter((p) => p.category === catName).slice(0, 4);
             const categoryIndex = SEVEN_CATEGORIES.indexOf(catName) + 1;
