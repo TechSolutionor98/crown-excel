@@ -410,14 +410,14 @@ export default function WholesaleProductsSection({
                 </div>
 
                 {/* Exactly 4 Product Cards Arranged Inline in a Single Row (No Wrapping) */}
-                <div className="w-full overflow-x-auto pb-2 scrollbar-none">
+                <div className="w-full overflow-x-auto pt-1 pb-2 scrollbar-none">
                   <div className="grid grid-cols-4 gap-2 sm:gap-4 lg:gap-6 items-stretch min-w-[700px] lg:min-w-0">
                     {catProducts.map((product, index) => {
                       const { line1, line2 } = getTwoLineTitle(product.name);
                       return (
                         <div
                           key={product.barcode}
-                          className="group relative bg-white p-2.5 sm:p-3.5 rounded-xl sm:rounded-2xl border border-[#147A5F] shadow-md hover:shadow-2xl transition-all duration-300 hover:-translate-y-1.5 flex flex-col justify-between overflow-hidden min-h-[295px] sm:min-h-[375px] lg:min-h-[395px]"
+                          className="group relative bg-white p-2.5 sm:p-3.5 rounded-xl sm:rounded-2xl border border-[#147A5F] hover:border-[#0c4e3c] shadow-md transition-colors duration-200 flex flex-col justify-between overflow-hidden min-h-[295px] sm:min-h-[375px] lg:min-h-[395px]"
                         >
                           {/* Product Image Showcase on Pure White Background */}
                           <div className="relative w-full h-28 xs:h-32 sm:h-48 lg:h-52 bg-white flex items-center justify-center overflow-hidden rounded-lg sm:rounded-xl">
