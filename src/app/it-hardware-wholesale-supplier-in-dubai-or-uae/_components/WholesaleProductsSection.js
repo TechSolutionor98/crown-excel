@@ -6,8 +6,6 @@ import { ArrowRight } from 'lucide-react';
 import { FaWhatsapp, FaTelegramPlane } from 'react-icons/fa';
 
 // Inventory Product WebP / PNG Images
-import Img24B3HA2_89 from '@/Components/Images/24B3HA2-89.webp';
-import Img25B36H_89 from '@/Components/Images/25B36H-89.webp';
 import Img83F30082AX from '@/Components/Images/83F30082AX.webp';
 import Img83M4000YGP from '@/Components/Images/83M4000YGP.webp';
 import Img83RR0040PS from '@/Components/Images/83RR0040PS.webp';
@@ -34,8 +32,10 @@ import ImgServerWorkstation1 from '@/Components/Images/servers-workstation-1.web
 import ImgServerWorkstation2 from '@/Components/Images/servers-workstation-2.webp';
 import ImgServerWorkstation3 from '@/Components/Images/servers-workstation-3.webp';
 import ImgServerWorkstation4 from '@/Components/Images/servers-workstation-4.webp';
-import ImgAccessAllinone1 from '@/Components/Images/accessallinone1.png';
-import ImgAccessAllinone2 from '@/Components/Images/accessallinone2.png';
+import ImgWorkstation4 from '@/Components/Images/workstation4.png';
+import ImgWorkstationpc3 from '@/Components/Images/workstationpc3.png';
+import ImgWorkstationpc1 from '@/Components/Images/workstationpc1.png';
+import ImgWorkstationpc from '@/Components/Images/workstationpc.jpg';
 
 // Seven Product Categories in Exact Required Sequence (1 to 7)
 const SEVEN_CATEGORIES = [
@@ -266,36 +266,36 @@ const ALL_PRODUCTS = [
 
   // 7. Accessories (Crownyx) (Exactly 4 Products)
   {
-    brand: 'AOC',
+    brand: 'CROWNYX',
     category: 'Accessories (Crownyx)',
-    barcode: '24B3HA2-89',
-    name: 'AOC MONITOR-23.8" flat wide monitor',
-    particular: 'AOC MONITOR-23.8" flat wide monitor, 100Hz Refresh Rate, Full HD IPS Display, Built-in Speakers, HDMI & VGA Inputs',
-    image: Img24B3HA2_89
-  },
-  {
-    brand: 'AOC',
-    category: 'Accessories (Crownyx)',
-    barcode: '25B36H-89',
-    name: 'AOC 25" IPS FHD 100Hz Monitor',
-    particular: 'AOC| 25"|IPS|FHD|100Hz|HDMI&VGA|GameMode|VESAMount',
-    image: Img25B36H_89
+    barcode: 'CMH-180',
+    name: 'CROWNYX CMH-180 8-in-1 USB-C Hub, 4K HDMI, Ethernet, 37W PD, 3× USB 3.0, SD/TF Reader, Compatible with MacBook, iPad and Laptops',
+    particular: 'CROWNYX CMH-180 8-in-1 USB-C Hub, 4K HDMI, Ethernet, 37W PD, 3× USB 3.0, SD/TF Reader, Compatible with MacBook, iPad and Laptops',
+    image: ImgWorkstation4
   },
   {
     brand: 'CROWNYX',
     category: 'Accessories (Crownyx)',
-    barcode: 'CX-MGSC-16P',
-    name: 'Crownyx MagSafe Shockproof Case',
-    particular: 'Crownyx Premium Crystal Clear Protective Case with Strong MagSafe Ring, Shock-Absorbing Corners, Scratch-Resistant Acrylic Back',
-    image: ImgAccessAllinone1
+    barcode: 'CCC130',
+    name: 'CROWNYX CCC130 USB-A to USB-C 3.0 Cable 1M, 5Gbps, Compatible with Samsung Galaxy S25 Ultra, iPhone 17-15, Huawei P70 Pro and iPad Mini 7',
+    particular: 'CROWNYX CCC130 USB-A to USB-C 3.0 Cable 1M, 5Gbps, Compatible with Samsung Galaxy S25 Ultra, iPhone 17-15, Huawei P70 Pro and iPad Mini 7',
+    image: ImgWorkstationpc3
   },
   {
     brand: 'CROWNYX',
     category: 'Accessories (Crownyx)',
-    barcode: 'CX-HUB7-PRO',
-    name: 'Crownyx 7-in-1 Dual USB-C Hub',
-    particular: 'Crownyx 7-in-1 Multiport USB-C Docking Adapter, 4K HDMI, 100W Power Delivery, 3x USB 3.0, SD/MicroSD Card Reader, Aluminum Grey',
-    image: ImgAccessAllinone2
+    barcode: 'CMC135',
+    name: 'CROWNYX CMC135 35W GaN USB-C Fast Charger, PD and PPS Wall Adapter, Compatible with MacBook Air, iPad Pro, iPhone 16/15 and Galaxy S24',
+    particular: 'CROWNYX CMC135 35W GaN USB-C Fast Charger, PD and PPS Wall Adapter, Compatible with MacBook Air, iPad Pro, iPhone 16/15 and Galaxy S24',
+    image: ImgWorkstationpc1
+  },
+  {
+    brand: 'CROWNYX',
+    category: 'Accessories (Crownyx)',
+    barcode: 'CMC-365',
+    name: 'CROWNYX CMC-365 65W GaN Fast Charger | Dual USB-C & USB-A Power Delivery Wall Adapter | Compact, Safe & Intelligent Charging for Laptops & Devices',
+    particular: 'CROWNYX CMC-365 65W GaN Fast Charger | Dual USB-C & USB-A Power Delivery Wall Adapter | Compact, Safe & Intelligent Charging for Laptops & Devices',
+    image: ImgWorkstationpc
   }
 ];
 
@@ -324,8 +324,10 @@ function getTwoLineTitle(name) {
   if (name.startsWith('HPE ProLiant DL380')) return { line1: 'HPE ProLiant DL380', line2: 'Gen11 Server' };
   if (name.startsWith('Lenovo ThinkSystem SR650')) return { line1: 'Lenovo ThinkSystem', line2: 'SR650 V2 Server' };
   if (name.startsWith('HP ZBook Firefly 16')) return { line1: 'HP ZBook Firefly', line2: '16 G10 Workstation' };
-  if (name.startsWith('Crownyx MagSafe Shockproof')) return { line1: 'Crownyx MagSafe', line2: 'Shockproof Case' };
-  if (name.startsWith('Crownyx 7-in-1 Dual')) return { line1: 'Crownyx 7-in-1', line2: 'Dual USB-C Hub' };
+  if (name.startsWith('CROWNYX CMH-180')) return { line1: 'CROWNYX CMH-180', line2: '8-in-1 USB-C Hub' };
+  if (name.startsWith('CROWNYX CCC130')) return { line1: 'CROWNYX CCC130', line2: 'USB-A to USB-C Cable' };
+  if (name.startsWith('CROWNYX CMC135')) return { line1: 'CROWNYX CMC135', line2: '35W GaN Fast Charger' };
+  if (name.startsWith('CROWNYX CMC-365')) return { line1: 'CROWNYX CMC-365', line2: '65W GaN Fast Charger' };
 
   let splitIndex = Math.ceil(words.length / 2);
   let line1 = words.slice(0, splitIndex).join(' ');
