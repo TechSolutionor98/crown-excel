@@ -19,6 +19,12 @@ import ImgNH_QX5EM_003 from '@/Components/Images/NH.QX5EM.003.png';
 import ImgNX_BSQEM_001 from '@/Components/Images/NX.BSQEM.001.png';
 import ImgNX_DGJEM_002 from '@/Components/Images/NX.DGJEM.002.png';
 
+// Consumer Laptops Updated Images
+import ImgLenovoIdeaPadYoga from '@/Components/Images/83KR0047USch.png';
+import ImgAcerAspire from '@/Components/Images/NX.DGJEM.002ch.webp';
+import ImgAsusVivoBookZenbook from '@/Components/Images/90NB14Q2-M003W0ch.webp';
+import ImgHPOmniBook from '@/Components/Images/D78MQEA_BH5ch.webp';
+
 // Category Additional Product Images
 import ImgAllinoneLatestProduct1 from '@/Components/Images/AllinoneLatestProduct1.png';
 import ImgOneinall1 from '@/Components/Images/oneinall1.png';
@@ -52,40 +58,48 @@ const SEVEN_CATEGORIES = [
 const ALL_PRODUCTS = [
   // 1. Consumer Laptops (Exactly 4 Products)
   {
-    brand: 'ACER',
-    category: 'Consumer Laptops',
-    barcode: 'NX.DGJEM.002',
-    name: 'ACER ASPIRE LITE AL15-36P-36UJ',
-    particular: 'ACER ASPIRE LITE AL15-36P-36UJ INTEL CORE 3 N350, 8GB RAM, 256GB SSD, INTEL SHARED, 15.6 FHD, DOS, ENGLISH KEYBOARD, SILVER',
-    image: ImgNX_DGJEM_002,
-    imageClassName: 'scale-[1.28]'
-  },
-  {
-    brand: 'ASUS',
-    category: 'Consumer Laptops',
-    barcode: '90NB10J1-M04TL0',
-    name: 'ASUS VIVOBOOK X1504VA-BQ4675',
-    particular: 'ASUS VIVOBOOK X1504VA-BQ4675 I3-1315U , 8GB RAM, 512GB SSD, 15.6-INCH, FHD , INTEL® UHD GRAPHICS,DOS,ENGLISH KEYBOARD,QUIET BLUE.',
-    image: Img90NB10J1_M04TL0,
-    imageClassName: 'scale-[0.92]'
-  },
-  {
-    brand: 'ASUS',
-    category: 'Consumer Laptops',
-    barcode: '90NB14Q2-M003W0',
-    name: 'ASUS VIVOBOOK S5507QA-MA007W OLED',
-    particular: 'ASUS VIVOBOOK S5507QA-MA007W SNAPDRAGON X PLUS X1P42100, 16GB RAM, 1TB SSD, 15.6 OLED (2880 X 1620), QUALCOMM ADRENO X1-45, WIN 11 HOME, RGB 1 ZONE BACKLIT ENGLISH KEYBOARD, COOL SILVER',
-    image: Img90NB14Q2_M003W0,
-    imageClassName: 'scale-[0.92]'
-  },
-  {
     brand: 'LENOVO',
     category: 'Consumer Laptops',
-    barcode: '83RR0040PS',
-    name: 'LENOVO IDEAPAD SLIM 3I',
-    particular: 'LENOVO IDEAPAD SLIM 3I,INTEL CORE™ 3 304,8GB RAM,512GB SSD, INTEGRATED INTEL® GRAPHICS, 15.3" WUXGA IPS,DOS,BACKLIT, ENGLISH KEYBOARD, LUNA GREY',
-    image: Img83RR0040PS,
-    imageClassName: 'scale-[1.36]'
+    name: 'IdeaPad & Yoga',
+    series: 'IdeaPad & Yoga',
+    description: 'IdeaPad Slim | IdeaPad Pro | Yoga Slim | Yoga 2-in-1',
+    particular: 'Lenovo IdeaPad & Yoga Series (IdeaPad Slim, IdeaPad Pro, Yoga Slim, Yoga 2-in-1) - Latest Model: 83KR0047US',
+    barcode: '83KR0047US',
+    image: ImgLenovoIdeaPadYoga,
+    imageClassName: 'scale-[1.05]'
+  },
+  {
+    brand: 'ACER',
+    category: 'Consumer Laptops',
+    name: 'Aspire Series',
+    series: 'Aspire Series',
+    description: 'Aspire Lite | Aspire Go | Aspire 5 | Aspire 7',
+    particular: 'Acer Aspire Series (Aspire Lite, Aspire Go, Aspire 5, Aspire 7)',
+    barcode: '',
+    image: ImgAcerAspire,
+    imageClassName: 'scale-[1.05]'
+  },
+  {
+    brand: 'ASUS',
+    category: 'Consumer Laptops',
+    name: 'VivoBook & Zenbook',
+    series: 'VivoBook & Zenbook',
+    description: 'VivoBook | VivoBook S | Zenbook | Zenbook S',
+    particular: 'ASUS VivoBook & Zenbook Series (VivoBook, VivoBook S, Zenbook, Zenbook S) - Latest Model: 90NB14Q2-M003W0',
+    barcode: '90NB14Q2-M003W0',
+    image: ImgAsusVivoBookZenbook,
+    imageClassName: 'scale-[1.05]'
+  },
+  {
+    brand: 'HP',
+    category: 'Consumer Laptops',
+    name: 'OmniBook Series',
+    series: 'OmniBook Series',
+    description: 'OmniBook 3 | OmniBook 5 | OmniBook 7 | OmniBook X',
+    particular: 'HP OmniBook Series (OmniBook 3, OmniBook 5, OmniBook 7, OmniBook X) - Latest Model: D78MQEA#BH5',
+    barcode: 'D78MQEA#BH5',
+    image: ImgHPOmniBook,
+    imageClassName: 'scale-[1.05]'
   },
 
   // 2. Gaming Laptops (Exactly 4 Products)
@@ -303,6 +317,10 @@ function getTwoLineTitle(name) {
   const words = name.trim().split(/\s+/);
   if (words.length <= 1) return { line1: name, line2: '\u00A0' };
 
+  if (name.startsWith('LENOVO IDEAPAD & YOGA')) return { line1: 'LENOVO IDEAPAD & YOGA', line2: 'SERIES' };
+  if (name.startsWith('ACER ASPIRE SERIES')) return { line1: 'ACER ASPIRE', line2: 'SERIES' };
+  if (name.startsWith('ASUS VIVOBOOK & ZENBOOK')) return { line1: 'ASUS VIVOBOOK & ZENBOOK', line2: 'SERIES' };
+  if (name.startsWith('HP OMNIBOOK SERIES')) return { line1: 'HP OMNIBOOK', line2: 'SERIES' };
   if (name.startsWith('Lenovo V15')) return { line1: 'Lenovo V15', line2: 'Gen 6' };
   if (name.startsWith('ACER TRAVELMATE')) return { line1: 'ACER TRAVELMATE', line2: 'P214-56' };
   if (name.startsWith('ASUS EXPERTBOOK')) return { line1: 'ASUS EXPERTBOOK', line2: 'B1503CV' };
@@ -378,49 +396,64 @@ export default function WholesaleProductsSection({
                   </span>
                 </div>
 
-                {/* Exactly 4 Product Cards Arranged Inline in a Single Row (No Wrapping) */}
-                <div className="w-full overflow-x-auto pt-1 pb-2 scrollbar-none">
-                  <div className="grid grid-cols-4 gap-2 sm:gap-4 lg:gap-6 items-stretch min-w-[700px] lg:min-w-0">
+                {/* 4 Product Cards: 2-column grid on mobile, 4-column inline on desktop */}
+                <div className="w-full pt-1 pb-2">
+                  <div className="grid grid-cols-2 lg:grid-cols-4 gap-3 sm:gap-4 lg:gap-6 items-stretch">
                     {catProducts.map((product, index) => {
                       const { line1, line2 } = getTwoLineTitle(product.name);
                       return (
                         <div
-                          key={product.barcode}
-                          className="group relative bg-white p-2.5 sm:p-3.5 rounded-xl sm:rounded-2xl border border-[#147A5F] hover:border-[#0c4e3c] shadow-md transition-colors duration-200 flex flex-col justify-between overflow-hidden min-h-[295px] sm:min-h-[375px] lg:min-h-[395px]"
+                          key={product.barcode || product.name || index}
+                          className="group relative bg-white p-2.5 sm:p-3.5 rounded-xl sm:rounded-2xl border border-[#147A5F] hover:border-[#0c4e3c] shadow-md transition-colors duration-200 flex flex-col justify-between overflow-hidden min-h-[260px] sm:min-h-[325px] lg:min-h-[345px]"
                         >
                           {/* Product Image Showcase on Pure White Background */}
-                          <div className="relative w-full h-28 xs:h-32 sm:h-48 lg:h-52 bg-white flex items-center justify-center overflow-hidden rounded-lg sm:rounded-xl">
+                          <div className="relative w-full h-28 xs:h-32 sm:h-40 lg:h-44 bg-white flex items-center justify-center overflow-hidden rounded-lg sm:rounded-xl">
                             <Image
                               src={product.image}
                               alt={product.name}
                               fill
                               priority={categoryIndex === 1 && index < 4}
-                              sizes="(max-width: 640px) 25vw, (max-width: 1024px) 25vw, 25vw"
+                              sizes="(max-width: 640px) 50vw, (max-width: 1024px) 50vw, 25vw"
                               className={`object-contain ${
                                 product.imageClassName ? `p-0 ${product.imageClassName}` : 'p-1 sm:p-2'
                               }`}
                             />
                           </div>
 
-                          {/* Separate container below the image for product text, barcode, and buttons */}
-                          <div className="w-full flex flex-col flex-grow justify-end pt-2 pb-0.5 sm:pb-1 px-0.5 sm:px-1.5">
-                            {/* Content: Exactly 2-Line Product Name & Plain Barcode Text */}
-                            <div className="w-full flex flex-col items-center text-center">
-                              <h3
-                                className="w-full font-montserrat font-bold text-[11.5px] xs:text-[13px] sm:text-[15px] text-[#171717] leading-[1.3] sm:leading-[1.35] h-[32px] xs:h-[35px] sm:h-[42px] mb-1 sm:mb-1.5 text-center overflow-hidden flex flex-col justify-center"
-                                title={product.particular}
-                              >
-                                <span className="block truncate">{line1}</span>
-                                <span className="block truncate">{line2}</span>
-                              </h3>
+                          {/* Separate container below the image for product text, description/barcode, and buttons */}
+                          <div className="w-full flex flex-col flex-grow justify-between pt-2 pb-0.5 sm:pb-1 px-1 sm:px-1.5">
+                            {product.description ? (
+                              /* Clean Left-aligned Product Name and Natural Flow Description */
+                              <div className="w-full text-left mb-1.5 sm:mb-2">
+                                <h4
+                                  className="w-full font-montserrat font-bold text-[13px] xs:text-[14px] sm:text-[15px] lg:text-[16px] text-[#171717] leading-snug mb-1 text-left"
+                                  title={product.particular}
+                                >
+                                  {product.name}
+                                </h4>
+                                <p className="w-full font-jakarta text-[10px] xs:text-[10.5px] sm:text-[11.5px] text-gray-500 leading-normal text-left">
+                                  {product.description}
+                                </p>
+                              </div>
+                            ) : (
+                              /* Default Category Title & Barcode */
+                              <div className="w-full flex flex-col items-center text-center">
+                                <h3
+                                  className="w-full font-montserrat font-bold text-[11.5px] xs:text-[13px] sm:text-[15px] text-[#171717] leading-[1.3] sm:leading-[1.35] h-[32px] xs:h-[35px] sm:h-[42px] mb-1 sm:mb-1.5 text-center overflow-hidden flex flex-col justify-center"
+                                  title={product.particular}
+                                >
+                                  <span className="block truncate">{line1}</span>
+                                  <span className="block truncate">{line2}</span>
+                                </h3>
 
-                              <p className="w-full font-mono text-[9.5px] xs:text-[10.5px] sm:text-[12px] text-gray-500 tracking-tight sm:tracking-wider mb-2 sm:mb-2.5 text-center truncate">
-                                {product.barcode}
-                              </p>
-                            </div>
+                                <p className="w-full font-mono text-[9.5px] xs:text-[10.5px] sm:text-[12px] text-gray-500 tracking-tight sm:tracking-wider mb-2 sm:mb-2.5 text-center truncate">
+                                  {product.barcode || '\u00A0'}
+                                </p>
+                              </div>
+                            )}
 
                             {/* Action Buttons: Inquire Now, WhatsApp & Telegram Inline Side-by-Side */}
-                            <div className="w-full flex items-center gap-1 xs:gap-1.5 sm:gap-2">
+                            <div className="w-full flex items-center gap-1 xs:gap-1.5 sm:gap-2 mt-1 sm:mt-1.5">
                               <button
                                 type="button"
                                 onClick={() => openProductInquiryModal(product)}
