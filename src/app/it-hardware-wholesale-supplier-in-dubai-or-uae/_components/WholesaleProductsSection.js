@@ -31,6 +31,12 @@ import ImgAcerPredatorNitro from '@/Components/Images/NH_QVXEM_003ch.jpg';
 import ImgAsusRogTuf from '@/Components/Images/ASUS_ROG_Zephyrus_G16_GU605CXch.webp';
 import ImgHpOmenVictus from '@/Components/Images/D13PWEA_ABVch.webp';
 
+// Business Laptops Updated Images
+import ImgLenovoThinkPadThinkBook from '@/Components/Images/21Q0006USch.webp';
+import ImgHpProBookEliteBook from '@/Components/Images/D0MB5ET_ABVch.webp';
+import ImgDellProSeries from '@/Components/Images/8V43Mch.webp';
+import ImgAsusExpertBook from '@/Components/Images/AsusExpertBookch.png';
+
 // Category Additional Product Images
 import ImgAllinoneLatestProduct1 from '@/Components/Images/AllinoneLatestProduct1.png';
 import ImgOneinall1 from '@/Components/Images/oneinall1.png';
@@ -156,40 +162,48 @@ const ALL_PRODUCTS = [
 
   // 3. Business Laptops (Exactly 4 Products)
   {
-    brand: 'ACER',
+    brand: 'LENOVO',
     category: 'Business Laptops',
-    barcode: 'NX.BSQEM.001',
-    name: 'ACER TRAVELMATE P214-56',
-    particular: 'ACER TRAVELMATE P214-56,INTEL® CORE™ ULTRA 5 225U,8GB RAM,512GB SSD,14” WUXGA IPS, INTEL® SHARED MEMORY,DOS,ENGLISH KEYBOARD,BACKLIT,SILVER',
-    image: ImgNX_BSQEM_001,
-    imageClassName: 'scale-[1.36]'
-  },
-  {
-    brand: 'ASUS',
-    category: 'Business Laptops',
-    barcode: '90NX0801-M04XV0',
-    name: 'ASUS EXPERTBOOK B1503CV',
-    particular: 'ASUS EXPERTBOOK B1503CV, INTEL CORE I3-1315U, 8GB DDR5, 256GB SSD M.2 2280 PCIE 4.0, 15.6" FHD 60HZ, WIN 11 HOME, ENG KEYBOARD, GENTLE GREY',
-    image: Img90NX0801_M04XV0,
-    imageClassName: 'scale-[1.44]'
+    name: 'ThinkPad & ThinkBook',
+    series: 'ThinkPad & ThinkBook',
+    description: 'ThinkPad E | ThinkPad L | ThinkPad T | ThinkPad X | ThinkPad X1 | ThinkPad P Series | ThinkBook',
+    particular: 'Lenovo ThinkPad & ThinkBook Series (ThinkPad E, ThinkPad L, ThinkPad T, ThinkPad X, ThinkPad X1, ThinkPad P Series, ThinkBook) - Model: 21Q0006US',
+    barcode: '21Q0006US',
+    image: ImgLenovoThinkPadThinkBook,
+    imageClassName: 'scale-[1.05]'
   },
   {
     brand: 'HP',
     category: 'Business Laptops',
-    barcode: 'D78MQEA#BH5',
-    name: 'HP OmniBook 3 Laptop 16-bu0065nia',
-    particular: 'HP OmniBook 3 Laptop 16-bu0065nia,Intel® Core™ 5 120U,16 GB DDR5-5200,512 GB PCIe® Gen4 NVMe,16" Diagonal 2K (1920 x 1200) IPS,Integrated,Intel® Graphics,DOS 3.0,English Backlit KB,Silver',
-    image: ImgD78MQEA_BH5,
-    imageClassName: 'scale-[1.24]'
+    name: 'ProBook & EliteBook',
+    series: 'ProBook & EliteBook',
+    description: 'ProBook 4 | EliteBook 6 | EliteBook 8 | EliteBook X | ZBook',
+    particular: 'HP ProBook & EliteBook Series (ProBook 4, EliteBook 6, EliteBook 8, EliteBook X, ZBook) - Model: D0MB5ET#ABV',
+    barcode: 'D0MB5ET#ABV',
+    image: ImgHpProBookEliteBook,
+    imageClassName: 'scale-[1.05]'
   },
   {
-    brand: 'LENOVO',
+    brand: 'DELL',
     category: 'Business Laptops',
-    barcode: '83M4000YGP',
-    name: 'Lenovo V15 Gen 6',
-    particular: 'Lenovo V15 Gen 6 ,Intel® N100,8GB SODIMM DDR5-4800,256GB SSD M.2,15.6" FHD (1920x1080),Integrated Intel® UHD Graphics,Dos,Non-backlit English,Business Black',
-    image: Img83M4000YGP,
-    imageClassName: 'scale-[1.26]'
+    name: 'Dell Pro Series',
+    series: 'Dell Pro Series',
+    description: 'Pro Premium | Pro Plus | Pro | Pro Essential',
+    particular: 'Dell Pro Series (Pro Premium, Pro Plus, Pro, Pro Essential) - Model: 8V43M',
+    barcode: '8V43M',
+    image: ImgDellProSeries,
+    imageClassName: 'scale-[1.05]'
+  },
+  {
+    brand: 'ASUS',
+    category: 'Business Laptops',
+    name: 'ExpertBook Series',
+    series: 'ExpertBook Series',
+    description: 'Ultra | A7 | B Series | P Series',
+    particular: 'ASUS ExpertBook Series (Ultra, A7, B Series, P Series)',
+    barcode: 'ASUS ExpertBook',
+    image: ImgAsusExpertBook,
+    imageClassName: 'scale-[1.05]'
   },
 
   // 4. All-In-One (Exactly 4 Products)
@@ -428,7 +442,7 @@ export default function WholesaleProductsSection({
                               src={product.image}
                               alt={product.name}
                               fill
-                              priority={categoryIndex <= 2 && index < 4}
+                              priority={categoryIndex <= 3 && index < 4}
                               sizes="(max-width: 640px) 50vw, (max-width: 1024px) 50vw, 25vw"
                               className={`object-contain ${
                                 product.imageClassName ? `p-0 ${product.imageClassName}` : 'p-1 sm:p-2'
