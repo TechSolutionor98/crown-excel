@@ -25,6 +25,12 @@ import ImgAcerAspire from '@/Components/Images/NX.DGJEM.002ch.webp';
 import ImgAsusVivoBookZenbook from '@/Components/Images/90NB14Q2-M003W0ch.webp';
 import ImgHPOmniBook from '@/Components/Images/D78MQEA_BH5ch.webp';
 
+// Gaming Laptops Updated Images
+import ImgLenovoLegionLOQ from '@/Components/Images/83EY0003AXch.webp';
+import ImgAcerPredatorNitro from '@/Components/Images/NH_QVXEM_003ch.jpg';
+import ImgAsusRogTuf from '@/Components/Images/ASUS_ROG_Zephyrus_G16_GU605CXch.webp';
+import ImgHpOmenVictus from '@/Components/Images/D13PWEA_ABVch.webp';
+
 // Category Additional Product Images
 import ImgAllinoneLatestProduct1 from '@/Components/Images/AllinoneLatestProduct1.png';
 import ImgOneinall1 from '@/Components/Images/oneinall1.png';
@@ -104,38 +110,52 @@ const ALL_PRODUCTS = [
 
   // 2. Gaming Laptops (Exactly 4 Products)
   {
-    brand: 'ACER',
-    category: 'Gaming Laptops',
-    barcode: 'NH.QX5EM.003',
-    name: 'Acer Predator Helios Neo PHN16-73-94ZR',
-    particular: "Acer Predator Helios Neo PHN16-73-94ZR, Intel® Core™ Ultra 9 275HX, 16GB 6400MHZ, 1TB SSD, 16''WQXGA IPS 240Hz, NVIDIA® GeForce® RTX™ 5070 8GB, DOS, RGB 4 ZONE BACKLITE ENGLISH KB, BLACK",
-    image: ImgNH_QX5EM_003,
-    imageClassName: 'scale-[1.38]'
-  },
-  {
-    brand: 'ACER',
-    category: 'Gaming Laptops',
-    barcode: 'NH.QVUEM.002',
-    name: 'Predator Helios Neo 16 AI PHN16-73-97BP',
-    particular: "Predator Helios Neo 16 AI PHN16-73-97BP Intel® Core™ Ultra 9 275HX, 16GB 6400MHZ, 1TB SSD, 16''WQXGA IPS 180Hz, 8GB NVIDIA RTX 5060, DOS, RGB 4 ZONE BACKLITE ENGLISH KB, BLACK",
-    image: ImgNH_QVUEM_002,
-    imageClassName: 'scale-[1.38]'
-  },
-  {
     brand: 'LENOVO',
     category: 'Gaming Laptops',
-    barcode: '83F30082AX',
-    name: 'Lenovo Legion Pro 5i (16", 10)',
-    particular: 'Lenovo Legion Pro 5i (16", 10) Intel Core™ Ultra 7 255HX, 2x 16GB SODIMM DDR5-5600, 1TB SSD M.2 2280, 16" WQXGA OLED 500nits 165Hz, NVIDIA GeForce RTX™ 5070 8GB GDDR7, DOS, 24-Zone RGB Backlit Arabic Keyboard, Eclipse Black',
-    image: Img83F30082AX
+    name: 'Legion & LOQ',
+    series: 'Legion & LOQ',
+    textLine: "Explore Lenovo's gaming laptop range.",
+    seriesButtons: ['LOQ', 'Legion', 'Legion Pro', 'Legion Slim'],
+    particular: "Lenovo Legion & LOQ Series (LOQ, Legion, Legion Pro, Legion Slim) - Model: 83EY0003AX",
+    barcode: '83EY0003AX',
+    image: ImgLenovoLegionLOQ,
+    imageClassName: 'scale-[1.05]'
   },
   {
-    brand: 'LENOVO',
+    brand: 'ACER',
     category: 'Gaming Laptops',
-    barcode: '83S0007FUS',
-    name: 'Lenovo LOQ Gaming Laptop 15.6"',
-    particular: 'Lenovo LOQ Gaming Laptop, AMD Ryzen 7 170 2025, 16GB Memory, 512GB Storage, 15.6" 2K, NVIDIA GeForce RTX 4050, Luna Grey',
-    image: Img83S0007FUS
+    name: 'Predator & Nitro',
+    series: 'Predator & Nitro',
+    textLine: "Explore Acer's powerful gaming laptop range.",
+    seriesButtons: ['Nitro V', 'Nitro', 'Predator Helios Neo', 'Predator Helios'],
+    particular: "Acer Predator & Nitro Series (Nitro V, Nitro, Predator Helios Neo, Predator Helios) - Model: NH.QVXEM.003",
+    barcode: 'NH.QVXEM.003',
+    image: ImgAcerPredatorNitro,
+    imageClassName: 'scale-[1.05]'
+  },
+  {
+    brand: 'ASUS',
+    category: 'Gaming Laptops',
+    name: 'ROG & TUF Gaming',
+    series: 'ROG & TUF Gaming',
+    textLine: "Explore ASUS gaming laptops built for performance.",
+    seriesButtons: ['ROG Strix', 'ROG Zephyrus', 'ROG Flow', 'TUF Gaming'],
+    particular: "ASUS ROG & TUF Gaming Series (ROG Strix, ROG Zephyrus, ROG Flow, TUF Gaming) - Model: ASUS ROG Zephyrus G16 GU605CX",
+    barcode: 'ASUS ROG Zephyrus G16 GU605CX',
+    image: ImgAsusRogTuf,
+    imageClassName: 'scale-[1.05]'
+  },
+  {
+    brand: 'HP',
+    category: 'Gaming Laptops',
+    name: 'OMEN & Victus',
+    series: 'OMEN & Victus',
+    textLine: "Discover HP's gaming laptop lineup.",
+    seriesButtons: ['OMEN', 'OMEN MAX', 'OMEN Transcend', 'Victus'],
+    particular: "HP OMEN & Victus Series (OMEN, OMEN MAX, OMEN Transcend, Victus) - Model: D13PWEA#ABV",
+    barcode: 'D13PWEA#ABV',
+    image: ImgHpOmenVictus,
+    imageClassName: 'scale-[1.05]'
   },
 
   // 3. Business Laptops (Exactly 4 Products)
@@ -412,7 +432,7 @@ export default function WholesaleProductsSection({
                               src={product.image}
                               alt={product.name}
                               fill
-                              priority={categoryIndex === 1 && index < 4}
+                              priority={categoryIndex <= 2 && index < 4}
                               sizes="(max-width: 640px) 50vw, (max-width: 1024px) 50vw, 25vw"
                               className={`object-contain ${
                                 product.imageClassName ? `p-0 ${product.imageClassName}` : 'p-1 sm:p-2'
@@ -422,7 +442,42 @@ export default function WholesaleProductsSection({
 
                           {/* Separate container below the image for product text, description/barcode, and buttons */}
                           <div className="w-full flex flex-col flex-grow justify-between pt-2 pb-0.5 sm:pb-1 px-1 sm:px-1.5">
-                            {product.description ? (
+                            {product.seriesButtons ? (
+                              /* Gaming Laptops: Image -> Product Name -> Short Text Line -> Series Buttons */
+                              <div className="w-full text-left mb-1.5 sm:mb-2">
+                                <h4
+                                  className="w-full font-montserrat font-bold text-[13px] xs:text-[14px] sm:text-[15px] lg:text-[16px] text-[#171717] leading-snug mb-1 text-left"
+                                  title={product.particular}
+                                >
+                                  {product.name}
+                                </h4>
+                                {product.textLine && (
+                                  <p className="w-full font-jakarta text-[10px] xs:text-[10.5px] sm:text-[11.5px] text-gray-500 leading-snug text-left mb-2 sm:mb-2.5">
+                                    {product.textLine}
+                                  </p>
+                                )}
+                                {/* Series Buttons / Tags: 2x2 grid */}
+                                <div className="grid grid-cols-2 gap-1 xs:gap-1.5 sm:gap-2 w-full">
+                                  {product.seriesButtons.map((btn, bIdx) => (
+                                    <button
+                                      key={bIdx}
+                                      type="button"
+                                      onClick={() =>
+                                        openProductInquiryModal({
+                                          ...product,
+                                          name: `${product.brand} ${btn}`,
+                                          particular: `${product.brand} ${btn} - Gaming Laptop Wholesale Inquiry`,
+                                        })
+                                      }
+                                      className="w-full py-1 sm:py-1.5 px-1 xs:px-1.5 text-center text-[8.5px] xs:text-[9.5px] sm:text-[10.5px] lg:text-[11px] font-jakarta font-medium text-gray-700 bg-gray-50 hover:bg-[#147A5F]/10 hover:text-[#147A5F] hover:border-[#147A5F] border border-gray-200 rounded sm:rounded-md transition-colors duration-150 truncate cursor-pointer shadow-2xs"
+                                      title={btn}
+                                    >
+                                      {btn}
+                                    </button>
+                                  ))}
+                                </div>
+                              </div>
+                            ) : product.description ? (
                               /* Clean Left-aligned Product Name and Natural Flow Description */
                               <div className="w-full text-left mb-1.5 sm:mb-2">
                                 <h4
