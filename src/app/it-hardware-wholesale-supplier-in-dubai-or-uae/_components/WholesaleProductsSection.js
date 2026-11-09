@@ -37,6 +37,12 @@ import ImgHpProBookEliteBook from '@/Components/Images/D0MB5ET_ABVch.webp';
 import ImgDellProSeries from '@/Components/Images/8V43Mch.webp';
 import ImgAsusExpertBook from '@/Components/Images/AsusExpertBookch.png';
 
+// All-in-One PCs Updated Images
+import ImgLenovoIdeaCentreThinkCentre from '@/Components/Images/F0HM000MAXch.webp';
+import ImgHpOmniStudioEliteOne from '@/Components/Images/HPOmniStudioAIOch.png';
+import ImgDellProAIO from '@/Components/Images/DellProAIOch.webp';
+import ImgAsusExpertCenterAIO from '@/Components/Images/90PT03J5_M00NY0ch.webp';
+
 // Category Additional Product Images
 import ImgAllinoneLatestProduct1 from '@/Components/Images/AllinoneLatestProduct1.png';
 import ImgOneinall1 from '@/Components/Images/oneinall1.png';
@@ -208,36 +214,48 @@ const ALL_PRODUCTS = [
 
   // 4. All-In-One (Exactly 4 Products)
   {
-    brand: 'ACER',
+    brand: 'LENOVO',
     category: 'All-In-One',
-    barcode: 'DQ.BGYEM.001',
-    name: 'Acer Aspire C24-1700 AIO Desktop',
-    particular: 'Acer Aspire C24-1700 23.8" FHD All-in-One PC, Intel Core i5-1235U, 8GB DDR4, 512GB NVMe SSD, Wireless Keyboard & Mouse, DOS',
-    image: ImgAllinoneLatestProduct1
+    name: 'IdeaCentre & ThinkCentre',
+    series: 'IdeaCentre & ThinkCentre',
+    description: 'IdeaCentre AIO | ThinkCentre neo AIO | Yoga AIO',
+    particular: 'Lenovo IdeaCentre & ThinkCentre Series (IdeaCentre AIO, ThinkCentre neo AIO, Yoga AIO) - Model: F0HM000MAX',
+    barcode: 'F0HM000MAX',
+    image: ImgLenovoIdeaCentreThinkCentre,
+    imageClassName: 'scale-[1.05]'
   },
   {
     brand: 'HP',
     category: 'All-In-One',
-    barcode: '8H5A4EA#BH5',
-    name: 'HP All-in-One 24-cr0122nh',
-    particular: 'HP 23.8" FHD All-in-One Desktop, Intel Core i5-1335U, 16GB DDR4, 512GB PCIe SSD, Intel Iris Xe Graphics, White Keyboard & Mouse, FreeDOS',
-    image: ImgOneinall4
+    name: 'OmniStudio & EliteOne',
+    series: 'OmniStudio & EliteOne',
+    description: 'OmniStudio 24 | OmniStudio 27 | OmniStudio X | EliteOne',
+    particular: 'HP OmniStudio & EliteOne Series (OmniStudio 24, OmniStudio 27, OmniStudio X, EliteOne)',
+    barcode: 'HP OmniStudio',
+    image: ImgHpOmniStudioEliteOne,
+    imageClassName: 'scale-[1.05]'
   },
   {
-    brand: 'LENOVO',
+    brand: 'DELL',
     category: 'All-In-One',
-    barcode: 'F0GH00XPAX',
-    name: 'Lenovo IdeaCentre AIO 3 27IAP7',
-    particular: 'Lenovo IdeaCentre AIO 3 27" FHD IPS Desktop, Intel Core i7-13620H, 16GB DDR4, 512GB SSD, Intel UHD Graphics, Wireless KB & Mouse, DOS',
-    image: ImgOneinall6
+    name: 'Dell Pro AIO',
+    series: 'Dell Pro AIO',
+    description: 'Dell Pro 24 AIO | Pro 24 AIO Plus | OptiPlex AIO',
+    particular: 'Dell Pro AIO Series (Dell Pro 24 AIO, Pro 24 AIO Plus, OptiPlex AIO)',
+    barcode: 'Dell Pro AIO',
+    image: ImgDellProAIO,
+    imageClassName: 'scale-[1.05]'
   },
   {
     brand: 'ASUS',
     category: 'All-In-One',
-    barcode: 'D700SC-I512',
-    name: 'ASUS ExpertCenter D700 AIO Desktop',
-    particular: 'ASUS ExpertCenter D700 23.8" FHD All-in-One Business PC, Intel Core i5-12400, 16GB RAM, 512GB SSD, Intel UHD Graphics 730, Wireless Keyboard & Mouse, DOS',
-    image: ImgOneinall1
+    name: 'ExpertCenter & ASUS AIO',
+    series: 'ExpertCenter & ASUS AIO',
+    description: 'ExpertCenter P600 | P400 | ASUS AIO',
+    particular: 'ASUS ExpertCenter & ASUS AIO Series (ExpertCenter P600, P400, ASUS AIO) - Model: 90PT03J5-M00NY0',
+    barcode: '90PT03J5-M00NY0',
+    image: ImgAsusExpertCenterAIO,
+    imageClassName: 'scale-[1.05]'
   },
 
   // 5. Print & Scan (Exactly 4 Products)
@@ -442,7 +460,7 @@ export default function WholesaleProductsSection({
                               src={product.image}
                               alt={product.name}
                               fill
-                              priority={categoryIndex <= 3 && index < 4}
+                              priority={categoryIndex <= 4 && index < 4}
                               sizes="(max-width: 640px) 50vw, (max-width: 1024px) 50vw, 25vw"
                               className={`object-contain ${
                                 product.imageClassName ? `p-0 ${product.imageClassName}` : 'p-1 sm:p-2'
