@@ -114,8 +114,7 @@ const ALL_PRODUCTS = [
     category: 'Gaming Laptops',
     name: 'Legion & LOQ',
     series: 'Legion & LOQ',
-    textLine: "Explore Lenovo's gaming laptop range.",
-    seriesButtons: ['LOQ', 'Legion', 'Legion Pro', 'Legion Slim'],
+    description: 'LOQ | Legion | Legion Pro | Legion Slim',
     particular: "Lenovo Legion & LOQ Series (LOQ, Legion, Legion Pro, Legion Slim) - Model: 83EY0003AX",
     barcode: '83EY0003AX',
     image: ImgLenovoLegionLOQ,
@@ -126,8 +125,7 @@ const ALL_PRODUCTS = [
     category: 'Gaming Laptops',
     name: 'Predator & Nitro',
     series: 'Predator & Nitro',
-    textLine: "Explore Acer's powerful gaming laptop range.",
-    seriesButtons: ['Nitro V', 'Nitro', 'Predator Helios Neo', 'Predator Helios'],
+    description: 'Nitro V | Nitro | Predator Helios Neo | Predator Helios',
     particular: "Acer Predator & Nitro Series (Nitro V, Nitro, Predator Helios Neo, Predator Helios) - Model: NH.QVXEM.003",
     barcode: 'NH.QVXEM.003',
     image: ImgAcerPredatorNitro,
@@ -138,8 +136,7 @@ const ALL_PRODUCTS = [
     category: 'Gaming Laptops',
     name: 'ROG & TUF Gaming',
     series: 'ROG & TUF Gaming',
-    textLine: "Explore ASUS gaming laptops built for performance.",
-    seriesButtons: ['ROG Strix', 'ROG Zephyrus', 'ROG Flow', 'TUF Gaming'],
+    description: 'ROG Strix | ROG Zephyrus | ROG Flow | TUF Gaming',
     particular: "ASUS ROG & TUF Gaming Series (ROG Strix, ROG Zephyrus, ROG Flow, TUF Gaming) - Model: ASUS ROG Zephyrus G16 GU605CX",
     barcode: 'ASUS ROG Zephyrus G16 GU605CX',
     image: ImgAsusRogTuf,
@@ -150,8 +147,7 @@ const ALL_PRODUCTS = [
     category: 'Gaming Laptops',
     name: 'OMEN & Victus',
     series: 'OMEN & Victus',
-    textLine: "Discover HP's gaming laptop lineup.",
-    seriesButtons: ['OMEN', 'OMEN MAX', 'OMEN Transcend', 'Victus'],
+    description: 'OMEN | OMEN MAX | OMEN Transcend | Victus',
     particular: "HP OMEN & Victus Series (OMEN, OMEN MAX, OMEN Transcend, Victus) - Model: D13PWEA#ABV",
     barcode: 'D13PWEA#ABV',
     image: ImgHpOmenVictus,
@@ -442,42 +438,7 @@ export default function WholesaleProductsSection({
 
                           {/* Separate container below the image for product text, description/barcode, and buttons */}
                           <div className="w-full flex flex-col flex-grow justify-between pt-2 pb-0.5 sm:pb-1 px-1 sm:px-1.5">
-                            {product.seriesButtons ? (
-                              /* Gaming Laptops: Image -> Product Name -> Short Text Line -> Series Buttons */
-                              <div className="w-full text-left mb-1.5 sm:mb-2">
-                                <h4
-                                  className="w-full font-montserrat font-bold text-[13px] xs:text-[14px] sm:text-[15px] lg:text-[16px] text-[#171717] leading-snug mb-1 text-left"
-                                  title={product.particular}
-                                >
-                                  {product.name}
-                                </h4>
-                                {product.textLine && (
-                                  <p className="w-full font-jakarta text-[10px] xs:text-[10.5px] sm:text-[11.5px] text-gray-500 leading-snug text-left mb-2 sm:mb-2.5">
-                                    {product.textLine}
-                                  </p>
-                                )}
-                                {/* Series Buttons / Tags: 2x2 grid */}
-                                <div className="grid grid-cols-2 gap-1 xs:gap-1.5 sm:gap-2 w-full">
-                                  {product.seriesButtons.map((btn, bIdx) => (
-                                    <button
-                                      key={bIdx}
-                                      type="button"
-                                      onClick={() =>
-                                        openProductInquiryModal({
-                                          ...product,
-                                          name: `${product.brand} ${btn}`,
-                                          particular: `${product.brand} ${btn} - Gaming Laptop Wholesale Inquiry`,
-                                        })
-                                      }
-                                      className="w-full py-1 sm:py-1.5 px-1 xs:px-1.5 text-center text-[8.5px] xs:text-[9.5px] sm:text-[10.5px] lg:text-[11px] font-jakarta font-medium text-gray-700 bg-gray-50 hover:bg-[#147A5F]/10 hover:text-[#147A5F] hover:border-[#147A5F] border border-gray-200 rounded sm:rounded-md transition-colors duration-150 truncate cursor-pointer shadow-2xs"
-                                      title={btn}
-                                    >
-                                      {btn}
-                                    </button>
-                                  ))}
-                                </div>
-                              </div>
-                            ) : product.description ? (
+                            {product.description ? (
                               /* Clean Left-aligned Product Name and Natural Flow Description */
                               <div className="w-full text-left mb-1.5 sm:mb-2">
                                 <h4
