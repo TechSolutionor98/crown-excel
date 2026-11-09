@@ -484,19 +484,15 @@ export default function WholesaleProductsSection({
                                 </p>
                               </div>
                             ) : (
-                              /* Default Category Title & Barcode */
-                              <div className="w-full flex flex-col items-center text-center">
-                                <h3
-                                  className="w-full font-montserrat font-bold text-[11.5px] xs:text-[13px] sm:text-[15px] text-[#171717] leading-[1.3] sm:leading-[1.35] h-[32px] xs:h-[35px] sm:h-[42px] mb-1 sm:mb-1.5 text-center overflow-hidden flex flex-col justify-center"
-                                  title={product.particular}
+                              /* Clean Left-aligned Product Name (No SKU) for Print & Scan, Servers & Workstation, and Accessories */
+                              <div className="w-full text-left mb-1.5 sm:mb-2">
+                                <h4
+                                  className="w-full font-montserrat font-bold text-[12px] xs:text-[13px] sm:text-[14px] lg:text-[15px] text-[#171717] leading-[1.3] sm:leading-[1.35] text-left"
+                                  title={product.particular || product.name}
                                 >
-                                  <span className="block truncate">{line1}</span>
-                                  <span className="block truncate">{line2}</span>
-                                </h3>
-
-                                <p className="w-full font-mono text-[9.5px] xs:text-[10.5px] sm:text-[12px] text-gray-500 tracking-tight sm:tracking-wider mb-2 sm:mb-2.5 text-center truncate">
-                                  {product.barcode || '\u00A0'}
-                                </p>
+                                  <span className="block truncate text-left">{line1}</span>
+                                  <span className="block truncate text-left">{line2 && line2.trim() ? line2 : '\u00A0'}</span>
+                                </h4>
                               </div>
                             )}
 
