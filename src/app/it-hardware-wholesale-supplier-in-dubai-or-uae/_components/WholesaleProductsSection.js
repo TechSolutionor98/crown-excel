@@ -56,10 +56,11 @@ import ImgServerWorkstation1 from '@/Components/Images/servers-workstation-1.web
 import ImgServerWorkstation2 from '@/Components/Images/servers-workstation-2.webp';
 import ImgServerWorkstation3 from '@/Components/Images/servers-workstation-3.webp';
 import ImgServerWorkstation4 from '@/Components/Images/servers-workstation-4.webp';
-import ImgWorkstation4 from '@/Components/Images/workstation4.png';
-import ImgWorkstationpc3 from '@/Components/Images/workstationpc3.png';
-import ImgWorkstationpc1 from '@/Components/Images/workstationpc1.png';
-import ImgWorkstationpc from '@/Components/Images/workstationpc.jpg';
+// Accessories (Crownyx) Updated Images
+import ImgAccessoriesAdaptersCables from '@/Components/Images/CAC-200ch.webp';
+import ImgAccessoriesPowerBanks from '@/Components/Images/CPB5Kch.webp';
+import ImgAccessoriesCarAccessories from '@/Components/Images/CAC-200ch01.webp';
+import ImgAccessoriesPCAccessories from '@/Components/Images/CGM440ch.webp';
 
 // Seven Product Categories in Exact Required Sequence (1 to 7)
 const SEVEN_CATEGORIES = [
@@ -330,34 +331,50 @@ const ALL_PRODUCTS = [
   {
     brand: 'CROWNYX',
     category: 'Accessories (Crownyx)',
-    barcode: 'CMH-180',
-    name: 'CROWNYX CMH-180 8-in-1 USB-C Hub, 4K HDMI, Ethernet, 37W PD, 3× USB 3.0, SD/TF Reader, Compatible with MacBook, iPad and Laptops',
-    particular: 'CROWNYX CMH-180 8-in-1 USB-C Hub, 4K HDMI, Ethernet, 37W PD, 3× USB 3.0, SD/TF Reader, Compatible with MacBook, iPad and Laptops',
-    image: ImgWorkstation4
+    name: 'Power Adapters & Cables',
+    series: 'Power Adapters & Cables',
+    textLine: 'Explore charging solutions and connectivity accessories for your everyday devices.',
+    description: 'USB-C | USB-A | Lightning | HDMI | 35W | 65W | 100W | USB-C PD | Multi-Port Chargers',
+    particular: 'CROWNYX Power Adapters & Cables - Explore charging solutions and connectivity accessories for your everyday devices. (USB-C | USB-A | Lightning | HDMI | 35W | 65W | 100W | USB-C PD | Multi-Port Chargers) - Latest Model: CAC-200',
+    barcode: 'CAC-200',
+    image: ImgAccessoriesAdaptersCables,
+    imageClassName: 'scale-[1.05]'
   },
   {
     brand: 'CROWNYX',
     category: 'Accessories (Crownyx)',
-    barcode: 'CCC130',
-    name: 'CROWNYX CCC130 USB-A to USB-C 3.0 Cable 1M, 5Gbps, Compatible with Samsung Galaxy S25 Ultra, iPhone 17-15, Huawei P70 Pro and iPad Mini 7',
-    particular: 'CROWNYX CCC130 USB-A to USB-C 3.0 Cable 1M, 5Gbps, Compatible with Samsung Galaxy S25 Ultra, iPhone 17-15, Huawei P70 Pro and iPad Mini 7',
-    image: ImgWorkstationpc3
+    name: 'Power Banks',
+    series: 'Power Banks',
+    textLine: 'Stay powered on the go with portable, wireless, and fast-charging solutions.',
+    description: 'Magnetic | 5,000mAh | 10,000mAh | 30,000mAh | Wireless | Fast Charging',
+    particular: 'CROWNYX Power Banks - Stay powered on the go with portable, wireless, and fast-charging solutions. (Magnetic | 5,000mAh | 10,000mAh | 30,000mAh | Wireless | Fast Charging) - Latest Model: CPB5K',
+    barcode: 'CPB5K',
+    image: ImgAccessoriesPowerBanks,
+    imageClassName: 'scale-[1.05]'
   },
   {
     brand: 'CROWNYX',
     category: 'Accessories (Crownyx)',
-    barcode: 'CMC135',
-    name: 'CROWNYX CMC135 35W GaN USB-C Fast Charger, PD and PPS Wall Adapter, Compatible with MacBook Air, iPad Pro, iPhone 16/15 and Galaxy S24',
-    particular: 'CROWNYX CMC135 35W GaN USB-C Fast Charger, PD and PPS Wall Adapter, Compatible with MacBook Air, iPad Pro, iPhone 16/15 and Galaxy S24',
-    image: ImgWorkstationpc1
+    name: 'Car Accessories',
+    series: 'Car Accessories',
+    textLine: 'Discover convenient charging and hands-free solutions for your driving experience.',
+    description: 'Magnetic Phone Mounts | Wireless Charging Holders | Fast Car Chargers',
+    particular: 'CROWNYX Car Accessories - Discover convenient charging and hands-free solutions for your driving experience. (Magnetic Phone Mounts | Wireless Charging Holders | Fast Car Chargers) - Latest Model: CAC-200',
+    barcode: 'CAC-200',
+    image: ImgAccessoriesCarAccessories,
+    imageClassName: 'scale-[1.05]'
   },
   {
     brand: 'CROWNYX',
     category: 'Accessories (Crownyx)',
-    barcode: 'CMC-365',
-    name: 'CROWNYX CMC-365 65W GaN Fast Charger | Dual USB-C & USB-A Power Delivery Wall Adapter | Compact, Safe & Intelligent Charging for Laptops & Devices',
-    particular: 'CROWNYX CMC-365 65W GaN Fast Charger | Dual USB-C & USB-A Power Delivery Wall Adapter | Compact, Safe & Intelligent Charging for Laptops & Devices',
-    image: ImgWorkstationpc
+    name: 'PC Accessories',
+    series: 'PC Accessories',
+    textLine: 'Enhance your computing and gaming experience with essential PC accessories.',
+    description: 'Gaming Mice | Wireless Mice | HDMI Cables | USB Hubs',
+    particular: 'CROWNYX PC Accessories - Enhance your computing and gaming experience with essential PC accessories. (Gaming Mice | Wireless Mice | HDMI Cables | USB Hubs) - Latest Model: CGM440',
+    barcode: 'CGM440',
+    image: ImgAccessoriesPCAccessories,
+    imageClassName: 'scale-[1.05]'
   }
 ];
 
@@ -451,7 +468,7 @@ export default function WholesaleProductsSection({
                       const { line1, line2 } = getTwoLineTitle(product.name);
                       return (
                         <div
-                          key={product.barcode || product.name || index}
+                          key={`${catName}-${product.name}-${index}`}
                           className="group relative bg-white p-2.5 sm:p-3.5 rounded-xl sm:rounded-2xl border border-[#147A5F] hover:border-[#0c4e3c] shadow-md transition-colors duration-200 flex flex-col justify-between overflow-hidden min-h-[260px] sm:min-h-[325px] lg:min-h-[345px]"
                         >
                           {/* Product Image Showcase on Pure White Background */}
@@ -479,6 +496,11 @@ export default function WholesaleProductsSection({
                                 >
                                   {product.name}
                                 </h4>
+                                {product.textLine && (
+                                  <p className="w-full font-jakarta text-[10px] xs:text-[10.5px] sm:text-[11.5px] text-gray-500 leading-normal text-left mb-1">
+                                    {product.textLine}
+                                  </p>
+                                )}
                                 <p className="w-full font-jakarta text-[10px] xs:text-[10.5px] sm:text-[11.5px] text-gray-500 leading-normal text-left">
                                   {product.description}
                                 </p>
