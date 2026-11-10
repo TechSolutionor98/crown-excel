@@ -48,10 +48,11 @@ import ImgAllinoneLatestProduct1 from '@/Components/Images/AllinoneLatestProduct
 import ImgOneinall1 from '@/Components/Images/oneinall1.png';
 import ImgOneinall4 from '@/Components/Images/oneinall4.png';
 import ImgOneinall6 from '@/Components/Images/oneinall6.png';
-import ImgBestSellingPrinter2 from '@/Components/Images/bestsellingprinter2.png';
-import ImgAllinonePrinters1 from '@/Components/Images/allinoneprinters1.png';
-import ImgAllinonePrinters2 from '@/Components/Images/allinoneprinters2.png';
-import ImgScannerPopular1 from '@/Components/Images/scannerpopular1.png';
+// Print & Scan Updated Images
+import ImgPrintHp from '@/Components/Images/PR145430ch.webp';
+import ImgPrintCanon from '@/Components/Images/456793ch.webp';
+import ImgPrintEpson from '@/Components/Images/456790ch.webp';
+import ImgPrintBrother from '@/Components/Images/PR145346ch.webp';
 import ImgServerWorkstation1 from '@/Components/Images/servers-workstation-1.webp';
 import ImgServerWorkstation2 from '@/Components/Images/servers-workstation-2.webp';
 import ImgServerWorkstation3 from '@/Components/Images/servers-workstation-3.webp';
@@ -263,34 +264,50 @@ const ALL_PRODUCTS = [
   {
     brand: 'HP',
     category: 'Print & Scan',
-    barcode: 'J7Z98A',
-    name: 'HP Color LaserJet Enterprise M652n',
-    particular: 'HP Color LaserJet Enterprise M652n Laser Printer, Up to 50 ppm, 1200 x 1200 dpi, Gigabit Ethernet, 550-Sheet Input Tray',
-    image: ImgBestSellingPrinter2
-  },
-  {
-    brand: 'HP',
-    category: 'Print & Scan',
-    barcode: '7MD72A',
-    name: 'HP LaserJet MFP M141a Monochrome',
-    particular: 'HP LaserJet MFP M141a 3-in-1 Multifunction Monochrome Laser Printer, Print, Copy & Scan, 20 ppm, Compact Small Office Design',
-    image: ImgAllinonePrinters1
+    name: 'HP Printers',
+    series: 'HP Printers',
+    textLine: 'Explore HP printing solutions for home, office, and professional environments.',
+    description: 'DeskJet | Smart Tank | OfficeJet | LaserJet',
+    particular: 'HP Printers - Explore HP printing solutions for home, office, and professional environments. (DeskJet | Smart Tank | OfficeJet | LaserJet)',
+    barcode: 'HP-Printers',
+    image: ImgPrintHp,
+    imageClassName: 'scale-[1.05]'
   },
   {
     brand: 'CANON',
     category: 'Print & Scan',
-    barcode: '2315C009AA',
-    name: 'Canon PIXMA G3410 MegaTank 3-in-1',
-    particular: 'Canon PIXMA G3410 Wireless Refillable MegaTank Color All-in-One Printer, Print, Copy & Scan, High-Yield Ink Bottles, Wi-Fi',
-    image: ImgAllinonePrinters2
+    name: 'Canon Printers',
+    series: 'Canon Printers',
+    textLine: 'Discover Canon printers designed for quality printing and everyday productivity.',
+    description: 'PIXMA | MAXIFY | imageCLASS',
+    particular: 'Canon Printers - Discover Canon printers designed for quality printing and everyday productivity. (PIXMA | MAXIFY | imageCLASS)',
+    barcode: 'Canon-Printers',
+    image: ImgPrintCanon,
+    imageClassName: 'scale-[1.05]'
   },
   {
-    brand: 'CANON',
+    brand: 'EPSON',
     category: 'Print & Scan',
-    barcode: '2995C010AA',
-    name: 'Canon CanoScan LiDE 300 Flatbed',
-    particular: 'Canon CanoScan LiDE 300 Compact Flatbed Document & Photo Scanner, 2400 x 2400 dpi, 4 EZ Buttons, USB Powered, Advanced Z-lid',
-    image: ImgScannerPopular1
+    name: 'Epson Printers',
+    series: 'Epson Printers',
+    textLine: 'Explore Epson printing solutions offering reliable performance and efficient printing.',
+    description: 'EcoTank | WorkForce | Expression',
+    particular: 'Epson Printers - Explore Epson printing solutions offering reliable performance and efficient printing. (EcoTank | WorkForce | Expression)',
+    barcode: 'Epson-Printers',
+    image: ImgPrintEpson,
+    imageClassName: 'scale-[1.05]'
+  },
+  {
+    brand: 'BROTHER',
+    category: 'Print & Scan',
+    name: 'Brother Printers',
+    series: 'Brother Printers',
+    textLine: 'Discover Brother printing and scanning solutions for home and business use.',
+    description: 'DCP | MFC | HL | ADS',
+    particular: 'Brother Printers - Discover Brother printing and scanning solutions for home and business use. (DCP | MFC | HL | ADS)',
+    barcode: 'Brother-Printers',
+    image: ImgPrintBrother,
+    imageClassName: 'scale-[1.05]'
   },
 
   // 6. Servers & Workstation (Exactly 4 Products)
@@ -506,7 +523,7 @@ export default function WholesaleProductsSection({
                                 </p>
                               </div>
                             ) : (
-                              /* Clean Left-aligned Product Name (No SKU) for Print & Scan, Servers & Workstation, and Accessories */
+                              /* Clean Left-aligned Product Name (No SKU) for Servers & Workstation */
                               <div className="w-full text-left mb-1.5 sm:mb-2">
                                 <h4
                                   className="w-full font-montserrat font-bold text-[12px] xs:text-[13px] sm:text-[14px] lg:text-[15px] text-[#171717] leading-[1.3] sm:leading-[1.35] text-left"
