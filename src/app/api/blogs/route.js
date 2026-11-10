@@ -177,10 +177,59 @@ export async function POST(req) {
   }
 }
 
-// PATCH /api/blogs -> update a blog
+// PATCH /api/blogs -> update a blog (supports single blog update or bulk author update)
 export async function PATCH(req) {
   try {
     const body = await req.json();
+
+    // Bulk Author Management: update author for multiple blogs at once
+    if (Array.isArray(body.ids)) {
+      if (body.ids.length === 0) {
+        return jsonResponse({ error: 'No blog IDs provided' }, 400);
+      }
+
+      const validIds = body.ids
+        .filter((id) => id && ObjectId.isValid(id))
+        .map((id) => new ObjectId(id));
+
+      if (validIds.length === 0) {
+        return jsonResponse({ error: 'No valid blog IDs provided' }, 400);
+      }
+
+      if (body.author === undefined || typeof body.author !== 'string') {
+        return jsonResponse({ error: 'Author name is required' }, 400);
+      }
+
+      const newAuthor = body.author.trim() || 'Admin';
+
+      const db = await getDb();
+      const col = db.collection('cms_blogs');
+
+      const result = await col.updateMany(
+        { _id: { $in: validIds } },
+        { $set: { author: newAuthor, updatedAt: new Date() } }
+      );
+
+      await logActivity(
+        req,
+        'bulk_update_blog_author',
+        `Bulk updated author to "${newAuthor}" for ${result.modifiedCount} blog(s)`,
+        {
+          ids: body.ids,
+          matchedCount: result.matchedCount,
+          modifiedCount: result.modifiedCount,
+          author: newAuthor,
+        }
+      );
+
+      return jsonResponse({
+        ok: true,
+        matchedCount: result.matchedCount,
+        modifiedCount: result.modifiedCount,
+        author: newAuthor,
+      });
+    }
+
     const id = body.id;
     if (!id) return jsonResponse({ error: 'id is required' }, 400);
     if (!ObjectId.isValid(id)) return jsonResponse({ error: 'Invalid ID format' }, 400);
