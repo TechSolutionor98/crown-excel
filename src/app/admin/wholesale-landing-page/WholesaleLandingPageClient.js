@@ -26,7 +26,9 @@ import { SEVEN_CATEGORIES } from '@/lib/wholesaleProductsSeed';
 export default function WholesaleLandingPageClient() {
   const [products, setProducts] = useState([]);
   const [loading, setLoading] = useState(true);
-  const [activeCategory, setActiveCategory] = useState('All');
+  const [activeCategory, setActiveCategory] = useState(
+    SEVEN_CATEGORIES[0] || 'Consumer Laptops'
+  );
   const [searchQuery, setSearchQuery] = useState('');
 
   // Modal states
@@ -74,7 +76,7 @@ export default function WholesaleLandingPageClient() {
 
   // Compute category counts and slot order
   const categoryCounts = useMemo(() => {
-    const counts = { All: products.length };
+    const counts = {};
     SEVEN_CATEGORIES.forEach((cat) => {
       counts[cat] = products.filter((p) => p.category === cat).length;
     });
@@ -102,16 +104,14 @@ export default function WholesaleLandingPageClient() {
   // Filtered products by active category & search query
   const displayedProducts = useMemo(() => {
     return enrichedProducts.filter((p) => {
-      const matchesCategory =
-        activeCategory === 'All' || p.category === activeCategory;
+      const matchesCategory = p.category === activeCategory;
       const query = searchQuery.trim().toLowerCase();
       const matchesSearch =
         !query ||
         p.name?.toLowerCase().includes(query) ||
         p.brand?.toLowerCase().includes(query) ||
         p.description?.toLowerCase().includes(query) ||
-        p.barcode?.toLowerCase().includes(query) ||
-        p.category?.toLowerCase().includes(query);
+        p.barcode?.toLowerCase().includes(query);
 
       return matchesCategory && matchesSearch;
     });
@@ -120,8 +120,7 @@ export default function WholesaleLandingPageClient() {
   // Open Add Modal
   const handleOpenAdd = () => {
     setEditingProduct(null);
-    const defaultCat =
-      activeCategory !== 'All' ? activeCategory : 'Consumer Laptops';
+    const defaultCat = activeCategory;
     const nextOrder =
       products.filter((p) => p.category === defaultCat).length + 1;
 
@@ -377,27 +376,6 @@ export default function WholesaleLandingPageClient() {
 
       {/* 3. Category Filter Tabs */}
       <div className="flex items-center gap-1.5 overflow-x-auto pb-1 scrollbar-none">
-        <button
-          type="button"
-          onClick={() => setActiveCategory('All')}
-          className={`px-3.5 py-2 rounded-lg text-xs font-semibold whitespace-nowrap transition-all cursor-pointer flex items-center gap-1.5 ${
-            activeCategory === 'All'
-              ? 'bg-[#084032] text-white shadow-xs'
-              : 'bg-white text-gray-600 hover:bg-gray-50 border border-gray-200'
-          }`}
-        >
-          <span>All Categories</span>
-          <span
-            className={`px-1.5 py-0.2 rounded-full text-[10px] ${
-              activeCategory === 'All'
-                ? 'bg-white/20 text-white'
-                : 'bg-gray-100 text-gray-600'
-            }`}
-          >
-            {categoryCounts.All || 0}
-          </span>
-        </button>
-
         {SEVEN_CATEGORIES.map((cat) => {
           const count = categoryCounts[cat] || 0;
           const isActive = activeCategory === cat;
@@ -443,7 +421,8 @@ export default function WholesaleLandingPageClient() {
 
           <div className="text-xs text-gray-500 w-full sm:w-auto text-left sm:text-right">
             Showing <strong className="text-gray-900">{displayedProducts.length}</strong> of{' '}
-            <strong className="text-gray-900">{products.length}</strong> products
+            <strong className="text-gray-900">{categoryCounts[activeCategory] || 0}</strong> products in{' '}
+            <strong className="text-[#147A5F]">{activeCategory}</strong>
           </div>
         </div>
 
