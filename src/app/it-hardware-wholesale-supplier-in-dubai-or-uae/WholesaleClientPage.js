@@ -9,7 +9,7 @@ import WholesaleProductsSection from './_components/WholesaleProductsSection';
 import WholesaleWhyCrownExcelSection from './_components/WholesaleWhyCrownExcelSection';
 import WholesaleWorldwideAreasSection from './_components/WholesaleWorldwideAreasSection';
 
-export default function WholesaleClientPage({ cmsContent }) {
+export default function WholesaleClientPage({ cmsContent, wholesaleProducts = [] }) {
   const sections = cmsContent?.sections || {};
   const heroSection = sections.wholesaleherosection || sections.hero;
 
@@ -161,6 +161,7 @@ export default function WholesaleClientPage({ cmsContent }) {
         handleWhatsAppRedirect={handleWhatsAppRedirect}
         telegramChannelUrl={telegramChannelUrl}
         defaultWhatsAppMessage={DEFAULT_WHATSAPP_MESSAGE}
+        wholesaleProducts={wholesaleProducts}
       />
 
       {/* 4. Why Crown Excel (5 Pillars) */}

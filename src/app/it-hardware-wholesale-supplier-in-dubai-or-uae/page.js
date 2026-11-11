@@ -1,5 +1,6 @@
 import React from 'react';
 import { generateCmsMetadata, getCmsData, getCmsSeo } from '@/lib/cms-fetch';
+import { getDb } from '@/lib/mongodb';
 import WholesaleClientPage from './WholesaleClientPage';
 
 export async function generateMetadata() {
@@ -75,6 +76,20 @@ export default async function ITHardwareWholesalePage() {
     } catch (e) {
       console.error('Failed to parse CMS customSchema in ITHardwareWholesalePage:', e);
     }
+  }
+
+  // Fetch dynamic products from database for Wholesale landing page
+  let wholesaleProducts = [];
+  try {
+    const db = await getDb();
+    const prods = await db
+      .collection('wholesale_products')
+      .find({ isActive: { $ne: false } })
+      .sort({ category: 1, order: 1, _id: 1 })
+      .toArray();
+    wholesaleProducts = prods.map((p) => ({ ...p, _id: p._id.toString() }));
+  } catch (err) {
+    console.error('Failed to load wholesale_products in ITHardwareWholesalePage:', err);
   }
   const jsonLdData = {
     '@context': 'https://schema.org',
@@ -230,7 +245,7 @@ export default async function ITHardwareWholesalePage() {
         type="application/ld+json"
         dangerouslySetInnerHTML={{ __html: JSON.stringify(jsonLdData) }}
       />
-      <WholesaleClientPage cmsContent={cmsContent} />
+      <WholesaleClientPage cmsContent={cmsContent} wholesaleProducts={wholesaleProducts} />
     </>
   );
 }

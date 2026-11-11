@@ -440,7 +440,15 @@ export default function WholesaleProductsSection({
   handleWhatsAppRedirect,
   telegramChannelUrl,
   defaultWhatsAppMessage,
+  wholesaleProducts = [],
 }) {
+  const productsSource = React.useMemo(() => {
+    if (Array.isArray(wholesaleProducts) && wholesaleProducts.length > 0) {
+      return wholesaleProducts;
+    }
+    return ALL_PRODUCTS;
+  }, [wholesaleProducts]);
+
   return (
     <section className="py-10 sm:py-14 bg-[#F8FAFC] border-t border-b border-gray-200" id="product-line">
       <div className="max-w-7xl mx-auto px-3 sm:px-6">
@@ -448,7 +456,14 @@ export default function WholesaleProductsSection({
         <div className="space-y-12 sm:space-y-16">
           {SEVEN_CATEGORIES.map((catName) => {
             // Strictly cap each category to exactly 4 product cards
-            const catProducts = ALL_PRODUCTS.filter((p) => p.category === catName).slice(0, 4);
+            const dbCategoryProducts = productsSource.filter(
+              (p) => p.category === catName && p.isActive !== false
+            );
+            const catProducts = (
+              dbCategoryProducts.length > 0
+                ? dbCategoryProducts
+                : ALL_PRODUCTS.filter((p) => p.category === catName)
+            ).slice(0, 4);
             const categoryIndex = SEVEN_CATEGORIES.indexOf(catName) + 1;
             const categoryAnchorId = catName.toLowerCase().replace(/[^a-z0-9]+/g, '-');
 
@@ -486,6 +501,7 @@ export default function WholesaleProductsSection({
                               src={product.image}
                               alt={product.name}
                               fill
+                              unoptimized={typeof product.image === 'string'}
                               priority={categoryIndex <= 4 && index < 4}
                               sizes="(max-width: 640px) 50vw, (max-width: 1024px) 50vw, 25vw"
                               className={`object-contain ${

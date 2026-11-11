@@ -631,6 +631,7 @@ export default function UsersClient({ initialUsers = [], websites = [], apiBase 
                   group: '🗂️ CMS',
                   rows: [
                     { label: 'Pages & Routes',         super_admin:true,  admin:true,  client:true,  seo:false, blog:false, editor:true,  viewer:true  },
+                    { label: 'Wholesale Landing Page', super_admin:true,  admin:true,  client:true,  seo:false, blog:false, editor:true,  viewer:true  },
                     { label: 'SEO Manager',            super_admin:true,  admin:true,  client:true,  seo:true,  blog:false, editor:false, viewer:true  },
                     { label: 'URL Redirects',          super_admin:true,  admin:true,  client:true,  seo:false, blog:false, editor:true,  viewer:false },
                     { label: 'Media Library',          super_admin:true,  admin:true,  client:true,  seo:false, blog:false, editor:true,  viewer:false },

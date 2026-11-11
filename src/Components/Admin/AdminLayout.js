@@ -21,6 +21,7 @@ const ROLE_ALLOWED_ROUTES = {
     "/admin/reviews",
     "/admin/settings",
     "/admin/pages",
+    "/admin/wholesale-landing-page",
     "/admin/product-catalog-cards",
     "/admin/seo",
     "/admin/redirects",
@@ -39,6 +40,7 @@ const ROLE_ALLOWED_ROUTES = {
     "/admin/reviews",
     "/admin/settings",
     "/admin/pages",
+    "/admin/wholesale-landing-page",
     "/admin/product-catalog-cards",
     "/admin/seo",
     "/admin/redirects",
@@ -63,6 +65,7 @@ const ROLE_ALLOWED_ROUTES = {
   editor: [
     "/admin",
     "/admin/pages",
+    "/admin/wholesale-landing-page",
     "/admin/product-catalog-cards",
     "/admin/redirects",
     "/admin/media",
@@ -72,6 +75,7 @@ const ROLE_ALLOWED_ROUTES = {
   viewer: [
     "/admin",
     "/admin/pages",
+    "/admin/wholesale-landing-page",
     "/admin/seo",
   ],
 };
@@ -157,6 +161,7 @@ export default function AdminLayout({ children, title = '' }) {
     { href: "/admin/reviews", label: "Reviews", group: "Management" },
     { href: "/admin/settings", label: "Business Settings", group: "Management" },
     { href: "/admin/pages", label: "Pages & Routes", group: "CMS" },
+    { href: "/admin/wholesale-landing-page", label: "Wholesale Landing Page", group: "CMS" },
     { href: "/admin/product-catalog-cards", label: "Product Catalog Cards", group: "CMS" },
     { href: "/admin/seo", label: "SEO Manager", group: "CMS" },
     { href: "/admin/redirects", label: "URL Redirects", group: "CMS" },
