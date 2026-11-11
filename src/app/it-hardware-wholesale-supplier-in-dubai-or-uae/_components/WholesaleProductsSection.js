@@ -58,7 +58,7 @@ import ImgServerWorkstation2 from '@/Components/Images/servers-workstation-2.web
 import ImgServerWorkstation3 from '@/Components/Images/servers-workstation-3.webp';
 import ImgServerWorkstation4 from '@/Components/Images/servers-workstation-4.webp';
 // Accessories (Crownyx) Updated Images
-import ImgAccessoriesAdaptersCables from '@/Components/Images/CAC-200ch.webp';
+import ImgAccessoriesAdaptersCables from '@/Components/Images/product-CCC.webp';
 import ImgAccessoriesPowerBanks from '@/Components/Images/CPB5Kch.webp';
 import ImgAccessoriesCarAccessories from '@/Components/Images/CAC-200ch01.webp';
 import ImgAccessoriesPCAccessories from '@/Components/Images/CGM440ch.webp';
@@ -504,9 +504,8 @@ export default function WholesaleProductsSection({
                               unoptimized={typeof product.image === 'string'}
                               priority={categoryIndex <= 4 && index < 4}
                               sizes="(max-width: 640px) 50vw, (max-width: 1024px) 50vw, 25vw"
-                              className={`object-contain ${
-                                product.imageClassName ? `p-0 ${product.imageClassName}` : 'p-1 sm:p-2'
-                              }`}
+                              className={`object-contain ${product.imageClassName ? `p-0 ${product.imageClassName}` : 'p-1 sm:p-2'
+                                }`}
                             />
                           </div>
 

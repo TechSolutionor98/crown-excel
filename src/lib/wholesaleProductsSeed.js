@@ -335,7 +335,7 @@ export const DEFAULT_WHOLESALE_PRODUCTS = [
     description: 'USB-C | USB-A | Lightning | HDMI | 35W | 65W | 100W | USB-C PD | Multi-Port Chargers',
     particular: 'CROWNYX Power Adapters & Cables (USB-C | USB-A | Lightning | HDMI | 35W | 65W | 100W | USB-C PD | Multi-Port Chargers) - Latest Model: CAC-200',
     barcode: 'CAC-200',
-    image: '/images/wholesale/CAC-200ch.webp',
+    image: '/images/wholesale/product-CCC.webp',
     imageClassName: 'scale-[1.05]',
     order: 1,
     isActive: true,
