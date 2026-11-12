@@ -30,6 +30,7 @@ export async function GET(request) {
       const now = new Date().toISOString();
       const seedDocs = DEFAULT_WHOLESALE_PRODUCTS.map((prod, idx) => ({
         ...prod,
+        textAlign: prod.textAlign || (prod.category === 'Servers & Workstation' ? 'center' : 'left'),
         order: prod.order || idx + 1,
         isActive: prod.isActive !== undefined ? prod.isActive : true,
         createdAt: now,
@@ -81,6 +82,7 @@ export async function POST(request) {
       imageClassName = 'scale-[1.05]',
       order = 999,
       isActive = true,
+      textAlign = 'left',
     } = body;
 
     if (!category || !name) {
@@ -100,6 +102,7 @@ export async function POST(request) {
       barcode: barcode.trim(),
       image: image.trim(),
       imageClassName: imageClassName || 'scale-[1.05]',
+      textAlign: ['left', 'center', 'right'].includes(textAlign) ? textAlign : 'left',
       order: Number(order) || 1,
       isActive: Boolean(isActive),
       createdAt: now,
@@ -149,6 +152,11 @@ export async function PUT(request) {
     if (updateFields.imageClassName !== undefined) allowed.imageClassName = updateFields.imageClassName;
     if (updateFields.order !== undefined) allowed.order = Number(updateFields.order);
     if (updateFields.isActive !== undefined) allowed.isActive = Boolean(updateFields.isActive);
+    if (updateFields.textAlign !== undefined) {
+      allowed.textAlign = ['left', 'center', 'right'].includes(updateFields.textAlign)
+        ? updateFields.textAlign
+        : 'left';
+    }
     allowed.updatedAt = now;
 
     let filter;

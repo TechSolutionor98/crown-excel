@@ -19,6 +19,9 @@ import {
   FiLayers,
   FiX,
   FiImage,
+  FiAlignLeft,
+  FiAlignCenter,
+  FiAlignRight,
 } from 'react-icons/fi';
 import toast from 'react-hot-toast';
 import { SEVEN_CATEGORIES } from '@/lib/wholesaleProductsSeed';
@@ -127,6 +130,7 @@ export default function WholesaleLandingPageClient() {
     imageClassName: 'scale-[1.05]',
     order: 1,
     isActive: true,
+    textAlign: 'left',
   };
   const [formData, setFormData] = useState(initialFormState);
   const [specRows, setSpecRows] = useState([{ key: '', value: '' }]);
@@ -237,6 +241,7 @@ export default function WholesaleLandingPageClient() {
       ...initialFormState,
       category: defaultCat,
       order: nextOrder,
+      textAlign: defaultCat === 'Servers & Workstation' ? 'center' : 'left',
     });
     setSpecRows([{ key: '', value: '' }]);
     setSpecInputMode('builder');
@@ -260,6 +265,7 @@ export default function WholesaleLandingPageClient() {
       imageClassName: product.imageClassName || 'scale-[1.05]',
       order: product.order || 1,
       isActive: product.isActive !== undefined ? product.isActive : true,
+      textAlign: product.textAlign || (product.category === 'Servers & Workstation' ? 'center' : 'left'),
     });
     setIsModalOpen(true);
   };
@@ -635,9 +641,20 @@ export default function WholesaleLandingPageClient() {
 
                       {/* Category */}
                       <td className="py-3 px-3.5">
-                        <span className="px-2.5 py-1 rounded-md text-[11px] font-semibold bg-gray-100 text-gray-700 whitespace-nowrap">
-                          {product.category}
-                        </span>
+                        <div className="flex flex-col gap-1 items-start">
+                          <span className="px-2.5 py-1 rounded-md text-[11px] font-semibold bg-gray-100 text-gray-700 whitespace-nowrap">
+                            {product.category}
+                          </span>
+                          <span className="inline-flex items-center gap-1 text-[10px] text-gray-500 font-medium capitalize">
+                            {(product.textAlign || (product.category === 'Servers & Workstation' ? 'center' : 'left')) === 'center' ? (
+                              <><FiAlignCenter className="w-3 h-3 text-[#147A5F]" /> Center align</>
+                            ) : (product.textAlign || (product.category === 'Servers & Workstation' ? 'center' : 'left')) === 'right' ? (
+                              <><FiAlignRight className="w-3 h-3 text-[#147A5F]" /> Right align</>
+                            ) : (
+                              <><FiAlignLeft className="w-3 h-3 text-gray-400" /> Left align</>
+                            )}
+                          </span>
+                        </div>
                       </td>
 
                       {/* Specifications / Key Points */}
@@ -760,326 +777,342 @@ export default function WholesaleLandingPageClient() {
 
       {/* 6. Add / Edit Modal Dialog */}
       {isModalOpen && (
-        <div className="fixed inset-0 z-50 bg-black/50 backdrop-blur-xs flex items-center justify-center p-4 overflow-y-auto">
-          <div className="bg-white rounded-2xl border border-gray-200 shadow-xl max-w-xl w-full p-6 my-8 animate-in fade-in duration-150">
-            <div className="flex items-center justify-between pb-3 border-b border-gray-200">
-              <h2 className="text-lg font-bold text-gray-900 font-montserrat">
+        <div className="fixed inset-0 z-50 bg-black/60 backdrop-blur-xs flex items-center justify-center p-3 sm:p-4 overflow-y-auto">
+          <div className="bg-white rounded-2xl border border-gray-200 shadow-2xl max-w-lg w-full max-h-[90vh] flex flex-col overflow-hidden animate-in fade-in duration-150">
+            {/* Modal Header */}
+            <div className="px-5 py-3 border-b border-gray-200 flex items-center justify-between bg-white shrink-0">
+              <h2 className="text-base font-bold text-gray-900 font-montserrat">
                 {editingProduct ? 'Edit Product Card' : 'Add New Product Card'}
               </h2>
               <button
                 type="button"
                 onClick={() => setIsModalOpen(false)}
-                className="text-gray-400 hover:text-gray-600 p-1 rounded-md"
+                className="text-gray-400 hover:text-gray-600 p-1 rounded-md transition-colors cursor-pointer"
               >
-                <FiX className="w-5 h-5" />
+                <FiX className="w-4 h-4" />
               </button>
             </div>
 
-            <form onSubmit={handleSubmitForm} className="mt-4 space-y-4">
-              {/* Category */}
-              <div>
-                <label className="block text-xs font-bold text-gray-700 uppercase mb-1">
-                  Category *
-                </label>
-                <select
-                  value={formData.category}
-                  onChange={(e) =>
-                    setFormData({ ...formData, category: e.target.value })
-                  }
-                  required
-                  className="w-full px-3 py-2 text-xs border border-gray-200 rounded-lg bg-gray-50 focus:bg-white focus:outline-none focus:ring-1 focus:ring-[#147A5F]"
-                >
-                  {SEVEN_CATEGORIES.map((cat) => (
-                    <option key={cat} value={cat}>
-                      {cat}
-                    </option>
-                  ))}
-                </select>
-              </div>
-
-              {/* Product Name & Brand */}
-              <div className="grid grid-cols-1 sm:grid-cols-3 gap-3">
-                <div className="sm:col-span-2">
-                  <label className="block text-xs font-bold text-gray-700 uppercase mb-1">
-                    Product Title / Name *
-                  </label>
-                  <input
-                    type="text"
-                    required
-                    placeholder="e.g. HP Printers, IdeaPad & Yoga"
-                    value={formData.name}
-                    onChange={(e) =>
-                      setFormData({ ...formData, name: e.target.value })
-                    }
-                    className="w-full px-3 py-2 text-xs border border-gray-200 rounded-lg bg-gray-50 focus:bg-white focus:outline-none focus:ring-1 focus:ring-[#147A5F]"
-                  />
-                </div>
-                <div>
-                  <label className="block text-xs font-bold text-gray-700 uppercase mb-1">
-                    Brand
-                  </label>
-                  <input
-                    type="text"
-                    placeholder="HP, Lenovo, etc."
-                    value={formData.brand}
-                    onChange={(e) =>
-                      setFormData({ ...formData, brand: e.target.value })
-                    }
-                    className="w-full px-3 py-2 text-xs border border-gray-200 rounded-lg bg-gray-50 focus:bg-white focus:outline-none focus:ring-1 focus:ring-[#147A5F]"
-                  />
-                </div>
-              </div>
-
-              {/* Product Specifications / Key Points (Key :: Value Type) */}
-              <div className="bg-emerald-50/50 border border-emerald-200/80 rounded-xl p-3.5 space-y-3">
-                <div className="flex items-center justify-between">
-                  <div>
-                    <label className="block text-xs font-bold text-gray-900 uppercase tracking-wide">
-                      Product Specifications / Key Points
+            {/* Form with scrollable body and fixed footer */}
+            <form onSubmit={handleSubmitForm} className="flex flex-col flex-1 overflow-hidden">
+              <div className="px-5 py-3.5 overflow-y-auto space-y-3 flex-1">
+                {/* Category, Display Order & Text Alignment inline in 1 row */}
+                <div className="grid grid-cols-1 sm:grid-cols-12 gap-2.5">
+                  <div className="sm:col-span-5">
+                    <label className="block text-[11px] font-bold text-gray-700 uppercase mb-1">
+                      Category *
                     </label>
-                    <p className="text-[11px] text-gray-500 mt-0.5">
-                      Add key points in <span className="font-bold text-[#147A5F]">(Key :: Value)</span> format. Displayed step-by-step on product cards.
-                    </p>
+                    <select
+                      value={formData.category}
+                      onChange={(e) =>
+                        setFormData({ ...formData, category: e.target.value })
+                      }
+                      required
+                      className="w-full px-2 py-1.5 text-xs border border-gray-200 rounded-lg bg-gray-50 focus:bg-white focus:outline-none focus:ring-1 focus:ring-[#147A5F]"
+                    >
+                      {SEVEN_CATEGORIES.map((cat) => (
+                        <option key={cat} value={cat}>
+                          {cat}
+                        </option>
+                      ))}
+                    </select>
                   </div>
-
-                  {/* Mode switcher tabs */}
-                  <div className="inline-flex rounded-lg border border-gray-200 bg-white p-0.5 text-[11px] font-semibold">
-                    <button
-                      type="button"
-                      onClick={() => setSpecInputMode('builder')}
-                      className={`px-2.5 py-1 rounded-md transition-colors cursor-pointer ${
-                        specInputMode === 'builder'
-                          ? 'bg-[#084032] text-white shadow-xs'
-                          : 'text-gray-600 hover:text-gray-900'
-                      }`}
-                    >
-                      Builder
-                    </button>
-                    <button
-                      type="button"
-                      onClick={() => setSpecInputMode('raw')}
-                      className={`px-2.5 py-1 rounded-md transition-colors cursor-pointer ${
-                        specInputMode === 'raw'
-                          ? 'bg-[#084032] text-white shadow-xs'
-                          : 'text-gray-600 hover:text-gray-900'
-                      }`}
-                    >
-                      Raw Text
-                    </button>
+                  <div className="sm:col-span-3">
+                    <label className="block text-[11px] font-bold text-gray-700 uppercase mb-1">
+                      Order
+                    </label>
+                    <input
+                      type="number"
+                      min="1"
+                      value={formData.order}
+                      onChange={(e) =>
+                        setFormData({
+                          ...formData,
+                          order: parseInt(e.target.value) || 1,
+                        })
+                      }
+                      className="w-full px-2 py-1.5 text-xs border border-gray-200 rounded-lg bg-gray-50 focus:bg-white focus:outline-none focus:ring-1 focus:ring-[#147A5F]"
+                    />
+                  </div>
+                  <div className="sm:col-span-4">
+                    <label className="block text-[11px] font-bold text-gray-700 uppercase mb-1">
+                      Text Align
+                    </label>
+                    <div className="inline-flex w-full rounded-lg border border-gray-200 bg-gray-50 p-0.5 text-xs h-[30px]">
+                      <button
+                        type="button"
+                        onClick={() => setFormData({ ...formData, textAlign: 'left' })}
+                        className={`flex-1 rounded-md flex items-center justify-center gap-1 text-[11px] font-semibold transition-all cursor-pointer ${
+                          formData.textAlign === 'left'
+                            ? 'bg-white text-[#147A5F] shadow-xs font-bold border border-gray-200/80'
+                            : 'text-gray-400 hover:text-gray-700'
+                        }`}
+                        title="Left Align Card Text"
+                      >
+                        <FiAlignLeft className="w-3.5 h-3.5" />
+                        <span className="text-[10px]">Left</span>
+                      </button>
+                      <button
+                        type="button"
+                        onClick={() => setFormData({ ...formData, textAlign: 'center' })}
+                        className={`flex-1 rounded-md flex items-center justify-center gap-1 text-[11px] font-semibold transition-all cursor-pointer ${
+                          formData.textAlign === 'center'
+                            ? 'bg-white text-[#147A5F] shadow-xs font-bold border border-gray-200/80'
+                            : 'text-gray-400 hover:text-gray-700'
+                        }`}
+                        title="Center Align Card Text"
+                      >
+                        <FiAlignCenter className="w-3.5 h-3.5" />
+                        <span className="text-[10px]">Center</span>
+                      </button>
+                      <button
+                        type="button"
+                        onClick={() => setFormData({ ...formData, textAlign: 'right' })}
+                        className={`flex-1 rounded-md flex items-center justify-center gap-1 text-[11px] font-semibold transition-all cursor-pointer ${
+                          formData.textAlign === 'right'
+                            ? 'bg-white text-[#147A5F] shadow-xs font-bold border border-gray-200/80'
+                            : 'text-gray-400 hover:text-gray-700'
+                        }`}
+                        title="Right Align Card Text"
+                      >
+                        <FiAlignRight className="w-3.5 h-3.5" />
+                        <span className="text-[10px]">Right</span>
+                      </button>
+                    </div>
                   </div>
                 </div>
 
-                {specInputMode === 'builder' ? (
-                  <div className="space-y-2">
-                    <div className="space-y-2 max-h-56 overflow-y-auto pr-1">
-                      {specRows.map((row, idx) => (
-                        <div
-                          key={idx}
-                          className="flex items-center gap-1.5 sm:gap-2 bg-white p-1.5 border border-gray-200 rounded-lg shadow-2xs"
-                        >
-                          <span className="text-[10px] font-bold text-gray-400 w-4 text-center shrink-0">
-                            {idx + 1}.
-                          </span>
-
-                          {/* Key input */}
-                          <div className="w-[36%] min-w-[100px]">
-                            <input
-                              type="text"
-                              placeholder="Key (e.g. Processor, RAM)"
-                              value={row.key}
-                              onChange={(e) =>
-                                handleSpecRowChange(idx, 'key', e.target.value)
-                              }
-                              className="w-full px-2.5 py-1.5 text-xs font-medium border border-gray-200 rounded-md bg-gray-50/60 focus:bg-white focus:outline-none focus:ring-1 focus:ring-[#147A5F]"
-                            />
-                          </div>
-
-                          {/* Separator badge :: */}
-                          <span className="text-xs font-bold text-[#147A5F] font-mono px-0.5 select-none shrink-0">
-                            ::
-                          </span>
-
-                          {/* Value input */}
-                          <div className="flex-1">
-                            <input
-                              type="text"
-                              placeholder="Value (e.g. Intel Core i7, 16GB DDR5)"
-                              value={row.value}
-                              onChange={(e) =>
-                                handleSpecRowChange(idx, 'value', e.target.value)
-                              }
-                              className="w-full px-2.5 py-1.5 text-xs border border-gray-200 rounded-md bg-gray-50/60 focus:bg-white focus:outline-none focus:ring-1 focus:ring-[#147A5F]"
-                            />
-                          </div>
-
-                          {/* Delete row */}
-                          <button
-                            type="button"
-                            onClick={() => handleRemoveSpecRow(idx)}
-                            className="p-1.5 text-gray-400 hover:text-red-600 hover:bg-red-50 rounded-md transition-colors shrink-0 cursor-pointer"
-                            title="Remove this point"
-                          >
-                            <FiTrash2 className="w-3.5 h-3.5" />
-                          </button>
-                        </div>
-                      ))}
-                    </div>
-
-                    <div className="pt-1 flex items-center justify-between">
-                      <button
-                        type="button"
-                        onClick={handleAddSpecRow}
-                        className="inline-flex items-center gap-1.5 px-3 py-1.5 text-xs font-bold text-[#147A5F] bg-white hover:bg-emerald-50 border border-emerald-300 rounded-lg transition-colors cursor-pointer shadow-2xs"
-                      >
-                        <FiPlus className="w-3.5 h-3.5" />
-                        <span>+ Add Specification Point</span>
-                      </button>
-
-                      <span className="text-[10px] text-gray-400 italic">
-                        Format: ( Key :: Value )
-                      </span>
-                    </div>
-                  </div>
-                ) : (
-                  <div>
-                    <textarea
-                      rows={4}
-                      placeholder={`Processor :: Intel Core i7\nRAM :: 16GB DDR5\nStorage :: 512GB SSD`}
-                      value={formData.description}
-                      onChange={(e) => handleRawDescriptionChange(e.target.value)}
-                      className="w-full px-3 py-2 text-xs font-mono border border-gray-200 rounded-lg bg-white focus:outline-none focus:ring-1 focus:ring-[#147A5F]"
-                    />
-                    <p className="text-[10.5px] text-gray-400 mt-1">
-                      Enter each point on a new line in <code className="font-mono font-bold text-gray-700">Key :: Value</code> format.
-                    </p>
-                  </div>
-                )}
-              </div>
-
-              {/* Image Upload & URL */}
-              <div>
-                <label className="block text-xs font-bold text-gray-700 uppercase mb-1">
-                  Product Image
-                </label>
-
-                <div className="flex items-center gap-3">
-                  {/* Thumbnail Preview */}
-                  <div className="w-16 h-16 relative bg-gray-50 border border-gray-200 rounded-lg overflow-hidden shrink-0 flex items-center justify-center p-1">
-                    {formData.image ? (
-                      <img
-                        src={formData.image}
-                        alt="Preview"
-                        className="w-full h-full object-contain"
-                        onError={(e) => {
-                          e.currentTarget.style.display = 'none';
-                        }}
-                      />
-                    ) : (
-                      <FiImage className="w-6 h-6 text-gray-300" />
-                    )}
-                  </div>
-
-                  {/* Upload button & file input */}
-                  <div className="flex-1 space-y-1.5">
-                    <div className="flex items-center gap-2">
-                      <button
-                        type="button"
-                        onClick={() => fileInputRef.current?.click()}
-                        disabled={uploadingImage}
-                        className="inline-flex items-center gap-1.5 px-3 py-1.5 text-xs font-semibold text-gray-700 bg-gray-100 hover:bg-gray-200 rounded-md transition-colors cursor-pointer"
-                      >
-                        <FiUploadCloud className="w-3.5 h-3.5" />
-                        <span>
-                          {uploadingImage ? 'Uploading...' : 'Upload Image'}
-                        </span>
-                      </button>
-                      <input
-                        type="file"
-                        ref={fileInputRef}
-                        accept="image/*"
-                        onChange={handleImageFileChange}
-                        className="hidden"
-                      />
-                    </div>
-
+                {/* Product Name & Brand */}
+                <div className="grid grid-cols-1 sm:grid-cols-3 gap-2.5">
+                  <div className="sm:col-span-2">
+                    <label className="block text-[11px] font-bold text-gray-700 uppercase mb-1">
+                      Product Title / Name *
+                    </label>
                     <input
                       type="text"
-                      placeholder="Or enter image URL / static path"
-                      value={formData.image}
+                      required
+                      placeholder="e.g. HP Printers, IdeaPad & Yoga"
+                      value={formData.name}
                       onChange={(e) =>
-                        setFormData({ ...formData, image: e.target.value })
+                        setFormData({ ...formData, name: e.target.value })
                       }
-                      className="w-full px-2.5 py-1 text-xs border border-gray-200 rounded-md bg-gray-50 focus:bg-white font-mono text-[11px]"
+                      className="w-full px-2.5 py-1.5 text-xs border border-gray-200 rounded-lg bg-gray-50 focus:bg-white focus:outline-none focus:ring-1 focus:ring-[#147A5F]"
+                    />
+                  </div>
+                  <div>
+                    <label className="block text-[11px] font-bold text-gray-700 uppercase mb-1">
+                      Brand
+                    </label>
+                    <input
+                      type="text"
+                      placeholder="HP, Lenovo, etc."
+                      value={formData.brand}
+                      onChange={(e) =>
+                        setFormData({ ...formData, brand: e.target.value })
+                      }
+                      className="w-full px-2.5 py-1.5 text-xs border border-gray-200 rounded-lg bg-gray-50 focus:bg-white focus:outline-none focus:ring-1 focus:ring-[#147A5F]"
                     />
                   </div>
                 </div>
+
+                {/* Product Specifications / Key Points (Key :: Value Type) */}
+                <div className="bg-emerald-50/50 border border-emerald-200/80 rounded-xl p-2.5 sm:p-3 space-y-2">
+                  <div className="flex items-center justify-between">
+                    <div>
+                      <label className="block text-[11px] font-bold text-gray-900 uppercase tracking-wide">
+                        Product Specifications / Key Points
+                      </label>
+                      <p className="text-[10px] text-gray-500">
+                        Add key points in <span className="font-bold text-[#147A5F]">(Key :: Value)</span> format.
+                      </p>
+                    </div>
+
+                    {/* Mode switcher tabs */}
+                    <div className="inline-flex rounded-lg border border-gray-200 bg-white p-0.5 text-[10.5px] font-semibold">
+                      <button
+                        type="button"
+                        onClick={() => setSpecInputMode('builder')}
+                        className={`px-2 py-0.5 rounded-md transition-colors cursor-pointer ${
+                          specInputMode === 'builder'
+                            ? 'bg-[#084032] text-white shadow-xs'
+                            : 'text-gray-600 hover:text-gray-900'
+                        }`}
+                      >
+                        Builder
+                      </button>
+                      <button
+                        type="button"
+                        onClick={() => setSpecInputMode('raw')}
+                        className={`px-2 py-0.5 rounded-md transition-colors cursor-pointer ${
+                          specInputMode === 'raw'
+                            ? 'bg-[#084032] text-white shadow-xs'
+                            : 'text-gray-600 hover:text-gray-900'
+                        }`}
+                      >
+                        Raw Text
+                      </button>
+                    </div>
+                  </div>
+
+                  {specInputMode === 'builder' ? (
+                    <div className="space-y-1.5">
+                      <div className="space-y-1.5 max-h-36 overflow-y-auto pr-1">
+                        {specRows.map((row, idx) => (
+                          <div
+                            key={idx}
+                            className="flex items-center gap-1.5 bg-white p-1 border border-gray-200 rounded-lg shadow-2xs"
+                          >
+                            <span className="text-[10px] font-bold text-gray-400 w-3.5 text-center shrink-0">
+                              {idx + 1}.
+                            </span>
+
+                            {/* Key input */}
+                            <div className="w-[34%] min-w-[90px]">
+                              <input
+                                type="text"
+                                placeholder="Key (e.g. Series, RAM)"
+                                value={row.key}
+                                onChange={(e) =>
+                                  handleSpecRowChange(idx, 'key', e.target.value)
+                                }
+                                className="w-full px-2 py-1 text-xs font-medium border border-gray-200 rounded-md bg-gray-50/60 focus:bg-white focus:outline-none focus:ring-1 focus:ring-[#147A5F]"
+                              />
+                            </div>
+
+                            {/* Separator badge :: */}
+                            <span className="text-xs font-bold text-[#147A5F] font-mono select-none shrink-0">
+                              ::
+                            </span>
+
+                            {/* Value input */}
+                            <div className="flex-1">
+                              <input
+                                type="text"
+                                placeholder="Value (e.g. Intel Core i7)"
+                                value={row.value}
+                                onChange={(e) =>
+                                  handleSpecRowChange(idx, 'value', e.target.value)
+                                }
+                                className="w-full px-2 py-1 text-xs border border-gray-200 rounded-md bg-gray-50/60 focus:bg-white focus:outline-none focus:ring-1 focus:ring-[#147A5F]"
+                              />
+                            </div>
+
+                            {/* Delete row */}
+                            <button
+                              type="button"
+                              onClick={() => handleRemoveSpecRow(idx)}
+                              className="p-1 text-gray-400 hover:text-red-600 hover:bg-red-50 rounded-md transition-colors shrink-0 cursor-pointer"
+                              title="Remove this point"
+                            >
+                              <FiTrash2 className="w-3.5 h-3.5" />
+                            </button>
+                          </div>
+                        ))}
+                      </div>
+
+                      <div className="pt-0.5 flex items-center justify-between">
+                        <button
+                          type="button"
+                          onClick={handleAddSpecRow}
+                          className="inline-flex items-center gap-1 px-2.5 py-1 text-[11px] font-bold text-[#147A5F] bg-white hover:bg-emerald-50 border border-emerald-300 rounded-lg transition-colors cursor-pointer shadow-2xs"
+                        >
+                          <FiPlus className="w-3 h-3" />
+                          <span>+ Add Specification Point</span>
+                        </button>
+
+                        <span className="text-[10px] text-gray-400 italic">
+                          (Key :: Value)
+                        </span>
+                      </div>
+                    </div>
+                  ) : (
+                    <div>
+                      <textarea
+                        rows={3}
+                        placeholder={`Processor :: Intel Core i7\nRAM :: 16GB DDR5\nStorage :: 512GB SSD`}
+                        value={formData.description}
+                        onChange={(e) => handleRawDescriptionChange(e.target.value)}
+                        className="w-full px-2.5 py-1.5 text-xs font-mono border border-gray-200 rounded-lg bg-white focus:outline-none focus:ring-1 focus:ring-[#147A5F]"
+                      />
+                    </div>
+                  )}
               </div>
 
-              {/* Barcode / SKU & Display Order */}
-              <div className="grid grid-cols-1 sm:grid-cols-2 gap-3">
+                {/* Product Image */}
                 <div>
-                  <label className="block text-xs font-bold text-gray-700 uppercase mb-1">
-                    Barcode / Model SKU (Optional)
+                  <label className="block text-[11px] font-bold text-gray-700 uppercase mb-1">
+                    Product Image
                   </label>
-                  <input
-                    type="text"
-                    placeholder="e.g. CAC-200, 83KR0047US"
-                    value={formData.barcode}
-                    onChange={(e) =>
-                      setFormData({ ...formData, barcode: e.target.value })
-                    }
-                    className="w-full px-3 py-2 text-xs border border-gray-200 rounded-lg bg-gray-50 focus:bg-white focus:outline-none focus:ring-1 focus:ring-[#147A5F]"
-                  />
+
+                  <div className="flex items-center gap-2.5">
+                    {/* Thumbnail Preview */}
+                    <div className="w-12 h-12 relative bg-gray-50 border border-gray-200 rounded-lg overflow-hidden shrink-0 flex items-center justify-center p-0.5">
+                      {formData.image ? (
+                        <img
+                          src={formData.image}
+                          alt="Preview"
+                          className="w-full h-full object-contain"
+                          onError={(e) => {
+                            e.currentTarget.style.display = 'none';
+                          }}
+                        />
+                      ) : (
+                        <FiImage className="w-5 h-5 text-gray-300" />
+                      )}
+                    </div>
+
+                    {/* Upload button & file input */}
+                    <div className="flex-1 space-y-1">
+                      <div className="flex items-center gap-2">
+                        <button
+                          type="button"
+                          onClick={() => fileInputRef.current?.click()}
+                          disabled={uploadingImage}
+                          className="inline-flex items-center gap-1 px-2.5 py-1 text-xs font-semibold text-gray-700 bg-gray-100 hover:bg-gray-200 rounded-md transition-colors cursor-pointer"
+                        >
+                          <FiUploadCloud className="w-3.5 h-3.5" />
+                          <span>
+                            {uploadingImage ? 'Uploading...' : 'Upload Image'}
+                          </span>
+                        </button>
+                        <input
+                          type="file"
+                          ref={fileInputRef}
+                          accept="image/*"
+                          onChange={handleImageFileChange}
+                          className="hidden"
+                        />
+                      </div>
+
+                      <input
+                        type="text"
+                        placeholder="Or enter image URL / static path"
+                        value={formData.image}
+                        onChange={(e) =>
+                          setFormData({ ...formData, image: e.target.value })
+                        }
+                        className="w-full px-2.5 py-1 text-xs border border-gray-200 rounded-md bg-gray-50 focus:bg-white font-mono text-[10.5px]"
+                      />
+                    </div>
+                  </div>
                 </div>
-                <div>
-                  <label className="block text-xs font-bold text-gray-700 uppercase mb-1">
-                    Display Order
-                  </label>
-                  <input
-                    type="number"
-                    min="1"
-                    value={formData.order}
-                    onChange={(e) =>
-                      setFormData({
-                        ...formData,
-                        order: parseInt(e.target.value) || 1,
-                      })
-                    }
-                    className="w-full px-3 py-2 text-xs border border-gray-200 rounded-lg bg-gray-50 focus:bg-white focus:outline-none focus:ring-1 focus:ring-[#147A5F]"
-                  />
-                </div>
+
               </div>
 
-              {/* Inquiry Particular (Modal Text) */}
-              <div>
-                <label className="block text-xs font-bold text-gray-700 uppercase mb-1">
-                  Inquiry Modal Text (Optional)
-                </label>
-                <textarea
-                  rows={2}
-                  placeholder="Auto-generated if left blank"
-                  value={formData.particular}
-                  onChange={(e) =>
-                    setFormData({ ...formData, particular: e.target.value })
-                  }
-                  className="w-full px-3 py-2 text-xs border border-gray-200 rounded-lg bg-gray-50 focus:bg-white focus:outline-none focus:ring-1 focus:ring-[#147A5F]"
-                />
-              </div>
-
-              {/* Action Buttons */}
-              <div className="pt-3 border-t border-gray-200 flex items-center justify-end gap-2.5">
+              {/* Fixed Sticky Modal Footer with Action Buttons */}
+              <div className="px-5 py-3 border-t border-gray-200 flex items-center justify-end gap-2.5 bg-gray-50/80 shrink-0">
                 <button
                   type="button"
                   onClick={() => setIsModalOpen(false)}
                   disabled={saving}
-                  className="px-4 py-2 text-xs font-semibold text-gray-600 hover:bg-gray-100 rounded-lg transition-colors cursor-pointer"
+                  className="px-3.5 py-1.5 text-xs font-semibold text-gray-600 hover:bg-gray-200 rounded-lg transition-colors cursor-pointer"
                 >
                   Cancel
                 </button>
                 <button
                   type="submit"
                   disabled={saving || uploadingImage}
-                  className="px-5 py-2 text-xs font-bold text-white bg-[#084032] hover:bg-[#0c5946] rounded-lg transition-all shadow-xs cursor-pointer disabled:opacity-50"
+                  className="px-4 py-1.5 text-xs font-bold text-white bg-[#084032] hover:bg-[#0c5946] rounded-lg transition-all shadow-xs cursor-pointer disabled:opacity-50"
                 >
                   {saving
                     ? 'Saving...'

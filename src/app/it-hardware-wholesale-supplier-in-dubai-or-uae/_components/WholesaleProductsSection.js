@@ -560,6 +560,8 @@ export default function WholesaleProductsSection({
                     {catProducts.map((product, index) => {
                       const { line1, line2 } = getTwoLineTitle(product.name);
                       const specs = parseSpecifications(product.description);
+                      const effectiveAlign = product.textAlign || (catName === 'Servers & Workstation' || product.category === 'Servers & Workstation' ? 'center' : 'left');
+                      const alignClass = effectiveAlign === 'center' ? 'text-center' : effectiveAlign === 'right' ? 'text-right' : 'text-left';
                       return (
                         <div
                           key={`${catName}-${product.name}-${index}`}
@@ -582,28 +584,28 @@ export default function WholesaleProductsSection({
                           {/* Separate container below the image for product text, description/barcode, and buttons */}
                           <div className="w-full flex flex-col flex-grow justify-between pt-2 pb-0.5 sm:pb-1 px-1 sm:px-1.5">
                             {product.description ? (
-                              /* Clean Left-aligned Product Name and Natural Flow Description / Step-by-Step Specifications */
-                              <div className="w-full text-left mb-1.5 sm:mb-2">
+                              /* Clean Product Name and Natural Flow Description / Step-by-Step Specifications */
+                              <div className={`w-full ${alignClass} mb-1.5 sm:mb-2`}>
                                 <h4
-                                  className="w-full font-montserrat font-bold text-[13px] xs:text-[14px] sm:text-[15px] lg:text-[16px] text-[#171717] leading-snug mb-1 text-left"
+                                  className={`w-full font-montserrat font-bold text-[13px] xs:text-[14px] sm:text-[15px] lg:text-[16px] text-[#171717] leading-snug mb-1 ${alignClass}`}
                                   title={product.particular}
                                 >
                                   {product.name}
                                 </h4>
                                 {product.textLine && (
-                                  <p className="w-full font-jakarta text-[10px] xs:text-[10.5px] sm:text-[11.5px] text-gray-500 leading-normal text-left mb-1">
+                                  <p className={`w-full font-jakarta text-[10px] xs:text-[10.5px] sm:text-[11.5px] text-gray-500 leading-normal mb-1 ${alignClass}`}>
                                     {product.textLine}
                                   </p>
                                 )}
                                 {specs ? (
                                   /* Step-by-Step Specification Display (Key :: Value Type) - clean standard text, no bullet dots, no key highlight, divided bars */
-                                  <div className="w-full space-y-0.5 sm:space-y-1 my-1 sm:my-1.5 text-left">
+                                  <div className={`w-full space-y-0.5 sm:space-y-1 my-1 sm:my-1.5 ${alignClass}`}>
                                     {specs.map((item, sIdx) => {
                                       const formattedValue = formatWithDividerBars(item.value);
                                       return (
                                         <p
                                           key={sIdx}
-                                          className="w-full font-jakarta text-[10px] xs:text-[10.5px] sm:text-[11.5px] text-gray-500 leading-normal text-left"
+                                          className={`w-full font-jakarta text-[10px] xs:text-[10.5px] sm:text-[11.5px] text-gray-500 leading-normal ${alignClass}`}
                                         >
                                           {item.key ? `${item.key}: ${formattedValue}` : formattedValue}
                                         </p>
@@ -612,20 +614,20 @@ export default function WholesaleProductsSection({
                                   </div>
                                 ) : (
                                   /* Classic single-line tags with divided bars */
-                                  <p className="w-full font-jakarta text-[10px] xs:text-[10.5px] sm:text-[11.5px] text-gray-500 leading-normal text-left">
+                                  <p className={`w-full font-jakarta text-[10px] xs:text-[10.5px] sm:text-[11.5px] text-gray-500 leading-normal ${alignClass}`}>
                                     {formatWithDividerBars(product.description)}
                                   </p>
                                 )}
                               </div>
                             ) : (
-                              /* Clean Left-aligned Product Name (No SKU) for Servers & Workstation */
-                              <div className="w-full text-left mb-1.5 sm:mb-2">
+                              /* Clean Product Name (No SKU) for Cards without description */
+                              <div className={`w-full ${alignClass} mb-1.5 sm:mb-2`}>
                                 <h4
-                                  className="w-full font-montserrat font-bold text-[12px] xs:text-[13px] sm:text-[14px] lg:text-[15px] text-[#171717] leading-[1.3] sm:leading-[1.35] text-left"
+                                  className={`w-full font-montserrat font-bold text-[12px] xs:text-[13px] sm:text-[14px] lg:text-[15px] text-[#171717] leading-[1.3] sm:leading-[1.35] ${alignClass}`}
                                   title={product.particular || product.name}
                                 >
-                                  <span className="block truncate text-left">{line1}</span>
-                                  <span className="block truncate text-left">{line2 && line2.trim() ? line2 : '\u00A0'}</span>
+                                  <span className={`block truncate ${alignClass}`}>{line1}</span>
+                                  <span className={`block truncate ${alignClass}`}>{line2 && line2.trim() ? line2 : '\u00A0'}</span>
                                 </h4>
                               </div>
                             )}
