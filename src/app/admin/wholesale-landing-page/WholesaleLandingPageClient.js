@@ -23,6 +23,82 @@ import {
 import toast from 'react-hot-toast';
 import { SEVEN_CATEGORIES } from '@/lib/wholesaleProductsSeed';
 
+// Helper: Parse description string into spec rows { key, value }
+function parseSpecStringToRows(str) {
+  if (!str || typeof str !== 'string' || !str.trim()) {
+    return [{ key: '', value: '' }];
+  }
+  const trimmed = str.trim();
+  const lines = trimmed.split(/\r?\n/).map((l) => l.trim()).filter(Boolean);
+
+  let rawList = [];
+  if (lines.length > 1) {
+    rawList = lines;
+  } else if (trimmed.includes('::')) {
+    rawList = trimmed.split('|').map((s) => s.trim()).filter(Boolean);
+  } else if (trimmed.includes(' & ') && trimmed.includes(':')) {
+    rawList = trimmed.split(/\s*&\s*/).map((s) => s.trim()).filter(Boolean);
+  } else if (/:\s*.+\s{2,}[A-Za-z]+:\s*/.test(trimmed)) {
+    rawList = trimmed.split(/\s{2,}/).map((s) => s.trim()).filter(Boolean);
+  } else if (trimmed.includes('|')) {
+    rawList = trimmed.split('|').map((s) => s.trim()).filter(Boolean);
+  } else {
+    rawList = [trimmed];
+  }
+
+  const rows = rawList.map((item) => {
+    if (item.includes('::')) {
+      const idx = item.indexOf('::');
+      return {
+        key: item.slice(0, idx).trim(),
+        value: item.slice(idx + 2).trim().replace(/,\s*$/, '').trim(),
+      };
+    }
+    const colonIdx = item.indexOf(':');
+    if (colonIdx > 0 && colonIdx < 30 && !item.startsWith('http')) {
+      return {
+        key: item.slice(0, colonIdx).trim(),
+        value: item.slice(colonIdx + 1).trim().replace(/,\s*$/, '').trim(),
+      };
+    }
+    return {
+      key: '',
+      value: item.trim().replace(/,\s*$/, '').trim(),
+    };
+  });
+
+  return rows.length > 0 ? rows : [{ key: '', value: '' }];
+}
+
+// Helper: Convert comma-separated list into divider bar (|) format, preserving number commas (e.g. 5,000)
+function formatWithDividerBars(val) {
+  if (!val || typeof val !== 'string') return '';
+  return val
+    .replace(/(?<=\d),(?=\d)/g, '___NUM_COMMA___')
+    .replace(/[,;]\s*/g, ' | ')
+    .replace(/___NUM_COMMA___/g, ',')
+    .split(/\s*\|\s*/)
+    .map((s) => s.trim())
+    .filter(Boolean)
+    .join(' | ');
+}
+
+// Helper: Serialize spec rows into string
+function serializeSpecRowsToString(rows) {
+  if (!Array.isArray(rows)) return '';
+  return rows
+    .map((r) => {
+      const k = (r.key || '').trim();
+      const v = (r.value || '').trim();
+      if (k && v) return `${k} :: ${v}`;
+      if (v) return v;
+      if (k) return k;
+      return '';
+    })
+    .filter(Boolean)
+    .join('\n');
+}
+
 export default function WholesaleLandingPageClient() {
   const [products, setProducts] = useState([]);
   const [loading, setLoading] = useState(true);
@@ -53,6 +129,8 @@ export default function WholesaleLandingPageClient() {
     isActive: true,
   };
   const [formData, setFormData] = useState(initialFormState);
+  const [specRows, setSpecRows] = useState([{ key: '', value: '' }]);
+  const [specInputMode, setSpecInputMode] = useState('builder'); // 'builder' or 'raw'
 
   // Fetch all wholesale products
   const fetchProducts = async () => {
@@ -117,6 +195,37 @@ export default function WholesaleLandingPageClient() {
     });
   }, [enrichedProducts, activeCategory, searchQuery]);
 
+  // Handlers for Specification Rows (Key :: Value)
+  const handleSpecRowChange = (index, field, value) => {
+    setSpecRows((prev) => {
+      const updated = [...prev];
+      updated[index] = { ...updated[index], [field]: value };
+      const serialized = serializeSpecRowsToString(updated);
+      setFormData((f) => ({ ...f, description: serialized }));
+      return updated;
+    });
+  };
+
+  const handleAddSpecRow = () => {
+    setSpecRows((prev) => [...prev, { key: '', value: '' }]);
+  };
+
+  const handleRemoveSpecRow = (index) => {
+    setSpecRows((prev) => {
+      const updated = prev.filter((_, i) => i !== index);
+      const safe = updated.length > 0 ? updated : [{ key: '', value: '' }];
+      const serialized = serializeSpecRowsToString(safe);
+      setFormData((f) => ({ ...f, description: serialized }));
+      return safe;
+    });
+  };
+
+  const handleRawDescriptionChange = (text) => {
+    setFormData((f) => ({ ...f, description: text }));
+    const parsed = parseSpecStringToRows(text);
+    setSpecRows(parsed);
+  };
+
   // Open Add Modal
   const handleOpenAdd = () => {
     setEditingProduct(null);
@@ -129,12 +238,17 @@ export default function WholesaleLandingPageClient() {
       category: defaultCat,
       order: nextOrder,
     });
+    setSpecRows([{ key: '', value: '' }]);
+    setSpecInputMode('builder');
     setIsModalOpen(true);
   };
 
   // Open Edit Modal
   const handleOpenEdit = (product) => {
     setEditingProduct(product);
+    const rows = parseSpecStringToRows(product.description || '');
+    setSpecRows(rows);
+    setSpecInputMode('builder');
     setFormData({
       category: product.category || 'Consumer Laptops',
       name: product.name || '',
@@ -196,11 +310,18 @@ export default function WholesaleLandingPageClient() {
 
     try {
       setSaving(true);
+      const finalDescription = (
+        specInputMode === 'builder'
+          ? serializeSpecRowsToString(specRows)
+          : formData.description
+      ).trim();
+
       const payload = {
         ...formData,
+        description: finalDescription,
         particular:
           formData.particular.trim() ||
-          `${formData.name.trim()} (${formData.description.trim()})`,
+          `${formData.name.trim()} (${finalDescription.replace(/\r?\n/g, ', ')})`,
       };
 
       if (editingProduct) {
@@ -435,7 +556,7 @@ export default function WholesaleLandingPageClient() {
                 <th className="py-3 px-3.5 w-16">Image</th>
                 <th className="py-3 px-3.5">Product Title & Brand</th>
                 <th className="py-3 px-3.5">Category</th>
-                <th className="py-3 px-3.5">Buttons / Tags</th>
+                <th className="py-3 px-3.5">Specifications / Key Points</th>
                 <th className="py-3 px-3.5 w-28 text-center">Website Status</th>
                 <th className="py-3 px-3.5 w-28 text-center">Order</th>
                 <th className="py-3 px-3.5 w-24 text-right">Actions</th>
@@ -519,13 +640,47 @@ export default function WholesaleLandingPageClient() {
                         </span>
                       </td>
 
-                      {/* Buttons / Tags */}
+                      {/* Specifications / Key Points */}
                       <td className="py-3 px-3.5 max-w-sm">
-                        <p className="text-[11.5px] text-gray-600 line-clamp-2 leading-relaxed">
-                          {product.description || (
-                            <span className="text-gray-300 italic">None</span>
-                          )}
-                        </p>
+                        {(() => {
+                          const rows = parseSpecStringToRows(product.description || '');
+                          const validRows = rows.filter((r) => r.key || r.value);
+                          if (validRows.length === 0) {
+                            return (
+                              <span className="text-gray-300 italic text-[11px]">None</span>
+                            );
+                          }
+                          return (
+                            <div className="space-y-0.5">
+                              {validRows.slice(0, 3).map((r, rIdx) => (
+                                <div
+                                  key={rIdx}
+                                  className="text-[11px] text-gray-700 truncate flex items-center gap-1"
+                                >
+                                  {r.key ? (
+                                    <>
+                                      <span className="font-semibold text-gray-900 shrink-0">
+                                        {r.key}:
+                                      </span>
+                                      <span className="text-gray-600 truncate">
+                                        {formatWithDividerBars(r.value)}
+                                      </span>
+                                    </>
+                                  ) : (
+                                    <span className="text-gray-600 truncate">
+                                      {formatWithDividerBars(r.value)}
+                                    </span>
+                                  )}
+                                </div>
+                              ))}
+                              {validRows.length > 3 && (
+                                <span className="text-[10px] text-[#147A5F] font-semibold">
+                                  +{validRows.length - 3} more points
+                                </span>
+                              )}
+                            </div>
+                          );
+                        })()}
                       </td>
 
                       {/* Website Status Badge */}
@@ -675,23 +830,130 @@ export default function WholesaleLandingPageClient() {
                 </div>
               </div>
 
-              {/* Buttons / Tags */}
-              <div>
-                <label className="block text-xs font-bold text-gray-700 uppercase mb-1">
-                  Buttons / Tags (Pipe-Separated)
-                </label>
-                <input
-                  type="text"
-                  placeholder="e.g. DeskJet | Smart Tank | OfficeJet | LaserJet"
-                  value={formData.description}
-                  onChange={(e) =>
-                    setFormData({ ...formData, description: e.target.value })
-                  }
-                  className="w-full px-3 py-2 text-xs border border-gray-200 rounded-lg bg-gray-50 focus:bg-white focus:outline-none focus:ring-1 focus:ring-[#147A5F]"
-                />
-                <p className="text-[10.5px] text-gray-400 mt-1">
-                  Shown directly below the product name on the card. Separate tags using the pipe character (<code className="font-mono">|</code>).
-                </p>
+              {/* Product Specifications / Key Points (Key :: Value Type) */}
+              <div className="bg-emerald-50/50 border border-emerald-200/80 rounded-xl p-3.5 space-y-3">
+                <div className="flex items-center justify-between">
+                  <div>
+                    <label className="block text-xs font-bold text-gray-900 uppercase tracking-wide">
+                      Product Specifications / Key Points
+                    </label>
+                    <p className="text-[11px] text-gray-500 mt-0.5">
+                      Add key points in <span className="font-bold text-[#147A5F]">(Key :: Value)</span> format. Displayed step-by-step on product cards.
+                    </p>
+                  </div>
+
+                  {/* Mode switcher tabs */}
+                  <div className="inline-flex rounded-lg border border-gray-200 bg-white p-0.5 text-[11px] font-semibold">
+                    <button
+                      type="button"
+                      onClick={() => setSpecInputMode('builder')}
+                      className={`px-2.5 py-1 rounded-md transition-colors cursor-pointer ${
+                        specInputMode === 'builder'
+                          ? 'bg-[#084032] text-white shadow-xs'
+                          : 'text-gray-600 hover:text-gray-900'
+                      }`}
+                    >
+                      Builder
+                    </button>
+                    <button
+                      type="button"
+                      onClick={() => setSpecInputMode('raw')}
+                      className={`px-2.5 py-1 rounded-md transition-colors cursor-pointer ${
+                        specInputMode === 'raw'
+                          ? 'bg-[#084032] text-white shadow-xs'
+                          : 'text-gray-600 hover:text-gray-900'
+                      }`}
+                    >
+                      Raw Text
+                    </button>
+                  </div>
+                </div>
+
+                {specInputMode === 'builder' ? (
+                  <div className="space-y-2">
+                    <div className="space-y-2 max-h-56 overflow-y-auto pr-1">
+                      {specRows.map((row, idx) => (
+                        <div
+                          key={idx}
+                          className="flex items-center gap-1.5 sm:gap-2 bg-white p-1.5 border border-gray-200 rounded-lg shadow-2xs"
+                        >
+                          <span className="text-[10px] font-bold text-gray-400 w-4 text-center shrink-0">
+                            {idx + 1}.
+                          </span>
+
+                          {/* Key input */}
+                          <div className="w-[36%] min-w-[100px]">
+                            <input
+                              type="text"
+                              placeholder="Key (e.g. Processor, RAM)"
+                              value={row.key}
+                              onChange={(e) =>
+                                handleSpecRowChange(idx, 'key', e.target.value)
+                              }
+                              className="w-full px-2.5 py-1.5 text-xs font-medium border border-gray-200 rounded-md bg-gray-50/60 focus:bg-white focus:outline-none focus:ring-1 focus:ring-[#147A5F]"
+                            />
+                          </div>
+
+                          {/* Separator badge :: */}
+                          <span className="text-xs font-bold text-[#147A5F] font-mono px-0.5 select-none shrink-0">
+                            ::
+                          </span>
+
+                          {/* Value input */}
+                          <div className="flex-1">
+                            <input
+                              type="text"
+                              placeholder="Value (e.g. Intel Core i7, 16GB DDR5)"
+                              value={row.value}
+                              onChange={(e) =>
+                                handleSpecRowChange(idx, 'value', e.target.value)
+                              }
+                              className="w-full px-2.5 py-1.5 text-xs border border-gray-200 rounded-md bg-gray-50/60 focus:bg-white focus:outline-none focus:ring-1 focus:ring-[#147A5F]"
+                            />
+                          </div>
+
+                          {/* Delete row */}
+                          <button
+                            type="button"
+                            onClick={() => handleRemoveSpecRow(idx)}
+                            className="p-1.5 text-gray-400 hover:text-red-600 hover:bg-red-50 rounded-md transition-colors shrink-0 cursor-pointer"
+                            title="Remove this point"
+                          >
+                            <FiTrash2 className="w-3.5 h-3.5" />
+                          </button>
+                        </div>
+                      ))}
+                    </div>
+
+                    <div className="pt-1 flex items-center justify-between">
+                      <button
+                        type="button"
+                        onClick={handleAddSpecRow}
+                        className="inline-flex items-center gap-1.5 px-3 py-1.5 text-xs font-bold text-[#147A5F] bg-white hover:bg-emerald-50 border border-emerald-300 rounded-lg transition-colors cursor-pointer shadow-2xs"
+                      >
+                        <FiPlus className="w-3.5 h-3.5" />
+                        <span>+ Add Specification Point</span>
+                      </button>
+
+                      <span className="text-[10px] text-gray-400 italic">
+                        Format: ( Key :: Value )
+                      </span>
+                    </div>
+                  </div>
+                ) : (
+                  <div>
+                    <textarea
+                      rows={4}
+                      placeholder={`Processor :: Intel Core i7\nRAM :: 16GB DDR5\nStorage :: 512GB SSD`}
+                      value={formData.description}
+                      onChange={(e) => handleRawDescriptionChange(e.target.value)}
+                      className="w-full px-3 py-2 text-xs font-mono border border-gray-200 rounded-lg bg-white focus:outline-none focus:ring-1 focus:ring-[#147A5F]"
+                    />
+                    <p className="text-[10.5px] text-gray-400 mt-1">
+                      Enter each point on a new line in <code className="font-mono font-bold text-gray-700">Key :: Value</code> format.
+                    </p>
+                  </div>
+                )}
               </div>
 
               {/* Image Upload & URL */}

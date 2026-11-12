@@ -312,6 +312,7 @@ const ALL_PRODUCTS = [
     category: 'Servers & Workstation',
     barcode: 'PER760-24NVMe',
     name: 'Dell PowerEdge R760 2U Rack Server',
+    description: 'Processor :: Dual Intel Xeon Silver 4410Y\nRAM :: 64GB DDR5 ECC\nStorage :: 2x 960GB NVMe SSD\nRAID :: PERC H755\nPower :: Dual 1100W Redundant PSU',
     particular: 'Dell PowerEdge R760 2U Rack Server, Dual Intel Xeon Silver 4410Y, 64GB DDR5 ECC, 2x 960GB NVMe SSD, PERC H755, Dual 1100W Redundant PSU',
     image: ImgServerWorkstation1
   },
@@ -320,6 +321,7 @@ const ALL_PRODUCTS = [
     category: 'Servers & Workstation',
     barcode: 'P52534-B21',
     name: 'HPE ProLiant DL380 Gen11 Server',
+    description: 'Processor :: Intel Xeon Silver 4410Y 12-Core\nRAM :: 32GB RDIMM\nStorage Controller :: MR408i-o Storage Controller\nDrive Bays :: 8 SFF Bays\nPower :: 800W PSU',
     particular: 'HPE ProLiant DL380 Gen11 2U Server, Intel Xeon Silver 4410Y 12-Core, 32GB RDIMM, MR408i-o Storage Controller, 8 SFF Bays, 800W PSU',
     image: ImgServerWorkstation2
   },
@@ -328,6 +330,7 @@ const ALL_PRODUCTS = [
     category: 'Servers & Workstation',
     barcode: '7Z73A03FEA',
     name: 'Lenovo ThinkSystem SR650 V2 Server',
+    description: 'Processor :: 3rd Gen Intel Xeon Scalable\nRAM :: 32GB TruDDR4\nRAID :: RAID 930-8i\nPower :: Dual 750W Titanium PSU',
     particular: 'Lenovo ThinkSystem SR650 V2 2U Rack Server, 3rd Gen Intel Xeon Scalable, 32GB TruDDR4, RAID 930-8i, Dual 750W Titanium PSU',
     image: ImgServerWorkstation3
   },
@@ -336,6 +339,7 @@ const ALL_PRODUCTS = [
     category: 'Servers & Workstation',
     barcode: '5G378EA#ABU',
     name: 'HP ZBook Firefly 16 G10 Workstation',
+    description: 'Processor :: Intel Core i7-1365U\nRAM :: 32GB DDR5\nStorage :: 1TB PCIe NVMe\nGraphics :: NVIDIA RTX A500 4GB\nDisplay :: 16" WUXGA IPS',
     particular: 'HP ZBook Firefly 16 G10 Mobile Workstation, Intel Core i7-1365U, 32GB DDR5, 1TB PCIe NVMe, NVIDIA RTX A500 4GB, 16" WUXGA IPS, Win 11 Pro',
     image: ImgServerWorkstation4
   },
@@ -434,6 +438,71 @@ function getTwoLineTitle(name) {
   return { line1, line2 };
 }
 
+// Helper: Parse specifications for product card step-by-step display (Key :: Value Type)
+function parseSpecifications(description) {
+  if (!description || typeof description !== 'string') return null;
+  const trimmed = description.trim();
+  if (!trimmed) return null;
+
+  // 1. Split by newlines if multiline
+  const lines = trimmed.split(/\r?\n/).map((l) => l.trim()).filter(Boolean);
+
+  let rawList = [];
+  if (lines.length > 1) {
+    rawList = lines;
+  } else if (trimmed.includes('::')) {
+    // Single line with explicit '::' (e.g. key :: value | key :: value)
+    rawList = trimmed.split('|').map((s) => s.trim()).filter(Boolean);
+  } else if (trimmed.includes(' & ') && trimmed.includes(':')) {
+    // E.g. Brand: values, & Brand: values
+    rawList = trimmed.split(/\s*&\s*/).map((s) => s.trim()).filter(Boolean);
+  } else if (/:\s*.+\s{2,}[A-Za-z]+:\s*/.test(trimmed)) {
+    // Multiple brand keys separated by multiple spaces
+    rawList = trimmed.split(/\s{2,}/).map((s) => s.trim()).filter(Boolean);
+  } else {
+    // Single line without '::' or brand colons (e.g. Consumer Laptops tags)
+    return null;
+  }
+
+  const items = rawList
+    .map((item) => {
+      if (item.includes('::')) {
+        const idx = item.indexOf('::');
+        return {
+          key: item.slice(0, idx).trim(),
+          value: item.slice(idx + 2).trim().replace(/,\s*$/, '').trim(),
+        };
+      }
+      const colonIdx = item.indexOf(':');
+      if (colonIdx > 0 && colonIdx < 30 && !item.startsWith('http')) {
+        return {
+          key: item.slice(0, colonIdx).trim(),
+          value: item.slice(colonIdx + 1).trim().replace(/,\s*$/, '').trim(),
+        };
+      }
+      return {
+        key: '',
+        value: item.trim().replace(/,\s*$/, '').trim(),
+      };
+    })
+    .filter((item) => item.key || item.value);
+
+  return items.length > 0 ? items : null;
+}
+
+// Helper: Convert comma-separated list into divider bar (|) format, preserving number commas (e.g. 5,000)
+function formatWithDividerBars(val) {
+  if (!val || typeof val !== 'string') return '';
+  return val
+    .replace(/(?<=\d),(?=\d)/g, '___NUM_COMMA___')
+    .replace(/[,;]\s*/g, ' | ')
+    .replace(/___NUM_COMMA___/g, ',')
+    .split(/\s*\|\s*/)
+    .map((s) => s.trim())
+    .filter(Boolean)
+    .join(' | ');
+}
+
 export default function WholesaleProductsSection({
   openProductInquiryModal,
   getWhatsAppUrl,
@@ -490,6 +559,7 @@ export default function WholesaleProductsSection({
                   <div className="grid grid-cols-2 lg:grid-cols-4 gap-3 sm:gap-4 lg:gap-6 items-stretch">
                     {catProducts.map((product, index) => {
                       const { line1, line2 } = getTwoLineTitle(product.name);
+                      const specs = parseSpecifications(product.description);
                       return (
                         <div
                           key={`${catName}-${product.name}-${index}`}
@@ -512,7 +582,7 @@ export default function WholesaleProductsSection({
                           {/* Separate container below the image for product text, description/barcode, and buttons */}
                           <div className="w-full flex flex-col flex-grow justify-between pt-2 pb-0.5 sm:pb-1 px-1 sm:px-1.5">
                             {product.description ? (
-                              /* Clean Left-aligned Product Name and Natural Flow Description */
+                              /* Clean Left-aligned Product Name and Natural Flow Description / Step-by-Step Specifications */
                               <div className="w-full text-left mb-1.5 sm:mb-2">
                                 <h4
                                   className="w-full font-montserrat font-bold text-[13px] xs:text-[14px] sm:text-[15px] lg:text-[16px] text-[#171717] leading-snug mb-1 text-left"
@@ -525,9 +595,27 @@ export default function WholesaleProductsSection({
                                     {product.textLine}
                                   </p>
                                 )}
-                                <p className="w-full font-jakarta text-[10px] xs:text-[10.5px] sm:text-[11.5px] text-gray-500 leading-normal text-left">
-                                  {product.description}
-                                </p>
+                                {specs ? (
+                                  /* Step-by-Step Specification Display (Key :: Value Type) - clean standard text, no bullet dots, no key highlight, divided bars */
+                                  <div className="w-full space-y-0.5 sm:space-y-1 my-1 sm:my-1.5 text-left">
+                                    {specs.map((item, sIdx) => {
+                                      const formattedValue = formatWithDividerBars(item.value);
+                                      return (
+                                        <p
+                                          key={sIdx}
+                                          className="w-full font-jakarta text-[10px] xs:text-[10.5px] sm:text-[11.5px] text-gray-500 leading-normal text-left"
+                                        >
+                                          {item.key ? `${item.key}: ${formattedValue}` : formattedValue}
+                                        </p>
+                                      );
+                                    })}
+                                  </div>
+                                ) : (
+                                  /* Classic single-line tags with divided bars */
+                                  <p className="w-full font-jakarta text-[10px] xs:text-[10.5px] sm:text-[11.5px] text-gray-500 leading-normal text-left">
+                                    {formatWithDividerBars(product.description)}
+                                  </p>
+                                )}
                               </div>
                             ) : (
                               /* Clean Left-aligned Product Name (No SKU) for Servers & Workstation */
