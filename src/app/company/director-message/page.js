@@ -5,7 +5,7 @@ import directorbg from '@/Components/Images/directorbg.png'
 import { generateCmsMetadata, getCmsData } from '@/lib/cms-fetch';
 import { safeRender, safeImage } from '@/lib/safe-html';
 
-export const revalidate = 120;
+export const revalidate = 86400;
 
 export async function generateMetadata() {
   return await generateCmsMetadata('/company/director-message', {

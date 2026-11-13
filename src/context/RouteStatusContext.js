@@ -39,18 +39,12 @@ export function RouteStatusProvider({ children, initialInactiveRoutes = [] }) {
   }, []);
 
   useEffect(() => {
-    fetchStatus();
-
     // Listen for custom event triggered when admin changes status
     const handleUpdate = () => fetchStatus();
     window.addEventListener('cms-route-status-updated', handleUpdate);
 
-    // Also refresh on window focus
-    window.addEventListener('focus', handleUpdate);
-
     return () => {
       window.removeEventListener('cms-route-status-updated', handleUpdate);
-      window.removeEventListener('focus', handleUpdate);
     };
   }, [fetchStatus]);
 

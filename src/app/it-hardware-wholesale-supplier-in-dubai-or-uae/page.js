@@ -57,7 +57,7 @@ export async function generateMetadata() {
 }
 
 // Enable Incremental Static Regeneration (ISR)
-export const revalidate = 300;
+export const revalidate = 86400;
 
 export default async function ITHardwareWholesalePage() {
   let { content: cmsContent } = await getCmsData('/it-hardware-wholesale-supplier-in-dubai-or-uae');

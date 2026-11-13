@@ -176,7 +176,7 @@ export const getCmsSeo = cache(async (path, websiteId = 'default') => {
   const cachedFn = unstable_cache(
     () => fetchCmsSeoFromDb(cleanPath, websiteId),
     [`cms-seo-${cleanPath}-${websiteId}`],
-    { revalidate: 300, tags: ['cms', 'cms-seo'] }
+    { revalidate: 86400, tags: ['cms', 'cms-seo'] }
   );
   return await cachedFn();
 });
@@ -190,7 +190,7 @@ export const getCmsContent = cache(async (path, websiteId = 'default') => {
   const cachedFn = unstable_cache(
     () => fetchCmsContentFromDb(cleanPath, websiteId),
     [`cms-content-${cleanPath}-${websiteId}`],
-    { revalidate: 300, tags: ['cms', 'cms-content'] }
+    { revalidate: 86400, tags: ['cms', 'cms-content'] }
   );
   return await cachedFn();
 });

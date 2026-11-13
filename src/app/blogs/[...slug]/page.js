@@ -5,7 +5,7 @@ import BlogCommentsSection from './BlogCommentsSection';
 import { generateCmsMetadata, getCmsSeo } from '@/lib/cms-fetch';
 import '../blog-content.css';
 
-export const revalidate = 120;
+export const revalidate = 86400;
 
 /**
  * Wraps un-wrapped HTML tables in a responsive, scrollable container

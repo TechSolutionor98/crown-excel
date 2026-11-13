@@ -52,7 +52,7 @@ export async function generateMetadata() {
   });
 }
 
-export const revalidate = 120;
+export const revalidate = 86400;
 
 export default async function LaptopsPage() {
   const { content: cmsContent, seo: cmsSeo } = await getCmsData('/products/laptops');

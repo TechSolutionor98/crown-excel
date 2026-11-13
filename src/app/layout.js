@@ -64,7 +64,7 @@ const getCachedWebsiteData = unstable_cache(
     };
   },
   ['website-settings-and-routes'],
-  { revalidate: 300, tags: ['settings', 'routes'] }
+  { revalidate: 86400, tags: ['settings', 'routes'] }
 );
 
 export default async function RootLayout({ children }) {

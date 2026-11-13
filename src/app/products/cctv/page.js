@@ -7,7 +7,7 @@ import CCTVBrand from '@/app/_components/Products/CCTV/CCTVBrand/CCTVBrand';
 import CCTVWhyFromUs from '@/app/_components/Products/CCTV/CCTVWhyFromUs/CCTVWhyFromUs';
 import { generateCmsMetadata, getCmsData } from '@/lib/cms-fetch';
 
-export const revalidate = 120;
+export const revalidate = 86400;
 
 export async function generateMetadata() {
   return await generateCmsMetadata('/products/cctv', {

@@ -2,7 +2,7 @@ import React from 'react';
 import { generateCmsMetadata, getCmsData, getCmsSeo } from '@/lib/cms-fetch';
 import ITHardwareClientPage from '@/app/_components/OurServicesPages/ITHardware/ITHardwareClientPage';
 
-export const revalidate = 120;
+export const revalidate = 86400;
 
 export async function generateMetadata() {
   return await generateCmsMetadata('/our-services/it-hardware-supplier-and-distributor', {

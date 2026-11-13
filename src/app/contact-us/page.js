@@ -14,7 +14,7 @@ export async function generateMetadata() {
 }
 
 // Enable Incremental Static Regeneration (ISR) to deliver instant HTML (0ms - 20ms TTFB)
-export const revalidate = 300;
+export const revalidate = 86400;
 
 const ContactUs = async () => {
   let appointmentLinks = [];

@@ -3,7 +3,7 @@ import SecuritySolutionsEmpowering from '@/app/_components/OurServicesPages/Hard
 import React from 'react'
 import { generateCmsMetadata, getCmsData } from '@/lib/cms-fetch';
 
-export const revalidate = 120;
+export const revalidate = 86400;
 
 export async function generateMetadata() {
   return await generateCmsMetadata('/our-services/security-solutions', {

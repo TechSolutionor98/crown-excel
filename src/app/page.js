@@ -1,7 +1,7 @@
 import Page from "./_components/page";
 import { getCmsData, generateCmsMetadata } from "@/lib/cms-fetch";
 
-export const revalidate = 120;
+export const revalidate = 86400;
 
 export async function generateMetadata() {
   return await generateCmsMetadata('/', {
