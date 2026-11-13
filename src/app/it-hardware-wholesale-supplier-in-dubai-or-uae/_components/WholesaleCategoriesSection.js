@@ -23,11 +23,11 @@ const wholesaleCategories = [
     icon: Briefcase,
   },
   {
-    name: 'All-In-One',
+    name: 'All-in-One PCs',
     icon: Monitor,
   },
   {
-    name: 'Print & Scan',
+    name: 'Printers & Scanners',
     icon: Printer,
   },
   {

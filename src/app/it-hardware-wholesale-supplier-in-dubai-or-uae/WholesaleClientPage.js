@@ -80,8 +80,8 @@ export default function WholesaleClientPage({ cmsContent, wholesaleProducts = []
     { name: 'Consumer Laptops' },
     { name: 'Gaming Laptops' },
     { name: 'Business Laptops' },
-    { name: 'All-In-One' },
-    { name: 'Print & Scan' },
+    { name: 'All-in-One PCs' },
+    { name: 'Printers & Scanners' },
     { name: 'Servers & Workstation' },
     { name: 'Accessories (Crownyx)' },
   ], []);

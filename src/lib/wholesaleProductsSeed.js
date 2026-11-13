@@ -3,8 +3,8 @@ export const SEVEN_CATEGORIES = [
   'Consumer Laptops',
   'Gaming Laptops',
   'Business Laptops',
-  'All-In-One',
-  'Print & Scan',
+  'All-in-One PCs',
+  'Printers & Scanners',
   'Servers & Workstation',
   'Accessories (Crownyx)',
 ];
@@ -172,10 +172,10 @@ export const DEFAULT_WHOLESALE_PRODUCTS = [
     isActive: true,
   },
 
-  // 4. All-In-One
+  // 4. All-in-One PCs
   {
     brand: 'LENOVO',
-    category: 'All-In-One',
+    category: 'All-in-One PCs',
     name: 'IdeaCentre & ThinkCentre',
     series: 'IdeaCentre & ThinkCentre',
     description: 'IdeaCentre AIO | ThinkCentre neo AIO | Yoga AIO',
@@ -188,7 +188,7 @@ export const DEFAULT_WHOLESALE_PRODUCTS = [
   },
   {
     brand: 'HP',
-    category: 'All-In-One',
+    category: 'All-in-One PCs',
     name: 'OmniStudio & EliteOne',
     series: 'OmniStudio & EliteOne',
     description: 'OmniStudio 24 | OmniStudio 27 | OmniStudio X | EliteOne',
@@ -201,7 +201,7 @@ export const DEFAULT_WHOLESALE_PRODUCTS = [
   },
   {
     brand: 'DELL',
-    category: 'All-In-One',
+    category: 'All-in-One PCs',
     name: 'Dell Pro AIO',
     series: 'Dell Pro AIO',
     description: 'Dell Pro 24 AIO | Pro 24 AIO Plus | OptiPlex AIO',
@@ -214,7 +214,7 @@ export const DEFAULT_WHOLESALE_PRODUCTS = [
   },
   {
     brand: 'ASUS',
-    category: 'All-In-One',
+    category: 'All-in-One PCs',
     name: 'ExpertCenter & ASUS AIO',
     series: 'ExpertCenter & ASUS AIO',
     description: 'ExpertCenter P600 | P400 | ASUS AIO',
@@ -226,10 +226,10 @@ export const DEFAULT_WHOLESALE_PRODUCTS = [
     isActive: true,
   },
 
-  // 5. Print & Scan
+  // 5. Printers & Scanners
   {
     brand: 'HP',
-    category: 'Print & Scan',
+    category: 'Printers & Scanners',
     name: 'HP Printers',
     series: 'HP Printers',
     description: 'DeskJet | Smart Tank | OfficeJet | LaserJet',
@@ -242,7 +242,7 @@ export const DEFAULT_WHOLESALE_PRODUCTS = [
   },
   {
     brand: 'CANON',
-    category: 'Print & Scan',
+    category: 'Printers & Scanners',
     name: 'Canon Printers',
     series: 'Canon Printers',
     description: 'PIXMA | MAXIFY | imageCLASS',
@@ -255,7 +255,7 @@ export const DEFAULT_WHOLESALE_PRODUCTS = [
   },
   {
     brand: 'EPSON',
-    category: 'Print & Scan',
+    category: 'Printers & Scanners',
     name: 'Epson Printers',
     series: 'Epson Printers',
     description: 'EcoTank | WorkForce | Expression',
@@ -268,7 +268,7 @@ export const DEFAULT_WHOLESALE_PRODUCTS = [
   },
   {
     brand: 'BROTHER',
-    category: 'Print & Scan',
+    category: 'Printers & Scanners',
     name: 'Brother Printers',
     series: 'Brother Printers',
     description: 'DCP | MFC | HL | ADS',

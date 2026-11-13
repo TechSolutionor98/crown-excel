@@ -143,7 +143,13 @@ export default function WholesaleLandingPageClient() {
       const res = await fetch('/api/admin/wholesale-landing-page');
       if (!res.ok) throw new Error('Failed to fetch products');
       const data = await res.json();
-      setProducts(data.products || []);
+      const normalizedProducts = (data.products || []).map((p) => {
+        let cat = p.category;
+        if (cat === 'All-In-One' || cat === 'All-in-One') cat = 'All-in-One PCs';
+        if (cat === 'Print & Scan') cat = 'Printers & Scanners';
+        return { ...p, category: cat };
+      });
+      setProducts(normalizedProducts);
     } catch (err) {
       console.error(err);
       toast.error('Failed to load products from database');

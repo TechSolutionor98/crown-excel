@@ -68,8 +68,8 @@ const SEVEN_CATEGORIES = [
   'Consumer Laptops',
   'Gaming Laptops',
   'Business Laptops',
-  'All-In-One',
-  'Print & Scan',
+  'All-in-One PCs',
+  'Printers & Scanners',
   'Servers & Workstation',
   'Accessories (Crownyx)',
 ];
@@ -214,10 +214,10 @@ const ALL_PRODUCTS = [
     imageClassName: 'scale-[1.05]'
   },
 
-  // 4. All-In-One (Exactly 4 Products)
+  // 4. All-in-One PCs (Exactly 4 Products)
   {
     brand: 'LENOVO',
-    category: 'All-In-One',
+    category: 'All-in-One PCs',
     name: 'IdeaCentre & ThinkCentre',
     series: 'IdeaCentre & ThinkCentre',
     description: 'IdeaCentre AIO | ThinkCentre neo AIO | Yoga AIO',
@@ -228,7 +228,7 @@ const ALL_PRODUCTS = [
   },
   {
     brand: 'HP',
-    category: 'All-In-One',
+    category: 'All-in-One PCs',
     name: 'OmniStudio & EliteOne',
     series: 'OmniStudio & EliteOne',
     description: 'OmniStudio 24 | OmniStudio 27 | OmniStudio X | EliteOne',
@@ -239,7 +239,7 @@ const ALL_PRODUCTS = [
   },
   {
     brand: 'DELL',
-    category: 'All-In-One',
+    category: 'All-in-One PCs',
     name: 'Dell Pro AIO',
     series: 'Dell Pro AIO',
     description: 'Dell Pro 24 AIO | Pro 24 AIO Plus | OptiPlex AIO',
@@ -250,7 +250,7 @@ const ALL_PRODUCTS = [
   },
   {
     brand: 'ASUS',
-    category: 'All-In-One',
+    category: 'All-in-One PCs',
     name: 'ExpertCenter & ASUS AIO',
     series: 'ExpertCenter & ASUS AIO',
     description: 'ExpertCenter P600 | P400 | ASUS AIO',
@@ -260,10 +260,10 @@ const ALL_PRODUCTS = [
     imageClassName: 'scale-[1.05]'
   },
 
-  // 5. Print & Scan (Exactly 4 Products)
+  // 5. Printers & Scanners (Exactly 4 Products)
   {
     brand: 'HP',
-    category: 'Print & Scan',
+    category: 'Printers & Scanners',
     name: 'HP Printers',
     series: 'HP Printers',
     description: 'DeskJet | Smart Tank | OfficeJet | LaserJet',
@@ -274,7 +274,7 @@ const ALL_PRODUCTS = [
   },
   {
     brand: 'CANON',
-    category: 'Print & Scan',
+    category: 'Printers & Scanners',
     name: 'Canon Printers',
     series: 'Canon Printers',
     description: 'PIXMA | MAXIFY | imageCLASS',
@@ -285,7 +285,7 @@ const ALL_PRODUCTS = [
   },
   {
     brand: 'EPSON',
-    category: 'Print & Scan',
+    category: 'Printers & Scanners',
     name: 'Epson Printers',
     series: 'Epson Printers',
     description: 'EcoTank | WorkForce | Expression',
@@ -296,7 +296,7 @@ const ALL_PRODUCTS = [
   },
   {
     brand: 'BROTHER',
-    category: 'Print & Scan',
+    category: 'Printers & Scanners',
     name: 'Brother Printers',
     series: 'Brother Printers',
     description: 'DCP | MFC | HL | ADS',
@@ -524,14 +524,21 @@ export default function WholesaleProductsSection({
         {/* Product Categories Rendered in Exact Sequence (1 to 7) */}
         <div className="space-y-12 sm:space-y-16">
           {SEVEN_CATEGORIES.map((catName) => {
+            const matchesCategory = (prodCat, targetCat) => {
+              if (prodCat === targetCat) return true;
+              if (targetCat === 'All-in-One PCs' && (prodCat === 'All-In-One' || prodCat === 'All-in-One' || prodCat === 'All-in-One PCs' || prodCat === 'All In One')) return true;
+              if (targetCat === 'Printers & Scanners' && (prodCat === 'Print & Scan' || prodCat === 'Printers & Scanners' || prodCat === 'Printers' || prodCat === 'Print and Scan')) return true;
+              return false;
+            };
+
             // Strictly cap each category to exactly 4 product cards
             const dbCategoryProducts = productsSource.filter(
-              (p) => p.category === catName && p.isActive !== false
+              (p) => matchesCategory(p.category, catName) && p.isActive !== false
             );
             const catProducts = (
               dbCategoryProducts.length > 0
                 ? dbCategoryProducts
-                : ALL_PRODUCTS.filter((p) => p.category === catName)
+                : ALL_PRODUCTS.filter((p) => matchesCategory(p.category, catName))
             ).slice(0, 4);
             const categoryIndex = SEVEN_CATEGORIES.indexOf(catName) + 1;
             const categoryAnchorId = catName.toLowerCase().replace(/[^a-z0-9]+/g, '-');
