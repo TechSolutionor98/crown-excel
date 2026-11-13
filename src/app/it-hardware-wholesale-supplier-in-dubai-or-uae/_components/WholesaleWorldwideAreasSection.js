@@ -2,22 +2,22 @@ import React from 'react';
 import Image from 'next/image';
 
 const worldwideServiceMarkets = [
-  { code: 'sa', name: 'Saudi Arabia', region: 'GCC Hub', hub: 'Riyadh, Jeddah, Dammam', freight: 'Active Customer Market' },
-  { code: 'ae', name: 'United Arab Emirates', region: 'Domestic Hub', hub: 'Dubai, Abu Dhabi, Sharjah', freight: 'Active Customer Market' },
-  { code: 'kw', name: 'Kuwait', region: 'GCC Hub', hub: 'Kuwait City, Hawalli', freight: 'Active Customer Market' },
-  { code: 'qa', name: 'Qatar', region: 'GCC Hub', hub: 'Doha, Al Rayyan', freight: 'Active Customer Market' },
-  { code: 'bh', name: 'Bahrain', region: 'GCC Hub', hub: 'Manama, Riffa', freight: 'Active Customer Market' },
-  { code: 'om', name: 'Oman', region: 'GCC Hub', hub: 'Muscat, Sohar, Salalah', freight: 'Active Customer Market' },
-  { code: 'iq', name: 'Iraq', region: 'Middle East', hub: 'Baghdad, Erbil, Basra', freight: 'Active Customer Market' },
-  { code: 'in', name: 'India', region: 'South Asia', hub: 'Mumbai, Delhi, Bengaluru', freight: 'Active Customer Market' },
-  { code: 'pk', name: 'Pakistan', region: 'South Asia', hub: 'Karachi, Lahore, Islamabad', freight: 'Active Customer Market' },
   { code: 'az', name: 'Azerbaijan', region: 'Central Asia', hub: 'Baku, Ganja, Sumqayit', freight: 'Active Customer Market' },
-  { code: 'uz', name: 'Uzbekistan', region: 'Central Asia', hub: 'Tashkent, Samarkand', freight: 'Active Customer Market' },
-  { code: 'kz', name: 'Kazakhstan', region: 'Central Asia', hub: 'Almaty, Astana, Shymkent', freight: 'Active Customer Market' },
   { code: 'eg', name: 'Egypt', region: 'North Africa', hub: 'Cairo, Alexandria', freight: 'Active Customer Market' },
-  { code: 'ng', name: 'Nigeria', region: 'West Africa', hub: 'Lagos, Abuja, Kano', freight: 'Active Customer Market' },
+  { code: 'gcc', name: 'GCC', region: 'GCC Hub', hub: 'Qatar, Kuwait, Oman, Bahrain', freight: 'Active Customer Market' },
+  { code: 'in', name: 'India', region: 'South Asia', hub: 'Mumbai, Delhi, Bengaluru', freight: 'Active Customer Market' },
+  { code: 'iq', name: 'Iraq', region: 'Middle East', hub: 'Baghdad, Erbil, Basra', freight: 'Active Customer Market' },
+  { code: 'kz', name: 'Kazakhstan', region: 'Central Asia', hub: 'Almaty, Astana, Shymkent', freight: 'Active Customer Market' },
   { code: 'ke', name: 'Kenya', region: 'East Africa', hub: 'Nairobi, Mombasa', freight: 'Active Customer Market' },
+  { code: 'np', name: 'Nepal', region: 'South Asia', hub: 'Kathmandu, Pokhara, Birgunj', freight: 'Active Customer Market' },
+  { code: 'ng', name: 'Nigeria', region: 'West Africa', hub: 'Lagos, Abuja, Kano', freight: 'Active Customer Market' },
+  { code: 'pk', name: 'Pakistan', region: 'South Asia', hub: 'Karachi, Lahore, Islamabad', freight: 'Active Customer Market' },
+  { code: 'sa', name: 'Saudi Arabia', region: 'GCC Hub', hub: 'Riyadh, Jeddah, Dammam', freight: 'Active Customer Market' },
+  { code: 'lk', name: 'Sri Lanka', region: 'South Asia', hub: 'Colombo, Kandy, Galle', freight: 'Active Customer Market' },
+  { code: 'sy', name: 'Syria', region: 'Middle East', hub: 'Damascus, Aleppo, Homs', freight: 'Active Customer Market' },
   { code: 'tz', name: 'Tanzania', region: 'East Africa', hub: 'Dar es Salaam, Arusha', freight: 'Active Customer Market' },
+  { code: 'ae', name: 'United Arab Emirates', region: 'Domestic Hub', hub: 'Dubai, Abu Dhabi, Sharjah', freight: 'Active Customer Market' },
+  { code: 'uz', name: 'Uzbekistan', region: 'Central Asia', hub: 'Tashkent, Samarkand', freight: 'Active Customer Market' },
 ];
 
 export default function WholesaleWorldwideAreasSection() {

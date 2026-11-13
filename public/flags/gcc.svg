@@ -1,0 +1,16 @@
+<svg xmlns="http://www.w3.org/2000/svg" width="900" height="600" viewBox="0 0 900 600">
+  <rect width="900" height="600" fill="#0D7662"/>
+  <circle cx="450" cy="300" r="180" fill="#FFFFFF" stroke="#D4AF37" stroke-width="12"/>
+  <circle cx="450" cy="300" r="150" fill="none" stroke="#D4AF37" stroke-width="4" stroke-dasharray="12 8"/>
+  <circle cx="450" cy="300" r="130" fill="#0D7662"/>
+  <text x="450" y="325" font-family="'Montserrat', 'Arial', sans-serif" font-size="76" font-weight="900" fill="#FFFFFF" text-anchor="middle" letter-spacing="4">GCC</text>
+  <g fill="#D4AF37">
+    <polygon points="450,140 454,152 466,152 456,160 460,172 450,164 440,172 444,160 434,152 446,152"/>
+    <polygon points="450,428 454,440 466,440 456,448 460,460 450,452 440,460 444,448 434,440 446,440"/>
+    <polygon points="305,225 309,237 321,237 311,245 315,257 305,249 295,257 299,245 289,237 301,237"/>
+    <polygon points="595,225 599,237 611,237 601,245 605,257 595,249 585,257 589,245 579,237 591,237"/>
+    <polygon points="305,345 309,357 321,357 311,365 315,377 305,369 295,377 299,365 289,357 301,357"/>
+    <polygon points="595,345 599,357 611,357 601,365 605,377 595,369 585,377 589,365 579,357 591,357"/>
+  </g>
+</svg>
+
