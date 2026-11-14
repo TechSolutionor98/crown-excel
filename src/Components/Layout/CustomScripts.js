@@ -49,7 +49,6 @@ export default function CustomScripts({ settings }) {
   // Combine custom scripts with third-party app scripts
   const combinedHeadScript = [
     settings.customHeadScript || '',
-    settings.googleAnalyticsHeadCode || '',
     settings.googleTagManagerHeadCode || '',
     settings.facebookPixelHeadCode || '',
     ...activeThirdPartyApps.map(app => app.headCode || '')

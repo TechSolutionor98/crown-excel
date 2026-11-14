@@ -10,10 +10,11 @@ export default function AnalyticsTracker({ settings }) {
   const prevPathRef = useRef("");
 
   const isAdminRoute = pathname?.startsWith("/admin");
+  const gaId = settings?.googleAnalyticsId || "G-VFS3Y19LDP";
 
   useEffect(() => {
-    // Only track if settings are available and we are NOT on an admin route
-    if (!settings || isAdminRoute) return;
+    // Only track if we are NOT on an admin route
+    if (isAdminRoute) return;
 
     // Build the full path
     const searchString = searchParams?.toString();
@@ -24,7 +25,7 @@ export default function AnalyticsTracker({ settings }) {
     prevPathRef.current = currentPath;
 
     // Track Facebook Pixel PageView
-    if (settings.facebookPixelId && typeof window !== "undefined" && window.fbq) {
+    if (settings?.facebookPixelId && typeof window !== "undefined" && window.fbq) {
       try {
         window.fbq("track", "PageView");
       } catch (err) {
@@ -32,10 +33,10 @@ export default function AnalyticsTracker({ settings }) {
       }
     }
 
-    // Track Google Analytics 4 PageView
-    if (settings.googleAnalyticsId && typeof window !== "undefined" && window.gtag) {
+    // Track Google Analytics 4 PageView on route navigation
+    if (gaId && typeof window !== "undefined" && window.gtag) {
       try {
-        window.gtag("config", settings.googleAnalyticsId, {
+        window.gtag("config", gaId, {
           page_path: currentPath,
         });
       } catch (err) {
@@ -44,7 +45,7 @@ export default function AnalyticsTracker({ settings }) {
     }
 
     // Track Google Tag Manager Custom Pageview Event
-    if (settings.googleTagManagerId && typeof window !== "undefined" && window.dataLayer) {
+    if (settings?.googleTagManagerId && typeof window !== "undefined" && window.dataLayer) {
       try {
         window.dataLayer.push({
           event: "pageview",
@@ -54,15 +55,15 @@ export default function AnalyticsTracker({ settings }) {
         console.error("Google Tag Manager dataLayer push error:", err);
       }
     }
-  }, [pathname, searchParams, settings, isAdminRoute]);
+  }, [pathname, searchParams, settings, isAdminRoute, gaId]);
 
-  // If on admin route or no settings, don't inject tracking scripts
-  if (isAdminRoute || !settings) return null;
+  // If on admin route, don't inject tracking scripts
+  if (isAdminRoute) return null;
 
   return (
     <>
       {/* Google Tag Manager Script */}
-      {settings.googleTagManagerId && (
+      {settings?.googleTagManagerId && (
         <Script
           id="gtm-script"
           strategy="afterInteractive"
@@ -78,32 +79,8 @@ export default function AnalyticsTracker({ settings }) {
         />
       )}
 
-      {/* Google Analytics (gtag.js) Scripts */}
-      {settings.googleAnalyticsId && (
-        <>
-          <Script
-            src={`https://www.googletagmanager.com/gtag/js?id=${settings.googleAnalyticsId}`}
-            strategy="afterInteractive"
-          />
-          <Script
-            id="google-analytics"
-            strategy="afterInteractive"
-            dangerouslySetInnerHTML={{
-              __html: `
-                window.dataLayer = window.dataLayer || [];
-                function gtag(){dataLayer.push(arguments);}
-                gtag('js', new Date());
-                gtag('config', '${settings.googleAnalyticsId}', {
-                  page_path: window.location.pathname,
-                });
-              `,
-            }}
-          />
-        </>
-      )}
-
       {/* Facebook Pixel Script */}
-      {settings.facebookPixelId && (
+      {settings?.facebookPixelId && (
         <Script
           id="fb-pixel"
           strategy="afterInteractive"

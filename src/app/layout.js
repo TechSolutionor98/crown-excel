@@ -69,10 +69,24 @@ const getCachedWebsiteData = unstable_cache(
 
 export default async function RootLayout({ children }) {
   const { settings, inactiveRoutes } = await getCachedWebsiteData();
+  const gaId = settings?.googleAnalyticsId || "G-VFS3Y19LDP";
 
   return (
     <html lang="en" suppressHydrationWarning>
-      <head />
+      <head>
+        {/* Google Tag Manager / Google Analytics */}
+        <script async src={`https://www.googletagmanager.com/gtm.js?id=${gaId}`} />
+        <script
+          dangerouslySetInnerHTML={{
+            __html: `
+              window.dataLayer = window.dataLayer || [];
+              function gtag(){dataLayer.push(arguments);}
+              gtag('js', new Date());
+              gtag('config', '${gaId}');
+            `,
+          }}
+        />
+      </head>
       <body
         suppressHydrationWarning
         style={{ backgroundColor: "white" }}
