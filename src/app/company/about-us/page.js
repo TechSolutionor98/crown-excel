@@ -1,6 +1,8 @@
 import React from 'react';
 import AboutUs from './_components/page';
-import { generateCmsMetadata } from '@/lib/cms-fetch';
+import { generateCmsMetadata, getCmsData } from '@/lib/cms-fetch';
+
+export const revalidate = 86400;
 
 export async function generateMetadata() {
   return await generateCmsMetadata('/company/about-us', {
@@ -9,10 +11,11 @@ export async function generateMetadata() {
   });
 }
 
-export default function AboutUsPage() {
+export default async function AboutUsPage() {
+  const { content: cmsContent } = await getCmsData('/company/about-us');
   return (
     <div>
-      <AboutUs />
+      <AboutUs cmsContent={cmsContent} />
     </div>
   );
 }

@@ -1,5 +1,5 @@
 import { NextResponse } from 'next/server';
-import { revalidatePath } from 'next/cache';
+import { revalidatePath, revalidateTag } from 'next/cache';
 import { getDb } from '@/lib/mongodb';
 import { ObjectId } from 'mongodb';
 import { parsePageContent, updatePageFiles, cleanText } from '@/lib/cms-parser';
@@ -1589,18 +1589,11 @@ export async function POST(request) {
 
     const isDynamicPage = 
       finalPath === '/' || path === '/' || routeId === '6a2016a8a0608271b7524e94' ||
-      finalPath === '/products/phones' || path === '/products/phones' || routeId === '6ae5c9a66688da764d5abb87' ||
-      finalPath === '/products/cctv' || path === '/products/cctv' || routeId === '6ae5c9a56688da764d5abb86' ||
-      finalPath === '/products/laptops' || path === '/products/laptops' || routeId === '6a2016aca0608271b7524ead' ||
-      finalPath === '/products/pc' || path === '/products/pc' || routeId === '6a2016aca0608271b7524eae' ||
-      finalPath === '/our-services/it-infrastructure' || path === '/our-services/it-infrastructure' || routeId === '6a2016aaa0608271b7524ea2' ||
-      finalPath === '/our-services/it-hardware-supplier-and-distributor' || path === '/our-services/it-hardware-supplier-and-distributor' || routeId === '6aead11910c353706f75a8c3' ||
-      finalPath === '/our-services/long/short-term-amc' || path === '/our-services/long/short-term-amc' || routeId === '6a2016aba0608271b7524ea3' ||
-      finalPath === '/our-services/networking' || path === '/our-services/networking' || routeId === '6a2016aba0608271b7524ea4' ||
-      finalPath === '/our-services/security-solutions' || path === '/our-services/security-solutions' || routeId === '6a2016aba0608271b7524ea5' ||
+      finalPath?.startsWith('/products') || path?.startsWith('/products') ||
+      finalPath?.startsWith('/our-services') || path?.startsWith('/our-services') ||
+      finalPath?.startsWith('/company') || path?.startsWith('/company') ||
       finalPath === '/it-hardware-wholesale-supplier-in-dubai-or-uae' || path === '/it-hardware-wholesale-supplier-in-dubai-or-uae' ||
-      finalPath === '/laptop-wholesale-supplier-in-dubai-or-uae' || path === '/laptop-wholesale-supplier-in-dubai-or-uae' || routeId === '6ad36ed7a31875b6e0e116ba' ||
-      finalPath === '/company/director-message' || path === '/company/director-message';
+      finalPath === '/laptop-wholesale-supplier-in-dubai-or-uae' || path === '/laptop-wholesale-supplier-in-dubai-or-uae' || routeId === '6ad36ed7a31875b6e0e116ba';
 
     // Update JSX files on disk with the new values (never for dynamic pages like homepage and laptops, which are rendered from DB)
     if (Array.isArray(sections) && !isDynamicPage) {
@@ -1639,6 +1632,14 @@ export async function POST(request) {
     await logActivity(request, 'update_content', finalPath || `Route ID: ${routeId}`, { status, version });
 
     // Trigger on-demand cache revalidation
+    try {
+      revalidateTag('cms');
+      revalidateTag('cms-content');
+      revalidateTag('cms-seo');
+    } catch (tagErr) {
+      console.error('revalidateTag error in POST /api/cms/content:', tagErr);
+    }
+
     if (finalPath) {
       try {
         revalidatePath(finalPath);

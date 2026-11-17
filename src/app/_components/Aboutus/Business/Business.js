@@ -5,7 +5,14 @@ import { FaPlus } from "react-icons/fa";
 import BusinessImage from '../../../../Components/Images/aboutbusiness.jpg'
 import Image from 'next/image';
 import Link from 'next/link';
-const Business = () => {
+import { safeRender, safeImage } from '@/lib/safe-html';
+
+const Business = ({ cmsData }) => {
+    const fields = cmsData?.fields || cmsData || {};
+    const headingText = safeRender(fields.heading, "Keep Your Business Safe & Ensure High Availability.");
+    const paragraphText = safeRender(fields.paragraph, "Ever find yourself staring at your computer's good consulting slogan to come to mind? Frequently.");
+    const bizImg = safeImage(fields.image_businessimage, BusinessImage);
+
     const faq = [
         { title: 'What services does Crown Excel provide?', desc: 'We offer IT consultancy, managed IT services, hardware/software maintenance, server support, and hardware repair.' },
         { title: 'How long has Crown Excel been in business?', desc: 'We have been providing top-notch IT solutions for over 15 years.' },
@@ -19,8 +26,8 @@ const Business = () => {
             <section className="relative w-full max-w-[1536px] mx-auto bg-[#1D8B6E] overflow-hidden">
                 <div className='bg-[#1D8B6E] relative h-[600px] px-8 py-12 hidden lg:flex'>
                     <div className="left-part  z-10">
-                        <h2 className='text-3xl lg:text-[40px] leading-[48px] font-montserrat text-shadow-2xs font-[600] text-white mb-4'>Keep Your Business Safe & Ensure High Availability.</h2>
-                        <p className='text-lg text-white mb-8 font-jakarta'>Ever find yourself staring at your computer&apos;s good consulting slogan to come to mind? Frequently.</p>
+                        <h2 className='text-3xl lg:text-[40px] leading-[48px] font-montserrat text-shadow-2xs font-[600] text-white mb-4'>{headingText}</h2>
+                        <p className='text-lg text-white mb-8 font-jakarta'>{paragraphText}</p>
                         <div className='max-w-2xl mx-auto font-montserrat'>
                             {faq.map((item, idx) => (
                                 <div key={idx} className=''>
@@ -47,7 +54,7 @@ const Business = () => {
                     </div>
                     <div className="right-part flex-1 flex items-center justify-end">
                         <Image
-                            src={BusinessImage}
+                            src={bizImg}
                             className={`transition-all  duration-700 ease-in-out ${openIndex !== null ? 'scale-90' : 'scale-70'} object-cover rounded-2xl shadow-2xl`}
                             width={700}
                             height={500}
@@ -57,14 +64,14 @@ const Business = () => {
                     </div>
                 </div>
                 <div className="mobile lg:hidden w-full h-auto py-5 md:py-20 md:px-10 flex flex-col items-center md:items-start md:justify-normal justify-center relative" style={{
-                    backgroundImage: `linear-gradient(rgba(13, 44, 92, 0.9), rgba(13, 44, 92, 0.9)), url(${BusinessImage.src || BusinessImage})`,
+                    backgroundImage: `linear-gradient(rgba(13, 44, 92, 0.9), rgba(13, 44, 92, 0.9)), url(${bizImg.src || bizImg})`,
                     backgroundSize: openIndex !== null ? '110%' : '100%',
                     backgroundPosition: 'center',
                     backgroundRepeat: 'no-repeat',
                     transition: 'background-size 0.7s ease-in-out',
                 }}>
-                    <h2 className="text-2xl md:text-[35px] md:text-start md:w-[550px] font-bold text-white mb-4 text-center px-4">Keep Your Business Safe & Ensure High Availability.</h2>
-                    <p className='text-white text-[12px] px-4 mb-4 md:text-[14px]'>Ever find yourself staring at your computer&apos;s good consulting slogan to come to mind? Frequently.</p>
+                    <h2 className="text-2xl md:text-[35px] md:text-start md:w-[550px] font-bold text-white mb-4 text-center px-4">{headingText}</h2>
+                    <p className='text-white text-[12px] px-4 mb-4 md:text-[14px]'>{paragraphText}</p>
                     <div className="w-full max-w-md md:max-w-full px-2 ">
                         {faq.map((item, idx) => (
                             <div key={idx} className="mb-2">

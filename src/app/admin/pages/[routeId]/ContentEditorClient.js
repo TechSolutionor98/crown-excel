@@ -116,6 +116,7 @@ export default function ContentEditorClient({ initialContent, routeId, routePath
   const [linkText, setLinkText] = useState('');
   const [linkUrl, setLinkUrl] = useState('');
   const [linkNewTab, setLinkNewTab] = useState(true);
+  const [linkUnderline, setLinkUnderline] = useState(true);
   const [existingLinkDetected, setExistingLinkDetected] = useState(false);
   const [savedRange, setSavedRange] = useState(null);
   const [targetAnchorNode, setTargetAnchorNode] = useState(null);
@@ -298,7 +299,7 @@ export default function ContentEditorClient({ initialContent, routeId, routePath
   };
 
   // Helper to find a text node and wrap it in a link
-  const wrapTextInLink = (parentEl, searchText, url, openNewTab) => {
+  const wrapTextInLink = (parentEl, searchText, url, openNewTab, underline = true) => {
     const walk = document.createTreeWalker(parentEl, NodeFilter.SHOW_TEXT, null, false);
     let node;
     while ((node = walk.nextNode())) {
@@ -317,6 +318,16 @@ export default function ContentEditorClient({ initialContent, routeId, routePath
         if (openNewTab) {
           a.setAttribute('target', '_blank');
           a.setAttribute('rel', 'noopener noreferrer');
+        }
+        if (underline) {
+          a.setAttribute('data-underline', 'true');
+          a.className = 'cms-link-underline';
+          a.style.textDecoration = 'underline';
+          a.style.textUnderlineOffset = '3px';
+        } else {
+          a.setAttribute('data-underline', 'false');
+          a.className = 'cms-link-no-underline';
+          a.style.textDecoration = 'none';
         }
         a.textContent = searchText;
 
@@ -377,6 +388,7 @@ export default function ContentEditorClient({ initialContent, routeId, routePath
       const href = closestAnchor.getAttribute('href') || '';
       const isNewTab = closestAnchor.hasAttribute('target') ? closestAnchor.getAttribute('target') === '_blank' : true;
       const text = closestAnchor.textContent || '';
+      const isUnderlined = closestAnchor.getAttribute('data-underline') === 'false' || closestAnchor.style.textDecoration === 'none' || closestAnchor.classList.contains('cms-link-no-underline') ? false : true;
 
       setLinkModalData({
         sectionIndex,
@@ -387,6 +399,7 @@ export default function ContentEditorClient({ initialContent, routeId, routePath
       setLinkText(text);
       setLinkUrl(href);
       setLinkNewTab(isNewTab);
+      setLinkUnderline(isUnderlined);
       setExistingLinkDetected(true);
       setTargetAnchorNode(closestAnchor);
       setLinkStep(1);
@@ -401,6 +414,7 @@ export default function ContentEditorClient({ initialContent, routeId, routePath
       setLinkText(selectedText);
       setLinkUrl('');
       setLinkNewTab(true);
+      setLinkUnderline(true);
       setExistingLinkDetected(false);
       setTargetAnchorNode(null);
       setLinkStep(1);
@@ -430,6 +444,8 @@ export default function ContentEditorClient({ initialContent, routeId, routePath
       if (foundAnchor) {
         setLinkUrl(foundAnchor.getAttribute('href') || '');
         setLinkNewTab(foundAnchor.getAttribute('target') === '_blank');
+        const isUnderlined = foundAnchor.getAttribute('data-underline') === 'false' || foundAnchor.style.textDecoration === 'none' || foundAnchor.classList.contains('cms-link-no-underline') ? false : true;
+        setLinkUnderline(isUnderlined);
         setExistingLinkDetected(true);
         setTargetAnchorNode(foundAnchor);
       } else if (!targetAnchorNode) {
@@ -445,17 +461,31 @@ export default function ContentEditorClient({ initialContent, routeId, routePath
     const element = document.getElementById(`input-${sectionIndex}-${fieldKey}`);
     if (!element) return;
 
+    const applyLinkAttributes = (a) => {
+      a.setAttribute('href', linkUrl);
+      if (linkNewTab) {
+        a.setAttribute('target', '_blank');
+        a.setAttribute('rel', 'noopener noreferrer');
+      } else {
+        a.removeAttribute('target');
+        a.removeAttribute('rel');
+      }
+      if (linkUnderline) {
+        a.setAttribute('data-underline', 'true');
+        a.className = 'cms-link-underline';
+        a.style.textDecoration = 'underline';
+        a.style.textUnderlineOffset = '3px';
+      } else {
+        a.setAttribute('data-underline', 'false');
+        a.className = 'cms-link-no-underline';
+        a.style.textDecoration = 'none';
+      }
+      a.textContent = linkText;
+    };
+
     if (existingLinkDetected && targetAnchorNode) {
       // Update existing anchor element
-      targetAnchorNode.setAttribute('href', linkUrl);
-      if (linkNewTab) {
-        targetAnchorNode.setAttribute('target', '_blank');
-        targetAnchorNode.setAttribute('rel', 'noopener noreferrer');
-      } else {
-        targetAnchorNode.removeAttribute('target');
-        targetAnchorNode.removeAttribute('rel');
-      }
-      targetAnchorNode.textContent = linkText;
+      applyLinkAttributes(targetAnchorNode);
     } else {
       // If we have a selection range and selection text matches linkText, use range
       const selection = window.getSelection();
@@ -464,12 +494,7 @@ export default function ContentEditorClient({ initialContent, routeId, routePath
       let inserted = false;
       if (hasSelection && savedRange) {
         const a = document.createElement('a');
-        a.setAttribute('href', linkUrl);
-        if (linkNewTab) {
-          a.setAttribute('target', '_blank');
-          a.setAttribute('rel', 'noopener noreferrer');
-        }
-        a.textContent = linkText;
+        applyLinkAttributes(a);
 
         selection.removeAllRanges();
         selection.addRange(savedRange);
@@ -478,18 +503,13 @@ export default function ContentEditorClient({ initialContent, routeId, routePath
         inserted = true;
       } else {
         // Fallback: search plain text node and wrap
-        inserted = wrapTextInLink(element, linkText, linkUrl, linkNewTab);
+        inserted = wrapTextInLink(element, linkText, linkUrl, linkNewTab, linkUnderline);
       }
 
       if (!inserted) {
         // Fallback to inserting at the end if wrap failed (should not happen due to validation)
         const a = document.createElement('a');
-        a.setAttribute('href', linkUrl);
-        if (linkNewTab) {
-          a.setAttribute('target', '_blank');
-          a.setAttribute('rel', 'noopener noreferrer');
-        }
-        a.textContent = linkText;
+        applyLinkAttributes(a);
         element.appendChild(a);
       }
     }
@@ -754,7 +774,6 @@ export default function ContentEditorClient({ initialContent, routeId, routePath
         }
         .content-editable-box a {
           color: #084032 !important;
-          text-decoration: underline !important;
           font-weight: 600 !important;
           background-color: #f0fdf4 !important;
           padding: 2px 6px !important;
@@ -763,6 +782,14 @@ export default function ContentEditorClient({ initialContent, routeId, routePath
           border: 1px dashed #22c55e !important;
           pointer-events: auto !important;
           display: inline !important;
+        }
+        .content-editable-box a:not([data-underline="false"]):not(.cms-link-no-underline) {
+          text-decoration: underline !important;
+          text-underline-offset: 3px !important;
+        }
+        .content-editable-box a[data-underline="false"],
+        .content-editable-box a.cms-link-no-underline {
+          text-decoration: none !important;
         }
       `}} />
       {/* Top Bar */}
@@ -1067,17 +1094,32 @@ export default function ContentEditorClient({ initialContent, routeId, routePath
                   />
                 </div>
 
-                <div className="flex items-center gap-2 py-2 px-3.5 bg-gray-50 border border-gray-200 rounded-lg">
-                  <input
-                    type="checkbox"
-                    id="link-new-tab-checkbox"
-                    checked={linkNewTab}
-                    onChange={(e) => setLinkNewTab(e.target.checked)}
-                    className="w-4.5 h-4.5 text-[#084032] border-gray-300 rounded-md focus:ring-[#084032] focus:ring-2 accent-[#084032] cursor-pointer"
-                  />
-                  <label htmlFor="link-new-tab-checkbox" className="text-sm font-semibold text-gray-700 cursor-pointer select-none">
-                    Open in a new tab
-                  </label>
+                <div className="grid grid-cols-1 sm:grid-cols-2 gap-2.5">
+                  <div className="flex items-center gap-2 py-2 px-3.5 bg-gray-50 border border-gray-200 rounded-lg">
+                    <input
+                      type="checkbox"
+                      id="link-new-tab-checkbox"
+                      checked={linkNewTab}
+                      onChange={(e) => setLinkNewTab(e.target.checked)}
+                      className="w-4.5 h-4.5 text-[#084032] border-gray-300 rounded-md focus:ring-[#084032] focus:ring-2 accent-[#084032] cursor-pointer"
+                    />
+                    <label htmlFor="link-new-tab-checkbox" className="text-sm font-semibold text-gray-700 cursor-pointer select-none">
+                      Open in a new tab
+                    </label>
+                  </div>
+
+                  <div className="flex items-center gap-2 py-2 px-3.5 bg-gray-50 border border-gray-200 rounded-lg">
+                    <input
+                      type="checkbox"
+                      id="link-underline-checkbox"
+                      checked={linkUnderline}
+                      onChange={(e) => setLinkUnderline(e.target.checked)}
+                      className="w-4.5 h-4.5 text-[#084032] border-gray-300 rounded-md focus:ring-[#084032] focus:ring-2 accent-[#084032] cursor-pointer"
+                    />
+                    <label htmlFor="link-underline-checkbox" className="text-sm font-semibold text-gray-700 cursor-pointer select-none">
+                      Underline link text
+                    </label>
+                  </div>
                 </div>
 
                 <div>

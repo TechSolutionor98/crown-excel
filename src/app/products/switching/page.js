@@ -1,3 +1,4 @@
+import React from 'react'
 import BestNetworkSwitches from '@/app/_components/Products/Switching/BestNetworkSwitches/BestNetworkSwitches'
 import SwitchingBanner from '@/app/_components/Products/Switching/SwitchingBanner/SwitchingBanner'
 import SwitchingBrandsWeDeal from '@/app/_components/Products/Switching/SwitchingBrandsWeDeal/SwitchingBrandsWeDeal'
@@ -6,8 +7,9 @@ import SwitchingHighPerformance from '@/app/_components/Products/Switching/Switc
 import SwitchingLatestProduct from '@/app/_components/Products/Switching/SwitchingLatestProduct/SwitchingLatestProduct'
 import SwitchingUnlease from '@/app/_components/Products/Switching/SwitchingUnlease/SwitchingUnlease'
 import SwitchingWhyBuyFromUs from '@/app/_components/Products/Switching/SwitchingWhyBuyFromUs/SwitchingWhyBuyFromUs'
-import React from 'react'
-import { generateCmsMetadata } from '@/lib/cms-fetch';
+import { generateCmsMetadata, getCmsData } from '@/lib/cms-fetch';
+
+export const revalidate = 86400;
 
 export async function generateMetadata() {
   return await generateCmsMetadata('/products/switching', {
@@ -16,17 +18,20 @@ export async function generateMetadata() {
   });
 }
 
-const Switching = () => {
+const Switching = async () => {
+  const { content: cmsContent } = await getCmsData('/products/switching');
+  const sections = cmsContent?.sections || {};
+
   return (
     <div>
-      <SwitchingBanner/>
-      <SwitchingLatestProduct/>
-      <SwitchingUnlease/>
-      <SwitchingHighPerformance/>
-      <SwitchingHeavyComputing/>
-      <BestNetworkSwitches/>
-      <SwitchingWhyBuyFromUs/>
-      <SwitchingBrandsWeDeal/>
+      <SwitchingBanner cmsData={sections.switchingbanner} />
+      <SwitchingLatestProduct cmsData={sections.switchinglatestproduct} />
+      <SwitchingUnlease cmsData={sections.switchingunlease} />
+      <SwitchingHighPerformance cmsData={sections.switchinghighperformance} />
+      <SwitchingHeavyComputing cmsData={sections.switchingheavycomputing} />
+      <BestNetworkSwitches cmsData={sections.bestnetworkswitches} />
+      <SwitchingWhyBuyFromUs cmsData={sections.switchingwhybuyfromus} />
+      <SwitchingBrandsWeDeal cmsData={sections.switchingbrandswedeal} />
     </div>
   )
 }

@@ -255,5 +255,71 @@ body {
   margin-bottom: 0.25rem !important;
 }
 
+/* CMS Rich-Text link styling for client-side content */
+.cms-rich-content a,
+a.cms-link-underline,
+a[data-underline="true"] {
+  color: #084032;
+  text-decoration: underline !important;
+  text-decoration-color: #00a63e !important;
+  text-underline-offset: 4px !important;
+  text-decoration-thickness: 1.5px !important;
+  font-weight: 600;
+  cursor: pointer !important;
+  transition: color 0.15s ease, text-decoration-color 0.15s ease, opacity 0.15s ease;
+}
+
+.cms-rich-content a:hover,
+a.cms-link-underline:hover,
+a[data-underline="true"]:hover {
+  color: #00a63e !important;
+  text-decoration-color: #084032 !important;
+  opacity: 0.85;
+}
+
+/* Explicit no-underline when user unchecked underline in CMS modal */
+.cms-rich-content a[data-underline="false"],
+.cms-rich-content a.cms-link-no-underline,
+a[data-underline="false"],
+a.cms-link-no-underline {
+  text-decoration: none !important;
+}
+
+/* Ensure links inside white-text containers (cards/heroes) stay legible */
+.text-white .cms-rich-content a,
+[class*="text-white"] .cms-rich-content a,
+[class*="text-gray-200"] .cms-rich-content a,
+[class*="text-gray-100"] .cms-rich-content a,
+.text-white a.cms-link-underline,
+[class*="text-white"] a.cms-link-underline,
+.text-white a[data-underline="true"],
+[class*="text-white"] a[data-underline="true"] {
+  color: #ffffff !important;
+  text-decoration: underline !important;
+  text-decoration-color: #ffd900 !important;
+  text-underline-offset: 4px !important;
+  text-decoration-thickness: 1.5px !important;
+}
+
+.text-white .cms-rich-content a[data-underline="false"],
+[class*="text-white"] .cms-rich-content a[data-underline="false"],
+.text-white .cms-rich-content a.cms-link-no-underline,
+[class*="text-white"] .cms-rich-content a.cms-link-no-underline,
+.text-white a[data-underline="false"],
+[class*="text-white"] a[data-underline="false"],
+.text-white a.cms-link-no-underline,
+[class*="text-white"] a.cms-link-no-underline {
+  text-decoration: none !important;
+}
+
+.text-white .cms-rich-content a:hover,
+[class*="text-white"] .cms-rich-content a:hover,
+.text-white a.cms-link-underline:hover,
+[class*="text-white"] a.cms-link-underline:hover {
+  color: #ffd900 !important;
+  opacity: 0.9;
+}
+
+
 
 

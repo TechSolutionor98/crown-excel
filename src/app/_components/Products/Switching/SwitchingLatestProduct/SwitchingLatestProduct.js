@@ -6,6 +6,7 @@ import { Swiper, SwiperSlide } from 'swiper/react'
 import { Navigation } from 'swiper/modules'
 import 'swiper/css'
 import 'swiper/css/navigation'
+import { safeRender } from '@/lib/safe-html'
 
 // Assets
 import ButtonBackground from '../../../../../Components/Images/ButtonBackground.png'
@@ -37,7 +38,9 @@ const carouselData = [
   },
 ]
 
-const SwitchingLatestProduct = () => {
+const SwitchingLatestProduct = ({ cmsData }) => {
+  const fields = cmsData?.fields || cmsData || {};
+  const headingText = safeRender(fields.heading, "Our Latest Product");
   // Desktop Swiper refs
   const prevRef = useRef(null)
   const nextRef = useRef(null)
@@ -61,7 +64,7 @@ const SwitchingLatestProduct = () => {
       >
         {/* Heading */}
         <h2 className="text-center text-[24px] md:text-[60px] leading-[60px] font-[800] text-[#16806b] uppercase font-montserrat mb-14">
-          Our Latest Product
+          {headingText}
         </h2>
 
     {/* Desktop View */}

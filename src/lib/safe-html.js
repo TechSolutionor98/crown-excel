@@ -18,7 +18,7 @@ export function safeRender(value, fallback = '') {
   // Check if string contains HTML tags like <a ...> or <br> or <strong ...> or entities like &apos;
   const hasHtml = /<[a-z][\s\S]*>|&[a-z0-9#]+;/i.test(content);
   if (hasHtml) {
-    return <span dangerouslySetInnerHTML={{ __html: content }} />;
+    return <span className="cms-rich-content inline" dangerouslySetInnerHTML={{ __html: content }} />;
   }
   return content;
 }

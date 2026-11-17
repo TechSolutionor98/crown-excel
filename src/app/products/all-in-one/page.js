@@ -7,7 +7,9 @@ import AllinOneHeavyComputing from '@/app/_components/Products/AllinOne/AllinOne
 import OneinAllProducts from '@/app/_components/Products/AllinOne/OneinAllProducts/OneinAllProducts'
 import AllinOneFromUs from '@/app/_components/Products/AllinOne/AllinOneFromUs/AllinOneFromUs'
 import AllinOneBrandsWeDeal from '@/app/_components/Products/AllinOne/AllinOneBrandsWeDeal/AllinOneBrandsWeDeal'
-import { generateCmsMetadata } from '@/lib/cms-fetch';
+import { generateCmsMetadata, getCmsData } from '@/lib/cms-fetch';
+
+export const revalidate = 86400;
 
 export async function generateMetadata() {
   return await generateCmsMetadata('/products/all-in-one', {
@@ -16,17 +18,20 @@ export async function generateMetadata() {
   });
 }
 
-const AllinOne = () => {
+const AllinOne = async () => {
+  const { content: cmsContent } = await getCmsData('/products/all-in-one');
+  const sections = cmsContent?.sections || {};
+
   return (
     <div>
-      <AllinOneBanner/>
-      <AllinOneLatestProduct/>
-      <AllinOneUnlease/>
-      <AllinOneHighPerformance/>
-      <AllinOneHeavyComputing/>
-      <OneinAllProducts/>
-      <AllinOneFromUs/>
-      <AllinOneBrandsWeDeal/>
+      <AllinOneBanner cmsData={sections.allinonebanner} />
+      <AllinOneLatestProduct cmsData={sections.allinonelatestproduct} />
+      <AllinOneUnlease cmsData={sections.allinoneunlease} />
+      <AllinOneHighPerformance cmsData={sections.allinonehighperformance} />
+      <AllinOneHeavyComputing cmsData={sections.allinoneheavycomputing} />
+      <OneinAllProducts cmsData={sections.oneinallproducts} />
+      <AllinOneFromUs cmsData={sections.allinonefromus} />
+      <AllinOneBrandsWeDeal cmsData={sections.allinonebrandswedeal} />
     </div>
   )
 }
