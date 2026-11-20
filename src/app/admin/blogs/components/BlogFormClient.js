@@ -1277,8 +1277,8 @@ export default function BlogFormClient({
           </div>
 
           {activeTab === 'visual' ? (
-            <div className="border border-gray-300 rounded-lg overflow-hidden flex flex-col">
-              <div className="bg-gray-50 border-b border-gray-200 p-2.5 flex flex-wrap gap-1.5 items-center">
+            <div className="border border-gray-300 rounded-lg flex flex-col relative bg-white shadow-xs">
+              <div className="sticky top-0 z-30 bg-gray-50/95 backdrop-blur-xs border-b border-gray-200 p-2.5 flex flex-wrap gap-1.5 items-center rounded-t-lg shadow-xs transition-shadow">
                 {/* Style Dropdown */}
                 <select
                   value={currentFormat}
@@ -1703,7 +1703,7 @@ export default function BlogFormClient({
                   }}
                   onKeyUp={updateCurrentFormat}
                   onMouseUp={updateCurrentFormat}
-                  className="w-full p-4 pt-10 min-h-[350px] outline-none prose max-w-none focus:ring-0 overflow-y-auto"
+                  className="w-full p-4 pt-4 min-h-[380px] max-h-[550px] outline-none prose max-w-none focus:ring-0 overflow-y-auto resize-y blog-editor-scroll rounded-b-lg"
                   style={{ direction: 'left', textAlign: 'left' }}
                 />
               </div>
@@ -1714,7 +1714,7 @@ export default function BlogFormClient({
               onChange={(e) => setContent(e.target.value)}
               placeholder="Paste HTML source code here..."
               rows={16}
-              className="w-full p-4 border border-gray-300 rounded-lg font-mono text-sm focus:ring-2 focus:ring-[#084032] focus:border-[#084032] outline-none"
+              className="w-full p-4 border border-gray-300 rounded-lg font-mono text-sm focus:ring-2 focus:ring-[#084032] focus:border-[#084032] outline-none min-h-[380px] max-h-[550px] overflow-y-auto resize-y blog-editor-scroll"
             />
           )}
         </div>

@@ -291,7 +291,7 @@ export default function AdminLayout({ children, title = '' }) {
       </aside>
 
       {/* Main content */}
-      <main className="flex-1 p-6 overflow-x-hidden">
+      <main className="flex-1 p-6 overflow-x-clip">
         <header className="mb-6 mt-10 md:mt-0">
           <h1 className="text-2xl font-semibold">{title}</h1>
         </header>

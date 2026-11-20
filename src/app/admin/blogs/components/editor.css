@@ -377,3 +377,31 @@
   clear: both;
 }
 
+/* Custom modern scrollbar for Blog Editor */
+.blog-editor-scroll {
+  scrollbar-width: thin;
+  scrollbar-color: #cbd5e1 #f8fafc;
+  scroll-behavior: smooth;
+}
+
+.blog-editor-scroll::-webkit-scrollbar {
+  width: 8px;
+  height: 8px;
+}
+
+.blog-editor-scroll::-webkit-scrollbar-track {
+  background: #f8fafc;
+  border-radius: 4px;
+}
+
+.blog-editor-scroll::-webkit-scrollbar-thumb {
+  background-color: #cbd5e1;
+  border-radius: 4px;
+  border: 2px solid #f8fafc;
+}
+
+.blog-editor-scroll::-webkit-scrollbar-thumb:hover {
+  background-color: #94a3b8;
+}
+
+
