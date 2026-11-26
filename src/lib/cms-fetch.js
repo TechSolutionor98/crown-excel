@@ -218,16 +218,110 @@ export const getCmsData = cache(async (path, websiteId = 'default') => {
  */
 export async function generateCmsMetadata(path, defaults = {}, websiteId = 'default') {
   const seo = await getCmsSeo(path, websiteId);
-
-  if (!seo) return defaults;
-
   const siteUrl = process.env.NEXT_PUBLIC_SITE_URL || 'https://www.crownexcel.ae';
+  const defaultOgImageUrl = `${siteUrl}/og-image.jpg`;
 
-  // Base metadata merging defaults
+  const cleanPath = path === '/' ? '' : (path.startsWith('/') ? path : '/' + path);
+  let canonicalToUse = null;
+  if (seo?.canonicalUrl && typeof seo.canonicalUrl === 'string' && seo.canonicalUrl.trim()) {
+    canonicalToUse = seo.canonicalUrl.trim();
+  } else if (defaults?.alternates?.canonical) {
+    canonicalToUse = defaults.alternates.canonical;
+  } else {
+    canonicalToUse = `${siteUrl}${cleanPath}`;
+  }
+
+  if (canonicalToUse) {
+    if (!canonicalToUse.startsWith('http://') && !canonicalToUse.startsWith('https://')) {
+      const cleanRel = canonicalToUse.startsWith('/') ? canonicalToUse : '/' + canonicalToUse;
+      canonicalToUse = `${siteUrl}${cleanRel}`;
+    }
+  }
+
+  const title = seo?.metaTitle || defaults.title || 'Crown Excel | IT Hardware and Solutions in Dubai';
+  const description =
+    seo?.metaDescription ||
+    defaults.description ||
+    'Crown Excel provides IT hardware, infrastructure, networking, and managed technology solutions for businesses in Dubai and the UAE.';
+
+  // Open Graph Image resolution
+  const rawOgImage =
+    seo?.openGraph?.image ||
+    defaults?.openGraph?.images?.[0]?.url ||
+    defaults?.openGraph?.images?.[0] ||
+    defaultOgImageUrl;
+
+  let ogImageUrl = typeof rawOgImage === 'string' ? rawOgImage : (rawOgImage?.url || defaultOgImageUrl);
+  if (!ogImageUrl.startsWith('http://') && !ogImageUrl.startsWith('https://')) {
+    const cleanRel = ogImageUrl.startsWith('/') ? ogImageUrl : '/' + ogImageUrl;
+    ogImageUrl = `${siteUrl}${cleanRel}`;
+  }
+
+  const isPng = ogImageUrl.toLowerCase().endsWith('.png');
+
+  const baseOpenGraph = {
+    title: seo?.openGraph?.title || title,
+    description: seo?.openGraph?.description || description,
+    url: seo?.openGraph?.url || canonicalToUse,
+    siteName: seo?.openGraph?.siteName || defaults?.openGraph?.siteName || 'Crown Excel',
+    type: seo?.openGraph?.type || defaults?.openGraph?.type || 'website',
+    locale: seo?.openGraph?.locale || defaults?.openGraph?.locale || 'en_AE',
+    images: [
+      {
+        url: ogImageUrl,
+        secureUrl: ogImageUrl,
+        width: 1200,
+        height: 630,
+        alt: seo?.openGraph?.title || title,
+        type: isPng ? 'image/png' : 'image/jpeg',
+      },
+    ],
+  };
+
+  // Twitter Image resolution
+  const rawTwitterImage =
+    seo?.twitterCard?.image ||
+    defaults?.twitter?.images?.[0] ||
+    ogImageUrl;
+  let twitterImageUrl = typeof rawTwitterImage === 'string' ? rawTwitterImage : (rawTwitterImage?.url || ogImageUrl);
+  if (!twitterImageUrl.startsWith('http://') && !twitterImageUrl.startsWith('https://')) {
+    const cleanRel = twitterImageUrl.startsWith('/') ? twitterImageUrl : '/' + twitterImageUrl;
+    twitterImageUrl = `${siteUrl}${cleanRel}`;
+  }
+
+  const baseTwitter = {
+    card: seo?.twitterCard?.cardType || defaults?.twitter?.card || 'summary_large_image',
+    title: seo?.twitterCard?.title || title,
+    description: seo?.twitterCard?.description || description,
+    images: [twitterImageUrl],
+  };
+
+  if (!seo) {
+    return {
+      ...defaults,
+      title,
+      description,
+      alternates: {
+        canonical: canonicalToUse,
+        ...(defaults.alternates || {}),
+      },
+      openGraph: {
+        ...baseOpenGraph,
+        ...(defaults.openGraph || {}),
+      },
+      twitter: {
+        ...baseTwitter,
+        ...(defaults.twitter || {}),
+      },
+    };
+  }
+
+  // Base metadata merging defaults with CMS SEO
   const metadata = {
     ...defaults,
-    title: seo.metaTitle || defaults.title,
-    description: seo.metaDescription || defaults.description,
+    title,
+    description,
+    alternates: { canonical: canonicalToUse },
   };
 
   // Keywords: CMS takes precedence; fall back to defaults
@@ -241,25 +335,6 @@ export async function generateCmsMetadata(path, defaults = {}, websiteId = 'defa
     metadata.keywords = defaults.keywords;
   }
 
-  // Canonical: Use admin custom canonical if provided; otherwise fallback to defaults or page path
-  let canonicalToUse = null;
-  if (seo?.canonicalUrl && typeof seo.canonicalUrl === 'string' && seo.canonicalUrl.trim()) {
-    canonicalToUse = seo.canonicalUrl.trim();
-  } else if (defaults?.alternates?.canonical) {
-    canonicalToUse = defaults.alternates.canonical;
-  } else {
-    const cleanPath = path === '/' ? '' : (path.startsWith('/') ? path : '/' + path);
-    canonicalToUse = `${siteUrl}${cleanPath}`;
-  }
-
-  if (canonicalToUse) {
-    if (!canonicalToUse.startsWith('http://') && !canonicalToUse.startsWith('https://')) {
-      const cleanRel = canonicalToUse.startsWith('/') ? canonicalToUse : '/' + canonicalToUse;
-      canonicalToUse = `${siteUrl}${cleanRel}`;
-    }
-    metadata.alternates = { canonical: canonicalToUse };
-  }
-
   // Robots
   if (seo.robots) {
     metadata.robots = {
@@ -270,35 +345,8 @@ export async function generateCmsMetadata(path, defaults = {}, websiteId = 'defa
     };
   }
 
-  // Open Graph
-  const ogImage =
-    seo?.openGraph?.image ||
-    defaults?.openGraph?.images?.[0]?.url ||
-    defaults?.openGraph?.images?.[0] ||
-    `${siteUrl}/logo.png`;
-
-  metadata.openGraph = {
-    title: seo?.openGraph?.title || seo.metaTitle || defaults?.openGraph?.title || defaults.title,
-    description: seo?.openGraph?.description || seo.metaDescription || defaults?.openGraph?.description || defaults.description,
-    url: seo?.openGraph?.url || defaults?.openGraph?.url || canonicalToUse,
-    siteName: seo?.openGraph?.siteName || defaults?.openGraph?.siteName || 'Crown Excel',
-    type: seo?.openGraph?.type || defaults?.openGraph?.type || 'website',
-    locale: seo?.openGraph?.locale || defaults?.openGraph?.locale || 'en_AE',
-    images: ogImage ? [{ url: typeof ogImage === 'string' ? ogImage : ogImage.url }] : undefined,
-  };
-
-  // Twitter
-  const twitterImage =
-    seo?.twitterCard?.image ||
-    defaults?.twitter?.images?.[0] ||
-    ogImage;
-
-  metadata.twitter = {
-    card: seo?.twitterCard?.cardType || defaults?.twitter?.card || 'summary_large_image',
-    title: seo?.twitterCard?.title || seo.metaTitle || defaults?.twitter?.title || defaults.title,
-    description: seo?.twitterCard?.description || seo.metaDescription || defaults?.twitter?.description || defaults.description,
-    images: twitterImage ? [typeof twitterImage === 'string' ? twitterImage : twitterImage.url] : undefined,
-  };
+  metadata.openGraph = baseOpenGraph;
+  metadata.twitter = baseTwitter;
 
   return metadata;
 }
