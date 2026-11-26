@@ -89,8 +89,8 @@ export default function BlogCommentsSection({
               >
                 <div className="flex justify-between items-center text-xs">
                   <span className="font-bold text-gray-800 text-sm">{c.authorName}</span>
-                  <span className="text-gray-400">
-                    {c.createdAt ? new Date(c.createdAt).toLocaleDateString(undefined, {
+                  <span className="text-gray-400" suppressHydrationWarning>
+                    {c.createdAt ? new Date(c.createdAt).toLocaleDateString('en-US', {
                       month: 'short',
                       day: 'numeric',
                       year: 'numeric'

@@ -12,7 +12,7 @@ export default function TestimonialCard({ name, message, image, rating = 0, date
     try {
       const d = new Date(date);
       if (!isNaN(d)) {
-        dateLabel = d.toLocaleDateString(undefined, { day: 'numeric', month: 'short', year: 'numeric' });
+        dateLabel = d.toLocaleDateString('en-US', { month: 'short', day: 'numeric', year: 'numeric' });
       }
     } catch {}
   }
@@ -53,7 +53,7 @@ export default function TestimonialCard({ name, message, image, rating = 0, date
               <span className="flex max-w-[160px] flex-wrap text-[18px] font-[600] leading-[20px] font-inter text-black break-words whitespace-normal md:max-w-[220px]">
                 {name || 'Anonymous'}
               </span>
-              <div className="text-gray-400 text-[13px] font-montserrat mt-0.5">{dateLabel}</div>
+              <div className="text-gray-400 text-[13px] font-montserrat mt-0.5" suppressHydrationWarning>{dateLabel}</div>
             </div>
           </div>
 

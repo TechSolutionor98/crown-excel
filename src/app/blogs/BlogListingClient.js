@@ -312,8 +312,8 @@ export default function BlogListingClient({ initialBlogs = [] }) {
                     >
                       {b.title}
                     </Link>
-                    <span className="text-[10px] text-gray-450 block font-semibold">
-                      {b.createdAt ? new Date(b.createdAt).toLocaleDateString(undefined, {
+                    <span className="text-[10px] text-gray-450 block font-semibold" suppressHydrationWarning>
+                      {b.createdAt ? new Date(b.createdAt).toLocaleDateString('en-US', {
                         month: 'short',
                         day: 'numeric'
                       }) : ''}

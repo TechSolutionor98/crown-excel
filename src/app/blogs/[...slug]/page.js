@@ -209,8 +209,8 @@ export default async function BlogDetailsPage({ params }) {
                 <span>By</span>
                 <span className="text-[#00a63e] font-semibold">{blog.author || 'Crown Excel'}</span>
                 <span className="text-gray-300">•</span>
-                <span>
-                  {blog.createdAt ? new Date(blog.createdAt).toLocaleDateString(undefined, {
+                <span suppressHydrationWarning>
+                  {blog.createdAt ? new Date(blog.createdAt).toLocaleDateString('en-US', {
                     weekday: 'long',
                     month: 'long',
                     day: 'numeric',
@@ -337,8 +337,8 @@ export default async function BlogDetailsPage({ params }) {
                       >
                         {b.title}
                       </Link>
-                      <span className="text-[10px] text-gray-450 block font-semibold">
-                        {b.createdAt ? new Date(b.createdAt).toLocaleDateString(undefined, {
+                      <span className="text-[10px] text-gray-450 block font-semibold" suppressHydrationWarning>
+                        {b.createdAt ? new Date(b.createdAt).toLocaleDateString('en-US', {
                           month: 'short',
                           day: 'numeric'
                         }) : ''}
