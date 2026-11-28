@@ -29,15 +29,16 @@ export default async function ContactSubmissionsPage() {
   }
 
   return (
-    <div>
-      <h2 className="text-[30px] font-bold uppercase">Inquiry Forms</h2>
-      <div className="bg-white p-4 rounded shadow mt-10">
-
-        <p className="text-sm text-gray-600 mb-4">
-          <span className='font-bold'>Total Inquiries:</span> {submissions.length}
-        </p>
-        <ContactTableClient initialData={submissions} apiBase={apiBase} />
+    <div className="w-full min-w-0">
+      <div className="flex flex-col sm:flex-row sm:items-center justify-between gap-2 mb-6">
+        <div>
+          <h1 className="text-2xl sm:text-3xl font-bold uppercase text-[#084032]">Inquiry Forms</h1>
+          <p className="text-sm text-gray-500 mt-1">
+            <span className="font-semibold text-gray-700">Total Inquiries:</span> {submissions.length}
+          </p>
+        </div>
       </div>
+      <ContactTableClient initialData={submissions} apiBase={apiBase} />
     </div>
   );
 }

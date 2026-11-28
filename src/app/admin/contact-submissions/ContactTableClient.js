@@ -79,32 +79,32 @@ export default function ContactTableClient({ initialData = [], apiBase = process
   const getGlobalIndex = (pageIndex) => (page - 1) * pageSize + pageIndex + 1;
 
   return (
-    <div className="bg-white rounded-xl shadow-lg p-6 w-full">
-      <div className="flex items-center justify-between mb-6">
-        <div className="flex items-center gap-2">
+    <div className="bg-white rounded-xl shadow-md p-4 sm:p-6 w-full min-w-0">
+      <div className="flex flex-col sm:flex-row items-stretch sm:items-center justify-between gap-4 mb-6">
+        <div className="flex items-center gap-2 flex-wrap sm:flex-nowrap">
           <input
             value={query}
             onChange={e => setQuery(e.target.value)}
             placeholder="Search name, email, phone, subject..."
-            className="border border-[#00a63e] focus:border-[#084032] p-2 rounded-lg w-80 outline-none transition-all"
+            className="border border-[#00a63e] focus:border-[#084032] p-2 rounded-lg w-full sm:w-80 outline-none transition-all text-sm"
           />
           <button
             onClick={() => { setQuery(''); setPage(1); }}
-            className="px-3 py-2 bg-gray-100 hover:bg-[#00a63e] hover:text-white rounded-lg transition-all"
+            className="px-3 py-2 bg-gray-100 hover:bg-[#00a63e] hover:text-white rounded-lg transition-all text-sm font-medium cursor-pointer shrink-0"
           >
             Clear
           </button>
         </div>
-        <div className="flex items-center gap-2">
+        <div className="flex items-center gap-2 shrink-0">
           <button
             onClick={refresh}
-            className={`px-3 py-2 rounded-lg bg-[#00a63e] hover:bg-[#084032] text-white font-semibold shadow ${loading ? 'opacity-60' : ''} transition-all`}
+            className={`px-3.5 py-2 rounded-lg bg-[#00a63e] hover:bg-[#084032] text-white text-sm font-semibold shadow-sm ${loading ? 'opacity-60' : ''} transition-all cursor-pointer`}
           >
             Refresh
           </button>
           <button
             onClick={downloadCSV}
-            className="px-3 py-2 rounded-lg bg-blue-600 hover:bg-blue-800 text-white font-semibold shadow transition-all"
+            className="px-3.5 py-2 rounded-lg bg-[#084032] hover:bg-[#0a5a47] text-white text-sm font-semibold shadow-sm transition-all cursor-pointer"
           >
             Export CSV
           </button>
@@ -125,51 +125,63 @@ export default function ContactTableClient({ initialData = [], apiBase = process
         </select>
       </div>
 
-      <div style={{ overflowX: "auto", maxHeight: "520px", overflowY: "auto" }} className="w-full rounded-lg border border-gray-200">
-        <table style={{ whiteSpace: "nowrap" }} className="w-full text-sm overflow-hidden">
+      <div style={{ overflowX: "auto", maxHeight: "580px", overflowY: "auto" }} className="w-full max-w-full rounded-lg border border-gray-200 shadow-xs">
+        <table style={{ whiteSpace: "nowrap" }} className="w-full text-sm border-collapse">
           <thead className="sticky top-0 z-10">
-            <tr className="bg-[#084032] text-white">
-              <th className="px-3 py-3 font-semibold text-left">Inquiry #</th>
-              <th className="px-3 py-3 font-semibold text-left">Name</th>
-              <th className="px-3 py-3 font-semibold text-left">Email</th>
-              <th className="px-3 py-3 font-semibold text-left">Phone</th>
-              <th className="px-3 py-3 font-semibold text-left">Subject</th>
-              <th className="px-3 py-3 font-semibold text-left">Service</th>
-              <th className="px-3 py-3 font-semibold text-left">Comments</th>
-              <th className="px-3 py-3 font-semibold text-left">Submitted At</th>
-              <th className="px-3 py-3 font-semibold text-left">Action</th>
+            <tr className="bg-[#084032] text-white text-xs uppercase tracking-wider">
+              <th className="px-4 py-3.5 font-semibold text-left">Inquiry #</th>
+              <th className="px-4 py-3.5 font-semibold text-left">Name</th>
+              <th className="px-4 py-3.5 font-semibold text-left">Email</th>
+              <th className="px-4 py-3.5 font-semibold text-left">Phone</th>
+              <th className="px-4 py-3.5 font-semibold text-left">Subject</th>
+              <th className="px-4 py-3.5 font-semibold text-left">Service</th>
+              <th className="px-4 py-3.5 font-semibold text-left">Comments</th>
+              <th className="px-4 py-3.5 font-semibold text-left">Submitted At</th>
+              <th className="px-4 py-3.5 font-semibold text-center">Action</th>
             </tr>
           </thead>
-          <tbody>
-            {pageData.map((s, idx) => (
-              <tr key={s.id ?? s._id ?? idx} className="hover:bg-[#e6f9f0] align-top transition-all">
-                <td className="px-4 py-3 border-b border-gray-100 align-top font-semibold text-[#084032]">{getGlobalIndex(idx)}</td>
-                <td className="px-4 py-3 border-b border-gray-100 align-top overflow-hidden text-ellipsis">{s.name}</td>
-                <td className="px-4 py-3 border-b border-gray-100 align-top overflow-hidden text-ellipsis">{s.email}</td>
-                <td className="px-4 py-3 border-b border-gray-100 align-top">{s.phone}</td>
-                <td className="px-4 py-3 border-b border-gray-100 align-top overflow-hidden text-ellipsis">{s.subject}</td>
-                <td className="px-4 py-3 border-b border-gray-100 align-top overflow-hidden text-ellipsis">{s.service}</td>
-                <td className="px-4 py-3 border-b border-gray-100 align-top overflow-hidden text-ellipsis whitespace-nowrap">
-                  {(s.comments || '').length > 30 ? s.comments.substring(0, 30) + '...' : s.comments}
-                </td>
-                <td className="px-4 py-3 border-b border-gray-100 align-top">
-                  {s.createdAt ? new Date(s.createdAt).toLocaleString() : ''}
-                </td>
-                <td className="px-4 py-3 border-b border-gray-100 align-top">
-                  <button
-                    onClick={() => setViewRow({ ...s, inquiryNo: getGlobalIndex(idx) })}
-                    className="px-3 py-1.5 bg-[#084032] hover:bg-[#0a5a47] text-white text-xs font-semibold rounded-lg transition-all cursor-pointer"
-                  >
-                    View
-                  </button>
+          <tbody className="divide-y divide-gray-100">
+            {pageData.length === 0 ? (
+              <tr>
+                <td colSpan={9} className="px-4 py-12 text-center text-gray-500 text-sm">
+                  No inquiries found.
                 </td>
               </tr>
-            ))}
+            ) : (
+              pageData.map((s, idx) => (
+                <tr key={s.id ?? s._id ?? idx} className="hover:bg-[#e6f9f0] align-top transition-colors">
+                  <td className="px-4 py-3.5 align-middle font-semibold text-[#084032]">{getGlobalIndex(idx)}</td>
+                  <td className="px-4 py-3.5 align-middle font-medium text-gray-900">{s.name || '—'}</td>
+                  <td className="px-4 py-3.5 align-middle text-gray-600">{s.email || '—'}</td>
+                  <td className="px-4 py-3.5 align-middle text-gray-600 font-mono text-xs">{s.phone || '—'}</td>
+                  <td className="px-4 py-3.5 align-middle text-gray-800">
+                    <span className="px-2 py-0.5 bg-gray-100 rounded text-xs font-medium">
+                      {s.subject || 'General'}
+                    </span>
+                  </td>
+                  <td className="px-4 py-3.5 align-middle text-gray-700">{s.service || '—'}</td>
+                  <td className="px-4 py-3.5 align-middle text-gray-500 max-w-[220px] truncate" title={s.comments}>
+                    {(s.comments || '').length > 30 ? s.comments.substring(0, 30) + '...' : (s.comments || '—')}
+                  </td>
+                  <td className="px-4 py-3.5 align-middle text-gray-500 text-xs whitespace-nowrap">
+                    {s.createdAt ? new Date(s.createdAt).toLocaleString('en-US', { month: 'short', day: 'numeric', year: 'numeric', hour: '2-digit', minute: '2-digit' }) : '—'}
+                  </td>
+                  <td className="px-4 py-3.5 align-middle text-center">
+                    <button
+                      onClick={() => setViewRow({ ...s, inquiryNo: getGlobalIndex(idx) })}
+                      className="px-3.5 py-1.5 bg-[#084032] hover:bg-[#0a5a47] text-white text-xs font-semibold rounded-lg transition-all cursor-pointer shadow-xs"
+                    >
+                      View
+                    </button>
+                  </td>
+                </tr>
+              ))
+            )}
           </tbody>
         </table>
       </div>
 
-      <div className="flex items-center justify-between mt-6">
+      <div className="flex flex-col sm:flex-row items-center justify-between gap-4 mt-6">
         <div className="text-sm text-gray-600">
           Showing {Math.min(filtered.length, (page - 1) * pageSize + 1)} - {Math.min(filtered.length, page * pageSize)} of {filtered.length}
         </div>
@@ -177,15 +189,15 @@ export default function ContactTableClient({ initialData = [], apiBase = process
           <button
             disabled={page <= 1}
             onClick={() => setPage(p => Math.max(1, p - 1))}
-            className="px-4 py-2 border rounded-lg disabled:opacity-50 bg-white hover:bg-[#e6f9f0] transition-all"
+            className="px-4 py-2 border border-gray-200 rounded-lg disabled:opacity-50 disabled:cursor-not-allowed bg-white hover:bg-[#e6f9f0] transition-all cursor-pointer text-sm font-medium"
           >
             Prev
           </button>
-          <div className="px-4 py-2 font-semibold">{page} / {totalPages}</div>
+          <div className="px-4 py-2 font-semibold text-sm text-[#084032]">{page} / {totalPages}</div>
           <button
             disabled={page >= totalPages}
             onClick={() => setPage(p => Math.min(totalPages, p + 1))}
-            className="px-4 py-2 border rounded-lg disabled:opacity-50 bg-white hover:bg-[#e6f9f0] transition-all"
+            className="px-4 py-2 border border-gray-200 rounded-lg disabled:opacity-50 disabled:cursor-not-allowed bg-white hover:bg-[#e6f9f0] transition-all cursor-pointer text-sm font-medium"
           >
             Next
           </button>
